@@ -5,6 +5,7 @@ import Team from "./Pages/Team";
 import Event from "./Pages/Event";
 import MainLayout from "./MainLayout";
 import AdminLayout from "./Pages/Admin/AdminLayout";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
 
 function App() {
     return (
@@ -21,7 +22,7 @@ function App() {
 
                     {/* Admin Routes */}
                     <Route path="/admin/*" element={<AdminLayout />}>
-                        
+                        <Route index element={<AdminDashboard />} />
                     </Route>
                 </Routes>
             </Router>
