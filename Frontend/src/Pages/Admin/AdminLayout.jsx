@@ -1,15 +1,20 @@
 import React from "react";
 import AdminSidebar from "../../Components/admin/AdminSidebar";
+import AdminDashboard from "./AdminDashboard";
 
 const AdminLayout = () => {
     return (
-        <div className="relative min-h-screen bg-white overflow-hidden">
-            {/* Background only */}
+        <div className="relative min-h-screen bg-white overflow-hidden font-family-google-sans">
+            {/* Background */}
             <BackgroundGradient />
 
-            {/* Content on top */}
-            <div className="relative z-10">
+            {/* Content */}
+            <div className="relative z-10 flex">
                 <AdminSidebar />
+                <main className="w-full">
+                    <AdminDashboard />
+                </main>
+
             </div>
         </div>
     );
