@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import {
     FaCode,
     FaMobile,
@@ -16,191 +16,248 @@ import {
     FaArrowRight,
     FaGithub,
     FaExternalLinkAlt,
-    FaRoad
-} from 'react-icons/fa';
+    FaRoad,
+} from "react-icons/fa";
 
 const TechStackSection = () => {
     const [visibleSections, setVisibleSections] = useState([]);
 
     const colors = {
-        blue: '#4285f4',
-        green: '#34a853',
-        yellow: '#f9ab00',
-        red: '#ea4335'
+        blue: "#4285f4",
+        green: "#34a853",
+        yellow: "#f9ab00",
+        red: "#ea4335",
     };
 
     const techStacks = [
         {
             id: 1,
-            title: 'Web Development',
+            title: "Web Development",
             icon: <FaCode />,
             color: colors.blue,
-            description: 'Master modern web technologies and build responsive, interactive websites and web applications.',
+            description:
+                "Master modern web technologies and build responsive, interactive websites and web applications.",
             cards: [
-                { title: 'Frontend', desc: 'HTML, CSS, JavaScript, React, Vue' },
-                { title: 'Backend', desc: 'Node.js, Express, MongoDB, APIs' },
-                { title: 'Frameworks', desc: 'Next.js, Angular, Svelte' }
+                {
+                    title: "Frontend",
+                    desc: "HTML, CSS, JavaScript, React, Vue",
+                },
+                { title: "Backend", desc: "Node.js, Express, MongoDB, APIs" },
+                { title: "Frameworks", desc: "Next.js, Angular, Svelte" },
             ],
-            facilitator: 'Connect with Web Dev Experts',
+            facilitator: "Connect with Web Dev Experts",
             resources: [
-                { name: 'MDN Web Docs', icon: <FaBook />, link: '#' },
-                { name: 'Roadmap.sh', icon: <FaMap />, link: '#' },
-                { name: 'FreeCodeCamp', icon: <FaCode />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "MDN Web Docs", icon: <FaBook />, link: "#" },
+                { name: "Roadmap.sh", icon: <FaMap />, link: "#" },
+                { name: "FreeCodeCamp", icon: <FaCode />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 2,
-            title: 'Mobile Development',
+            title: "Mobile Development",
             icon: <FaMobile />,
             color: colors.green,
-            description: 'Build cross-platform mobile applications using Flutter, React Native, and native technologies.',
+            description:
+                "Build cross-platform mobile applications using Flutter, React Native, and native technologies.",
             cards: [
-                { title: 'Flutter', desc: 'Dart, Widgets, Firebase Integration' },
-                { title: 'React Native', desc: 'JavaScript, Native Modules' },
-                { title: 'Android/iOS', desc: 'Kotlin, Swift, Native Development' }
+                {
+                    title: "Flutter",
+                    desc: "Dart, Widgets, Firebase Integration",
+                },
+                { title: "React Native", desc: "JavaScript, Native Modules" },
+                {
+                    title: "Android/iOS",
+                    desc: "Kotlin, Swift, Native Development",
+                },
             ],
-            facilitator: 'Connect with Mobile Dev Mentors',
+            facilitator: "Connect with Mobile Dev Mentors",
             resources: [
-                { name: 'Flutter Docs', icon: <FaBook />, link: '#' },
-                { name: 'React Native', icon: <FaMobile />, link: '#' },
-                { name: 'App Brewery', icon: <FaRocket />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "Flutter Docs", icon: <FaBook />, link: "#" },
+                { name: "React Native", icon: <FaMobile />, link: "#" },
+                { name: "App Brewery", icon: <FaRocket />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 3,
-            title: 'AI & Machine Learning',
+            title: "AI & Machine Learning",
             icon: <FaBrain />,
             color: colors.yellow,
-            description: 'Explore artificial intelligence, machine learning models, and data science applications.',
+            description:
+                "Explore artificial intelligence, machine learning models, and data science applications.",
             cards: [
-                { title: 'Machine Learning', desc: 'Python, TensorFlow, Scikit-learn' },
-                { title: 'Deep Learning', desc: 'Neural Networks, PyTorch, Keras' },
-                { title: 'Data Science', desc: 'Pandas, NumPy, Data Visualization' }
+                {
+                    title: "Machine Learning",
+                    desc: "Python, TensorFlow, Scikit-learn",
+                },
+                {
+                    title: "Deep Learning",
+                    desc: "Neural Networks, PyTorch, Keras",
+                },
+                {
+                    title: "Data Science",
+                    desc: "Pandas, NumPy, Data Visualization",
+                },
             ],
-            facilitator: 'Connect with AI/ML Researchers',
+            facilitator: "Connect with AI/ML Researchers",
             resources: [
-                { name: 'TensorFlow', icon: <FaBrain />, link: '#' },
-                { name: 'Kaggle', icon: <FaBook />, link: '#' },
-                { name: 'Fast.ai', icon: <FaRocket />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "TensorFlow", icon: <FaBrain />, link: "#" },
+                { name: "Kaggle", icon: <FaBook />, link: "#" },
+                { name: "Fast.ai", icon: <FaRocket />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 4,
-            title: 'Cloud Computing',
+            title: "Cloud Computing",
             icon: <FaCloud />,
             color: colors.red,
-            description: 'Learn cloud platforms, DevOps, and scalable infrastructure management.',
+            description:
+                "Learn cloud platforms, DevOps, and scalable infrastructure management.",
             cards: [
-                { title: 'Google Cloud', desc: 'GCP, Firebase, Cloud Functions' },
-                { title: 'AWS', desc: 'EC2, S3, Lambda, AWS Services' },
-                { title: 'DevOps', desc: 'Docker, Kubernetes, CI/CD' }
+                {
+                    title: "Google Cloud",
+                    desc: "GCP, Firebase, Cloud Functions",
+                },
+                { title: "AWS", desc: "EC2, S3, Lambda, AWS Services" },
+                { title: "DevOps", desc: "Docker, Kubernetes, CI/CD" },
             ],
-            facilitator: 'Connect with Cloud Architects',
+            facilitator: "Connect with Cloud Architects",
             resources: [
-                { name: 'GCP Free Tier', icon: <FaCloud />, link: '#' },
-                { name: 'AWS Educate', icon: <FaBook />, link: '#' },
-                { name: 'Docker Docs', icon: <FaCode />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "GCP Free Tier", icon: <FaCloud />, link: "#" },
+                { name: "AWS Educate", icon: <FaBook />, link: "#" },
+                { name: "Docker Docs", icon: <FaCode />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 5,
-            title: 'Cyber Security',
+            title: "Cyber Security",
             icon: <FaShieldAlt />,
             color: colors.blue,
-            description: 'Protect systems and networks from digital attacks and ensure data security.',
+            description:
+                "Protect systems and networks from digital attacks and ensure data security.",
             cards: [
-                { title: 'Network Security', desc: 'Firewalls, VPNs, Intrusion Detection' },
-                { title: 'Ethical Hacking', desc: 'Penetration Testing, Vulnerability Assessment' },
-                { title: 'Cryptography', desc: 'Encryption, Digital Signatures, SSL/TLS' }
+                {
+                    title: "Network Security",
+                    desc: "Firewalls, VPNs, Intrusion Detection",
+                },
+                {
+                    title: "Ethical Hacking",
+                    desc: "Penetration Testing, Vulnerability Assessment",
+                },
+                {
+                    title: "Cryptography",
+                    desc: "Encryption, Digital Signatures, SSL/TLS",
+                },
             ],
-            facilitator: 'Connect with Security Experts',
+            facilitator: "Connect with Security Experts",
             resources: [
-                { name: 'Cybrary', icon: <FaShieldAlt />, link: '#' },
-                { name: 'TryHackMe', icon: <FaBook />, link: '#' },
-                { name: 'OWASP', icon: <FaExternalLinkAlt />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "Cybrary", icon: <FaShieldAlt />, link: "#" },
+                { name: "TryHackMe", icon: <FaBook />, link: "#" },
+                { name: "OWASP", icon: <FaExternalLinkAlt />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 6,
-            title: 'Git & GitHub',
+            title: "Git & GitHub",
             icon: <FaGitAlt />,
             color: colors.green,
-            description: 'Master version control and collaborative development with Git and GitHub.',
+            description:
+                "Master version control and collaborative development with Git and GitHub.",
             cards: [
-                { title: 'Version Control', desc: 'Commits, Branches, Merging' },
-                { title: 'Collaboration', desc: 'Pull Requests, Code Review' },
-                { title: 'CI/CD', desc: 'GitHub Actions, Automation' }
+                {
+                    title: "Version Control",
+                    desc: "Commits, Branches, Merging",
+                },
+                { title: "Collaboration", desc: "Pull Requests, Code Review" },
+                { title: "CI/CD", desc: "GitHub Actions, Automation" },
             ],
-            facilitator: 'Connect with Git Experts',
+            facilitator: "Connect with Git Experts",
             resources: [
-                { name: 'Git Docs', icon: <FaBook />, link: '#' },
-                { name: 'GitHub Learning', icon: <FaGithub />, link: '#' },
-                { name: 'Interactive Tutorial', icon: <FaCode />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "Git Docs", icon: <FaBook />, link: "#" },
+                { name: "GitHub Learning", icon: <FaGithub />, link: "#" },
+                { name: "Interactive Tutorial", icon: <FaCode />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 7,
-            title: 'Blockchain',
+            title: "Blockchain",
             icon: <FaLink />,
             color: colors.yellow,
-            description: 'Explore decentralized applications, smart contracts, and Web3 technologies.',
+            description:
+                "Explore decentralized applications, smart contracts, and Web3 technologies.",
             cards: [
-                { title: 'Smart Contracts', desc: 'Solidity, Ethereum, Web3.js' },
-                { title: 'DApps', desc: 'Decentralized Applications' },
-                { title: 'Cryptocurrency', desc: 'Bitcoin, NFTs, DeFi' }
+                {
+                    title: "Smart Contracts",
+                    desc: "Solidity, Ethereum, Web3.js",
+                },
+                { title: "DApps", desc: "Decentralized Applications" },
+                { title: "Cryptocurrency", desc: "Bitcoin, NFTs, DeFi" },
             ],
-            facilitator: 'Connect with Blockchain Developers',
+            facilitator: "Connect with Blockchain Developers",
             resources: [
-                { name: 'Ethereum.org', icon: <FaLink />, link: '#' },
-                { name: 'Solidity Docs', icon: <FaBook />, link: '#' },
-                { name: 'Web3 University', icon: <FaRocket />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "Ethereum.org", icon: <FaLink />, link: "#" },
+                { name: "Solidity Docs", icon: <FaBook />, link: "#" },
+                { name: "Web3 University", icon: <FaRocket />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 8,
-            title: 'IoT',
+            title: "IoT",
             icon: <FaMicrochip />,
             color: colors.red,
-            description: 'Build connected devices and smart systems with Internet of Things technology.',
+            description:
+                "Build connected devices and smart systems with Internet of Things technology.",
             cards: [
-                { title: 'Embedded Systems', desc: 'Arduino, Raspberry Pi, Sensors' },
-                { title: 'Protocols', desc: 'MQTT, HTTP, Bluetooth' },
-                { title: 'Cloud Integration', desc: 'AWS IoT, Google IoT Core' }
+                {
+                    title: "Embedded Systems",
+                    desc: "Arduino, Raspberry Pi, Sensors",
+                },
+                { title: "Protocols", desc: "MQTT, HTTP, Bluetooth" },
+                {
+                    title: "Cloud Integration",
+                    desc: "AWS IoT, Google IoT Core",
+                },
             ],
-            facilitator: 'Connect with IoT Engineers',
+            facilitator: "Connect with IoT Engineers",
             resources: [
-                { name: 'Arduino', icon: <FaMicrochip />, link: '#' },
-                { name: 'Raspberry Pi', icon: <FaBook />, link: '#' },
-                { name: 'IoT Projects', icon: <FaCode />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
+                { name: "Arduino", icon: <FaMicrochip />, link: "#" },
+                { name: "Raspberry Pi", icon: <FaBook />, link: "#" },
+                { name: "IoT Projects", icon: <FaCode />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
         },
         {
             id: 9,
-            title: 'Graphic Design',
+            title: "Graphic Design",
             icon: <FaPalette />,
             color: colors.blue,
-            description: 'Create stunning visual designs and user interfaces for digital products.',
+            description:
+                "Create stunning visual designs and user interfaces for digital products.",
             cards: [
-                { title: 'UI/UX Design', desc: 'Figma, Adobe XD, User Research' },
-                { title: 'Graphics', desc: 'Photoshop, Illustrator, Canva' },
-                { title: 'Prototyping', desc: 'Wireframing, Mockups, Design Systems' }
+                {
+                    title: "UI/UX Design",
+                    desc: "Figma, Adobe XD, User Research",
+                },
+                { title: "Graphics", desc: "Photoshop, Illustrator, Canva" },
+                {
+                    title: "Prototyping",
+                    desc: "Wireframing, Mockups, Design Systems",
+                },
             ],
-            facilitator: 'Connect with Design Experts',
+            facilitator: "Connect with Design Experts",
             resources: [
-                { name: 'Figma Community', icon: <FaPalette />, link: '#' },
-                { name: 'Behance', icon: <FaBook />, link: '#' },
-                { name: 'Dribbble', icon: <FaExternalLinkAlt />, link: '#' },
-                { name: 'Roadmap', icon: <FaRoad />, link: '#' }
-            ]
-        }
+                { name: "Figma Community", icon: <FaPalette />, link: "#" },
+                { name: "Behance", icon: <FaBook />, link: "#" },
+                { name: "Dribbble", icon: <FaExternalLinkAlt />, link: "#" },
+                { name: "Roadmap", icon: <FaRoad />, link: "#" },
+            ],
+        },
     ];
 
     // Intersection Observer for scroll animations
@@ -208,14 +265,14 @@ const TechStackSection = () => {
         const observers = [];
         const options = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: "0px 0px -100px 0px",
         };
 
         techStacks.forEach((tech, index) => {
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
+                entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setVisibleSections(prev => [...prev, tech.id]);
+                        setVisibleSections((prev) => [...prev, tech.id]);
                     }
                 });
             }, options);
@@ -228,7 +285,7 @@ const TechStackSection = () => {
         });
 
         return () => {
-            observers.forEach(observer => observer.disconnect());
+            observers.forEach((observer) => observer.disconnect());
         };
     }, []);
 
@@ -242,7 +299,9 @@ const TechStackSection = () => {
                     return (
                         <div className="relative w-full h-64">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className={`transform transition-all duration-1000 ${isLeft ? 'rotate-12' : '-rotate-12'} ${isHovered ? 'scale-110' : 'scale-100'}`}>
+                                <div
+                                    className={`transform transition-all duration-1000 ${isLeft ? "rotate-12" : "-rotate-12"} ${isHovered ? "scale-110" : "scale-100"}`}
+                                >
                                     <div className="w-32 h-32 bg-blue-100 rounded-2xl rotate-45 flex items-center justify-center">
                                         <div className="w-24 h-24 bg-blue-200 rounded-xl -rotate-45 flex items-center justify-center">
                                             <FaCode className="text-3xl text-blue-500" />
@@ -251,7 +310,10 @@ const TechStackSection = () => {
                                 </div>
                                 {/* Floating elements */}
                                 <div className="absolute top-4 left-4 w-8 h-8 bg-blue-300 rounded-full animate-bounce"></div>
-                                <div className="absolute bottom-4 right-4 w-6 h-6 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+                                <div
+                                    className="absolute bottom-4 right-4 w-6 h-6 bg-blue-400 rounded-full animate-bounce"
+                                    style={{ animationDelay: "0.5s" }}
+                                ></div>
                             </div>
                         </div>
                     );
@@ -260,7 +322,9 @@ const TechStackSection = () => {
                     return (
                         <div className="relative w-full h-64">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className={`transform transition-all duration-1000 ${isHovered ? 'scale-105 rotate-3' : 'scale-100'}`}>
+                                <div
+                                    className={`transform transition-all duration-1000 ${isHovered ? "scale-105 rotate-3" : "scale-100"}`}
+                                >
                                     <div className="w-28 h-48 bg-green-100 rounded-3xl border-4 border-green-300 flex items-center justify-center">
                                         <div className="w-20 h-32 bg-white rounded-lg flex items-center justify-center">
                                             <FaMobile className="text-2xl text-green-500" />
@@ -269,7 +333,10 @@ const TechStackSection = () => {
                                 </div>
                                 {/* App icons */}
                                 <div className="absolute top-8 right-8 w-4 h-4 bg-green-400 rounded animate-pulse"></div>
-                                <div className="absolute bottom-8 left-8 w-3 h-3 bg-green-500 rounded animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                                <div
+                                    className="absolute bottom-8 left-8 w-3 h-3 bg-green-500 rounded animate-pulse"
+                                    style={{ animationDelay: "0.3s" }}
+                                ></div>
                             </div>
                         </div>
                     );
@@ -278,7 +345,9 @@ const TechStackSection = () => {
                     return (
                         <div className="relative w-full h-64">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className={`transform transition-all duration-1000 ${isHovered ? 'scale-110' : 'scale-100'}`}>
+                                <div
+                                    className={`transform transition-all duration-1000 ${isHovered ? "scale-110" : "scale-100"}`}
+                                >
                                     <div className="w-36 h-36 bg-yellow-100 rounded-full flex items-center justify-center">
                                         <div className="w-24 h-24 bg-yellow-200 rounded-full flex items-center justify-center">
                                             <FaBrain className="text-3xl text-yellow-600" />
@@ -286,14 +355,14 @@ const TechStackSection = () => {
                                     </div>
                                 </div>
                                 {/* Neural network nodes */}
-                                {[1, 2, 3, 4].map(i => (
+                                {[1, 2, 3, 4].map((i) => (
                                     <div
                                         key={i}
                                         className={`absolute w-4 h-4 bg-yellow-400 rounded-full animate-pulse`}
                                         style={{
                                             left: `${20 + i * 15}%`,
                                             top: `${30 + (i % 2) * 40}%`,
-                                            animationDelay: `${i * 0.2}s`
+                                            animationDelay: `${i * 0.2}s`,
                                         }}
                                     ></div>
                                 ))}
@@ -306,11 +375,17 @@ const TechStackSection = () => {
                     return (
                         <div className="relative w-full h-64 flex items-center justify-center">
                             <div
-                                className={`w-32 h-32 rounded-2xl flex items-center justify-center transform transition-all duration-1000 ${isHovered ? 'scale-110 rotate-12' : 'scale-100'
-                                    }`}
+                                className={`w-32 h-32 rounded-2xl flex items-center justify-center transform transition-all duration-1000 ${
+                                    isHovered
+                                        ? "scale-110 rotate-12"
+                                        : "scale-100"
+                                }`}
                                 style={{ backgroundColor: `${tech.color}20` }}
                             >
-                                <span className="text-4xl" style={{ color: tech.color }}>
+                                <span
+                                    className="text-4xl"
+                                    style={{ color: tech.color }}
+                                >
                                     {tech.icon}
                                 </span>
                             </div>
@@ -333,21 +408,23 @@ const TechStackSection = () => {
     return (
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
             <div className="max-w-7xl mx-auto">
-
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center space-x-2 bg-blue-50 px-6 py-3 rounded-full border border-blue-200 mb-4">
                         <FaRocket className="text-blue-500" />
-                        <span className="text-lg font-medium text-blue-600">Tech Stack</span>
+                        <span className="text-lg font-medium text-blue-600">
+                            Tech Stack
+                        </span>
                     </div>
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                        Explore Our{' '}
+                        Explore Our{" "}
                         <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                             Tech Domains
                         </span>
                     </h2>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Dive deep into various technology domains with expert guidance and comprehensive resources
+                        Dive deep into various technology domains with expert
+                        guidance and comprehensive resources
                     </p>
                 </div>
 
@@ -361,20 +438,23 @@ const TechStackSection = () => {
                             <div
                                 key={tech.id}
                                 id={`tech-${tech.id}`}
-                                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center transition-all duration-1000 ${isVisible
-                                        ? 'translate-y-0 opacity-100'
-                                        : 'translate-y-20 opacity-0'
-                                    }`}
+                                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center transition-all duration-1000 ${
+                                    isVisible
+                                        ? "translate-y-0 opacity-100"
+                                        : "translate-y-20 opacity-0"
+                                }`}
                             >
-
                                 {/* Content Side */}
-                                <div className={`space-y-6 ${isLeft ? 'lg:order-1' : 'lg:order-2'}`}>
-
+                                <div
+                                    className={`space-y-6 ${isLeft ? "lg:order-1" : "lg:order-2"}`}
+                                >
                                     {/* Header */}
                                     <div className="flex items-center space-x-3 mb-4">
                                         <div
                                             className="w-12 h-12 rounded-xl flex items-center justify-center text-white"
-                                            style={{ backgroundColor: tech.color }}
+                                            style={{
+                                                backgroundColor: tech.color,
+                                            }}
                                         >
                                             {tech.icon}
                                         </div>
@@ -395,8 +475,12 @@ const TechStackSection = () => {
                                                 key={cardIndex}
                                                 className="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow duration-300"
                                             >
-                                                <h4 className="font-semibold text-gray-900 mb-2">{card.title}</h4>
-                                                <p className="text-sm text-gray-600">{card.desc}</p>
+                                                <h4 className="font-semibold text-gray-900 mb-2">
+                                                    {card.title}
+                                                </h4>
+                                                <p className="text-sm text-gray-600">
+                                                    {card.desc}
+                                                </p>
                                             </div>
                                         ))}
                                     </div>
@@ -418,23 +502,40 @@ const TechStackSection = () => {
                                             <span>Learning Resources</span>
                                         </h4>
                                         <div className="flex flex-wrap gap-3">
-                                            {tech.resources.map((resource, resIndex) => (
-                                                <a
-                                                    key={resIndex}
-                                                    href={resource.link}
-                                                    className="flex items-center space-x-2 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-300"
-                                                >
-                                                    <span style={{ color: tech.color }}>{resource.icon}</span>
-                                                    <span className="text-sm font-medium text-gray-700">{resource.name}</span>
-                                                </a>
-                                            ))}
+                                            {tech.resources.map(
+                                                (resource, resIndex) => (
+                                                    <a
+                                                        key={resIndex}
+                                                        href={resource.link}
+                                                        className="flex items-center space-x-2 px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-300"
+                                                    >
+                                                        <span
+                                                            style={{
+                                                                color: tech.color,
+                                                            }}
+                                                        >
+                                                            {resource.icon}
+                                                        </span>
+                                                        <span className="text-sm font-medium text-gray-700">
+                                                            {resource.name}
+                                                        </span>
+                                                    </a>
+                                                )
+                                            )}
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Illustration Side */}
-                                <div className={isLeft ? 'lg:order-2' : 'lg:order-1'}>
-                                    <TechIllustration tech={tech} isLeft={isLeft} />
+                                <div
+                                    className={
+                                        isLeft ? "lg:order-2" : "lg:order-1"
+                                    }
+                                >
+                                    <TechIllustration
+                                        tech={tech}
+                                        isLeft={isLeft}
+                                    />
                                 </div>
                             </div>
                         );
@@ -448,7 +549,8 @@ const TechStackSection = () => {
                             Ready to Start Your Tech Journey?
                         </h3>
                         <p className="text-lg mb-6 opacity-90">
-                            Join our community and get access to all tech domains with expert guidance
+                            Join our community and get access to all tech
+                            domains with expert guidance
                         </p>
                         <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:scale-105 transition-transform duration-300">
                             Join Community Now

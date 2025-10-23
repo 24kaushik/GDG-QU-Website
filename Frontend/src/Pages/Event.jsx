@@ -4,13 +4,13 @@ import UpcomingEvents from "../Components/UpcomingEventsSection";
 import PastEvents from "../Components/PastEventsSection";
 
 const Event = () => {
-  return (
-    <>
-      <WelcomeEvents />
-      <UpcomingEvents />
-      <PastEvents />
-    </>
-  );
+    return (
+        <>
+            <WelcomeEvents />
+            <UpcomingEvents />
+            <PastEvents />
+        </>
+    );
 };
 
 export default Event;

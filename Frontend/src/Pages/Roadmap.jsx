@@ -1,12 +1,12 @@
-import React from 'react'
-import RoadmapSection from '../Components/RoadmapSection'
+import React from "react";
+import RoadmapSection from "../Components/RoadmapSection";
 
 const Roadmap = () => {
-  return (
-    <>
-    <RoadmapSection/>
-    </>
-  )
-}
+    return (
+        <>
+            <RoadmapSection />
+        </>
+    );
+};
 
-export default Roadmap
+export default Roadmap;
