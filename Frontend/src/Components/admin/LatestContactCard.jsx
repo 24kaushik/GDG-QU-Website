@@ -1,4 +1,3 @@
-
 const LatestContactCard = () => {
     const latestContact = {
         name: "Noor Ahmed",
@@ -20,7 +19,9 @@ const LatestContactCard = () => {
             <div className="backdrop-blur-lg bg-white/30 p-8 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full min-h-[220px] flex flex-col justify-between">
                 <div>
                     <div className="mb-3">
-                        <h4 className="text-sm font-semibold text-gray-500">Latest contact form</h4>
+                        <h4 className="text-sm font-semibold text-gray-500">
+                            Latest contact form
+                        </h4>
                     </div>
 
                     <div className="flex items-start justify-between gap-4 mb-4">
@@ -29,12 +30,19 @@ const LatestContactCard = () => {
                                 {initials}
                             </div>
                             <div>
-                                <h3 className="text-2xl font-bold text-gray-900">{latestContact.name}</h3>
-                                <p className="text-xs text-gray-500 mt-1">{latestContact.date}</p>
+                                <h3 className="text-2xl font-bold text-gray-900">
+                                    {latestContact.name}
+                                </h3>
+                                <p className="text-xs text-gray-500 mt-1">
+                                    {latestContact.date}
+                                </p>
                             </div>
                         </div>
                         <div className="text-sm text-gray-700 break-words max-w-xs text-right">
-                            <a href={`mailto:${latestContact.email}`} className="text-google-blue hover:underline">
+                            <a
+                                href={`mailto:${latestContact.email}`}
+                                className="text-google-blue hover:underline"
+                            >
                                 {latestContact.email}
                             </a>
                         </div>
@@ -52,7 +60,9 @@ const LatestContactCard = () => {
                     >
                         See all forms
                     </a>
-                    <div className="text-xs text-gray-500 text-right">Updated just now</div>
+                    <div className="text-xs text-gray-500 text-right">
+                        Updated just now
+                    </div>
                 </div>
             </div>
         </div>

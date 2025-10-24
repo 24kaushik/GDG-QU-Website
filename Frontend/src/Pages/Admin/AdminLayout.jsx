@@ -14,7 +14,6 @@ const AdminLayout = () => {
                 <main className="w-full">
                     <AdminDashboard />
                 </main>
-
             </div>
         </div>
     );

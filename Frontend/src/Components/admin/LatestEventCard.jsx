@@ -25,7 +25,8 @@ const LatestEventCard = () => {
                                     {event.name}
                                 </h2>
                                 <p className="text-sm text-gray-600 mt-1">
-                                    {event.date} • {event.time} • {event.location}
+                                    {event.date} • {event.time} •{" "}
+                                    {event.location}
                                 </p>
                             </div>
                             <div className="inline-flex items-center gap-2">
