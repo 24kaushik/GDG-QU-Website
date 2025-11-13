@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    /* ✅ File Layout */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* ✅ Environment Settings (for Node + ESM) */
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "ES2020",
+    "lib": ["ES2020"],
+
+    /* ✅ Output Options */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* ✅ Type System and Imports */
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strict": true,
+    "skipLibCheck": true,
+
+    /* ✅ Optional Strictness Enhancements */
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* ⚠️ Remove React JSX (you’re on a backend) */
+    "jsx": "preserve",
+
+    /* ✅ Module handling */
+    "verbatimModuleSyntax": true,
+
+    /* 🧩 Optional — helps editor imports */
+    "types": ["node"]
+  },
+  "include": ["src"]
+}
