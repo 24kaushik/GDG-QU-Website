@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import errorHandler from "./middlewares/errorHandler";
+import errorHandler from "./middlewares/errorHandler.middleware";
 
 // CORS configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS
@@ -23,6 +23,10 @@ app.use(cookieParser());
 app.get("/", (_, res) => {
     res.send("Api is running...");
 });
+
+// Import and use routes
+import authRouter from "./routes/auth.route";
+app.use("/api/auth", authRouter);
 
 // Error handling middleware
 app.use(errorHandler);
