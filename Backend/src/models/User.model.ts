@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import jwt from "jsonwebtoken";
+import type { IUser } from "../types/user.interface";
 
 const UserSchema = new Schema(
     {
@@ -38,7 +39,4 @@ UserSchema.methods.generateJWT = function () {
     });
 };
 
-
-
-const User = model("User", UserSchema);
-export default User;
+export default model<IUser>("User", UserSchema);

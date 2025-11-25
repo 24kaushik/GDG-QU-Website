@@ -1,8 +1,8 @@
 import { OAuth2Client } from "google-auth-library";
-import type { Request, Response } from "express";
+import type { Request } from "express";
 import { asyncHandler } from "../utils/asyncHandler";
 import { ApiError } from "../utils/ApiError";
-import type { MyResponse } from "../types/response";
+import type { MyResponse } from "../types/response.interface";
 import { validationResult } from "express-validator";
 import User from "../models/User.model";
 
@@ -40,12 +40,12 @@ const googleOAuth = asyncHandler(async (req: Request, res: MyResponse) => {
         const { sub, email, name, picture, email_verified } = payload;
 
         // Check if user exists in the database, create if not
-        let user: any = await User.findOne({ email });
+        let user = await User.findOne({ email });
         if (user) {
             user.googleId = sub;
-            user.photo = picture;
-            user.name = name;
-            user.verifiedEmail = email_verified;
+            user.photo = picture || "";
+            user.name = name || user.name || "";
+            user.verifiedEmail = email_verified || false;
             await user.save();
         } else {
             user = await User.create({
