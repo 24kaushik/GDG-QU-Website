@@ -1,8 +1,7 @@
 import { OAuth2Client } from "google-auth-library";
-import type { Request } from "express";
+import type { Request , Response} from "express";
 import { asyncHandler } from "../utils/asyncHandler";
 import { ApiError } from "../utils/ApiError";
-import type { MyResponse } from "../types/response.interface";
 import { validationResult } from "express-validator";
 import User from "../models/User.model";
 
@@ -10,7 +9,7 @@ import User from "../models/User.model";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // === Google Auth ===
-const googleOAuth = asyncHandler(async (req: Request, res: MyResponse) => {
+const googleOAuth = asyncHandler(async (req: Request, res: Response) => {
     // Validate request
     const result = validationResult(req);
     if (!result.isEmpty()) {
@@ -70,7 +69,7 @@ const googleOAuth = asyncHandler(async (req: Request, res: MyResponse) => {
 
 // === GitHub Auth ===
 // Damn this shit was fun, too much manual effort but fun.
-const githubOAuth = asyncHandler(async (req: Request, res: MyResponse) => {
+const githubOAuth = asyncHandler(async (req: Request, res: Response) => {
     // Validate request
     const result = validationResult(req);
     if (!result.isEmpty()) {

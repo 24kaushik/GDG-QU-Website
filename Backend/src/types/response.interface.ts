@@ -1,7 +1,15 @@
-import type {Response} from 'express'
+import type { Response } from "express";
 
-interface MyResponse extends Response {
-    sendResponse: (statusCode: number, message: string, data?: any) => void;
+declare global {
+    namespace Express {
+        interface Response {
+            sendResponse: (
+                statusCode: number,
+                message: string,
+                data?: any
+            ) => void;
+        }
+    }
 }
 
-export type { MyResponse };
+export type { Response };
