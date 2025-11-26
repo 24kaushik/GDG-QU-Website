@@ -30,8 +30,6 @@ const UserSchema = new Schema(
 UserSchema.methods.generateJWT = function () {
     const payload = {
         id: this._id,
-        email: this.email,
-        isAdmin: this.isAdmin,
     };
 
     return jwt.sign(payload, process.env.JWT_SECRET as string, {

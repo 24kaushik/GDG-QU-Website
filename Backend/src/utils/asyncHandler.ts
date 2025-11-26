@@ -1,6 +1,6 @@
 import type { Request, NextFunction } from "express";
 import { ApiResponse } from "./ApiResponse";
-import type { MyResponse } from "../types/response.interface";
+import type { MyResponse } from "../types/express.interface";
 
 export const asyncHandler =
     (fn: Function) => (req: Request, res: MyResponse, next: NextFunction) => {

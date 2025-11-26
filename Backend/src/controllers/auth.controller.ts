@@ -1,9 +1,10 @@
 import { OAuth2Client } from "google-auth-library";
-import type { Request , Response} from "express";
+import type { Request, Response } from "express";
 import { asyncHandler } from "../utils/asyncHandler";
 import { ApiError } from "../utils/ApiError";
 import { validationResult } from "express-validator";
 import User from "../models/User.model";
+import { cookieOptions } from "../constants";
 
 // Google OAuth2 Client
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -58,14 +59,16 @@ const googleOAuth = asyncHandler(async (req: Request, res: Response) => {
 
         const token = (user as any).generateJWT();
 
-        // TODO: Redirect to frontend with token as query parameter
-        res.sendResponse(200, "Google authentication successful", { token });
+        //  Redirect to frontend and set cookie.
+        res.cookie("authToken", token, cookieOptions).redirect(
+            "https://google.com" // TODO: Change this to actual frontend URL
+            // `${process.env.FRONTEND_URL}/oauth-success`
+        );
     } catch (error) {
         console.error(error);
         throw new ApiError(400, "Invalid Google token");
     }
 });
-
 
 // === GitHub Auth ===
 // Damn this shit was fun, too much manual effort but fun.
@@ -173,8 +176,11 @@ const githubOAuth = asyncHandler(async (req: Request, res: Response) => {
 
     const token = (dbUser as any).generateJWT();
 
-    // TODO: Redirect to frontend with token as query parameter
-    res.sendResponse(200, "GitHub authentication successful", { token });
+    //  Redirect to frontend and set cookie.
+    res.cookie("authToken", token, cookieOptions).redirect(
+        "https://google.com" // TODO: Change this to actual frontend URL
+        // `${process.env.FRONTEND_URL}/oauth-success`
+    );
 });
 
 export { googleOAuth, githubOAuth };

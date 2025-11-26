@@ -1,4 +1,4 @@
-import type { Response } from "express";
+import type { Response, Request } from "express";
 
 declare global {
     namespace Express {
@@ -9,7 +9,10 @@ declare global {
                 data?: any
             ) => void;
         }
+        interface Request {
+            user?: any;
+        }
     }
 }
 
-export type { Response };
+export type { Response, Request };
