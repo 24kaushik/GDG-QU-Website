@@ -3,7 +3,6 @@ import { asyncHandler } from "../utils/asyncHandler";
 import User from "../models/User.model";
 import { ApiError } from "../utils/ApiError";
 import { isValidObjectId } from "mongoose";
-import type { IUser } from "../types/user.interface";
 import { validationResult } from "express-validator";
 
 export const getAllUsers = asyncHandler(async (_: Request, res: Response) => {
