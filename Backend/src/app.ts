@@ -27,9 +27,11 @@ app.get("/", (_, res) => {
 // Import and use routes
 import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
+import eventRouter from "./routes/event.route";
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/event", eventRouter);
 
 // Error handling middleware
 app.use(errorHandler);

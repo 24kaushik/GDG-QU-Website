@@ -19,6 +19,8 @@ export interface IEvent extends Document {
     date_to: Date;
     cover: string;
     photos: string[];
+    gdgUrl: string;
+    gdgEventId: number;
     createdAt?: Date;
     updatedAt?: Date;
 }
