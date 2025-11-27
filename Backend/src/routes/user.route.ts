@@ -11,7 +11,7 @@ import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
 const userRouter = Router();
 
 // TODO: Add authentication middleware to protect this route
-userRouter.get("/all",adminAuthMiddleware,  getAllUsers);
+userRouter.get("/all", adminAuthMiddleware, getAllUsers);
 userRouter.get("/:userId", param("userId").isMongoId(), getUserById);
 userRouter.put(
     "/update",
