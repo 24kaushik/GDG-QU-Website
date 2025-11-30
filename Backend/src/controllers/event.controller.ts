@@ -3,14 +3,24 @@ import Event from "../models/Event.model";
 import { asyncHandler } from "../utils/asyncHandler";
 import type { Request, Response } from "express";
 import { ApiError } from "../utils/ApiError";
+import { fetchGdgMedia } from "../utils/eventFetcher";
 
 // TODO: pagenation
 export const getAllEvents = asyncHandler(
     async (req: Request, res: Response) => {
-        const events = await Event.find().sort({ date: -1 });
+        const events = await Event.find().sort({ date_from: -1 });
         res.sendResponse(200, "Events fetched successfully", events);
     }
 );
+
+export const getEventById = asyncHandler(async (req: Request, res: Response) => {
+    const eventId = req.params.id;
+    const event = await Event.findById(eventId);
+    if (!event) {
+        throw new ApiError(404, "Event not found");
+    }
+    res.sendResponse(200, "Event fetched successfully", event);
+}); 
 
 export const createEvent = asyncHandler(async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -28,50 +38,14 @@ export const createEvent = asyncHandler(async (req: Request, res: Response) => {
         gdgUrl,
     } = req.body;
 
-    // Fetching CoverImage, eventId from the gdg event url provided
-    const [coverImageUrl, gdgEventId] = await fetch(gdgUrl)
-        .then((res) => {
-            if (!res.ok) {
-                throw new ApiError(400, "Cover image URL is not reachable");
-            }
-            return res.text();
-        })
-        .then((data) => {
-            return [
-                (data as string)
-                    .split(`"event_banner":`)[1]
-                    ?.split(`",`)[0]
-                    ?.replace('"', "") || "",
-                (data as string)
-                    .split(`"eventid":`)[1]
-                    ?.split(`,`)[0]
-                    ?.trim() || "",
-            ];
-        })
-        .catch(() => {
-            throw new ApiError(400, "Failed to fetch cover image from GDG URL");
-        });
+    // Fetching CoverImage, gdgEventId and photos from GDG URL
+    const { coverImageUrl, gdgEventId, eventPhotos } = await fetchGdgMedia(gdgUrl);
 
-    if (!coverImageUrl || !gdgEventId) {
-        throw new ApiError(400, "Invalid GDG event URL provided");
+    // Check if an event with the same gdgEventId already exists
+    const existingEvent = await Event.findOne({ gdgEventId: gdgEventId });
+    if (existingEvent) {
+        throw new ApiError(409, "An event with the same GDG Event ID already exists");
     }
-
-    // Fetching event photos from GDG API
-    const eventPhotos: any[] = await fetch(
-        `https://gdg.community.dev/api/event_wrapup_photos/${gdgEventId}/`
-    )
-        .then((res) => {
-            if (!res.ok) {
-                return [];
-            }
-            return res.json();
-        })
-        .then((data: any) => {
-            return data?.results?.map((photo: any) => photo?.picture?.url);
-        })
-        .catch(() => {
-            return [];
-        });
 
     const newEvent = await Event.create({
         title,
@@ -92,4 +66,21 @@ export const createEvent = asyncHandler(async (req: Request, res: Response) => {
     }
 
     res.sendResponse(201, "Event created successfully", newEvent);
+});
+
+export const refreshEvent = asyncHandler(async (req: Request, res: Response) => {
+    const eventId = req.params.id;
+    const event = await Event.findById(eventId);
+    if (!event) {
+        throw new ApiError(404, "Event not found");
+    }
+
+    // Fetching updated CoverImage and photos from GDG URL
+    const { coverImageUrl, eventPhotos } = await fetchGdgMedia(event.gdgUrl);
+
+    event.cover = coverImageUrl;
+    event.photos = eventPhotos;
+    await event.save();
+
+    res.sendResponse(200, "Event refreshed successfully", event);
 });

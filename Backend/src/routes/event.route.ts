@@ -1,14 +1,25 @@
 import { Router } from "express";
-import { createEvent, getAllEvents } from "../controllers/event.controller";
+import {
+    createEvent,
+    getAllEvents,
+    getEventById,
+    refreshEvent,
+} from "../controllers/event.controller";
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 const eventRouter = Router();
 
 eventRouter.get("/all", getAllEvents);
+eventRouter.get(
+    "/:id",
+    param("id").isMongoId().withMessage("Invalid event ID"),
+    getEventById
+);
+
+eventRouter.use(adminAuthMiddleware);
 eventRouter.post(
     "/create",
-    adminAuthMiddleware,
     body("title")
         .notEmpty()
         .withMessage("Title is required")
@@ -50,5 +61,6 @@ eventRouter.post(
         .withMessage("Invalid GDG event URL format"),
     createEvent
 );
+eventRouter.post("/refresh/:id", refreshEvent);
 
 export default eventRouter;

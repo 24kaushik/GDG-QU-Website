@@ -38,8 +38,8 @@ const EventSchema = new Schema<IEvent>(
 
         cover: { type: String, required: true },
         photos: { type: [String], default: [] },
-        gdgUrl: { type: String, required: true },
-        gdgEventId: { type: Number, required: true },
+        gdgUrl: { type: String, required: true, unique: true },
+        gdgEventId: { type: Number, required: true, unique: true },
     },
     { timestamps: true }
 );
