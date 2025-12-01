@@ -28,10 +28,12 @@ app.get("/", (_, res) => {
 import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
 import eventRouter from "./routes/event.route";
+import teamRouter from "./routes/team.route";
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/event", eventRouter);
+app.use("/api/team", teamRouter);
 
 // Error handling middleware
 app.use(errorHandler);

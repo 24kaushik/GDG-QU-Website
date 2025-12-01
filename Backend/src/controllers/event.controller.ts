@@ -84,3 +84,6 @@ export const refreshEvent = asyncHandler(async (req: Request, res: Response) => 
 
     res.sendResponse(200, "Event refreshed successfully", event);
 });
+
+// TODO: Allow students to enroll for events
+// TODO: Update and Delete Event controllers
