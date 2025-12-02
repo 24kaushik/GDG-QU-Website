@@ -13,6 +13,8 @@ export const createTeamMember = asyncHandler(
             linkedinUrl,
             githubUrl,
             twitterUrl,
+            instagramUrl,
+            badge,
         } = req.body;
 
         const newMember = await TeamMember.create({
@@ -23,6 +25,8 @@ export const createTeamMember = asyncHandler(
             linkedinUrl,
             githubUrl,
             twitterUrl,
+            instagramUrl,
+            badge,
         });
 
         if (!newMember) {

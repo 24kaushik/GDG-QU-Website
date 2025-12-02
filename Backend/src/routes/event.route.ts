@@ -70,7 +70,7 @@ eventRouter.post(
                 /^https:\/\/gdg\.community\.dev\/(e\/[a-zA-Z0-9]+\/?|events\/details\/[a-z0-9-]+\/?)$/
             )
             .withMessage("Invalid GDG event URL format"),
-            body("maxParticipants")
+        body("maxParticipants")
             .optional()
             .isInt({ min: 0 })
             .withMessage("maxParticipants must be a positive integer"),
@@ -111,7 +111,10 @@ eventRouter.put(
                 "bootcamp",
             ])
             .withMessage("Invalid event type"),
-        body("venue").optional().notEmpty().withMessage("Venue cannot be empty"),
+        body("venue")
+            .optional()
+            .notEmpty()
+            .withMessage("Venue cannot be empty"),
         body("date_from")
             .optional()
             .isISO8601()

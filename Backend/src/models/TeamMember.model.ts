@@ -28,6 +28,12 @@ const TeamMemberSchema = new Schema(
         twitterUrl: {
             type: String,
         },
+        instagramUrl: {
+            type: String,
+        },
+        badge: {
+            type: String,
+        },
     },
     { timestamps: true }
 );

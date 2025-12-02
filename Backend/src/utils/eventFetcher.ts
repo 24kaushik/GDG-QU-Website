@@ -17,7 +17,10 @@ export const fetchGdgMedia = async (gdgUrl: string) => {
         .then((data) => {
             const html = data as string;
             return [
-                html.split(`"event_banner":`)[1]?.split(`",`)[0]?.replace('"', "") || "",
+                html
+                    .split(`"event_banner":`)[1]
+                    ?.split(`",`)[0]
+                    ?.replace('"', "") || "",
                 html.split(`"eventid":`)[1]?.split(`,`)[0]?.trim() || "",
             ];
         })
@@ -38,7 +41,9 @@ export const fetchGdgMedia = async (gdgUrl: string) => {
             return res.json();
         })
         .then((data: any) => {
-            return data?.results?.map((photo: any) => photo?.picture?.url) || [];
+            return (
+                data?.results?.map((photo: any) => photo?.picture?.url) || []
+            );
         })
         .catch(() => {
             return [];
@@ -50,4 +55,3 @@ export const fetchGdgMedia = async (gdgUrl: string) => {
         eventPhotos,
     };
 };
-

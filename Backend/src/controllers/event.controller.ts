@@ -73,9 +73,8 @@ export const createEvent = asyncHandler(async (req: Request, res: Response) => {
     } = req.body;
 
     // Fetching CoverImage, gdgEventId and photos from GDG URL
-    const { coverImageUrl, gdgEventId, eventPhotos } = await fetchGdgMedia(
-        gdgUrl
-    );
+    const { coverImageUrl, gdgEventId, eventPhotos } =
+        await fetchGdgMedia(gdgUrl);
 
     // Check if an event with the same gdgEventId already exists
     const existingEvent = await Event.findOne({ gdgEventId: gdgEventId });

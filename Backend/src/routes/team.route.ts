@@ -18,25 +18,33 @@ teamRouter.get("/:id", param("id").exists().isMongoId(), getTeamMemberById);
 teamRouter.use(adminAuthMiddleware);
 teamRouter.post(
     "/create",
-    body("name").exists().isString(),
-    body("role").exists().isString(),
-    body("bio").exists().isString(),
-    body("photoUrl").optional().isURL(),
-    body("linkedinUrl").optional().isURL(),
-    body("githubUrl").optional().isURL(),
-    body("twitterUrl").optional().isURL(),
+    [
+        body("name").exists().isString(),
+        body("role").exists().isString(),
+        body("bio").exists().isString(),
+        body("photoUrl").optional().isURL(),
+        body("linkedinUrl").optional().isURL(),
+        body("githubUrl").optional().isURL(),
+        body("twitterUrl").optional().isURL(),
+        body("instagramUrl").optional().isURL(),
+        body("badge").optional().isString(),
+    ],
     createTeamMember
 );
 teamRouter.put(
     "/:id",
-    param("id").exists().isMongoId(),
-    body("name").optional().isString(),
-    body("role").optional().isString(),
-    body("bio").optional().isString(),
-    body("photoUrl").optional().isURL(),
-    body("linkedinUrl").optional().isURL(),
-    body("githubUrl").optional().isURL(),
-    body("twitterUrl").optional().isURL(),
+    [
+        param("id").exists().isMongoId(),
+        body("name").optional().isString(),
+        body("role").optional().isString(),
+        body("bio").optional().isString(),
+        body("photoUrl").optional().isURL(),
+        body("linkedinUrl").optional().isURL(),
+        body("githubUrl").optional().isURL(),
+        body("twitterUrl").optional().isURL(),
+        body("instagramUrl").optional().isURL(),
+        body("badge").optional().isString(),
+    ],
     updateTeamMember
 );
 teamRouter.delete("/:id", param("id").exists().isMongoId(), deleteTeamMember);
