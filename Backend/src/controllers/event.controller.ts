@@ -240,3 +240,28 @@ export const updateEvent = asyncHandler(async (req: Request, res: Response) => {
 
     res.sendResponse(200, "Event updated successfully", updatedEvent);
 });
+
+export const getEventParticipants = asyncHandler(
+    async (req: Request, res: Response) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            throw new ApiError(400, JSON.stringify(errors.array()));
+        }
+
+        const eventId = req.params.id;
+        const event = await Event.findById(eventId);
+        if (!event) {
+            throw new ApiError(404, "Event not found");
+        }
+
+        const participants = await EventParticipant.find({ eventId: event._id })
+            .populate("userId", "name email photo")
+            .exec();
+
+        res.sendResponse(
+            200,
+            "Event participants fetched successfully",
+            participants
+        );
+    }
+);

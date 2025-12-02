@@ -5,6 +5,7 @@ import {
     enrollForEvent,
     getAllEvents,
     getEventById,
+    getEventParticipants,
     refreshEvent,
     updateEvent,
 } from "../controllers/event.controller";
@@ -138,5 +139,6 @@ eventRouter.put(
     ],
     updateEvent
 );
+eventRouter.get("/participants/:id", param("id").isMongoId(), getEventParticipants);
 
 export default eventRouter;
