@@ -40,6 +40,7 @@ const EventSchema = new Schema<IEvent>(
         photos: { type: [String], default: [] },
         gdgUrl: { type: String, required: true, unique: true },
         gdgEventId: { type: Number, required: true, unique: true },
+        maxParticipants: { type: Number, default: 100 },
     },
     { timestamps: true }
 );
