@@ -19,9 +19,9 @@ teamRouter.use(adminAuthMiddleware);
 teamRouter.post(
     "/create",
     [
-        body("name").exists().isString(),
-        body("role").exists().isString(),
-        body("bio").exists().isString(),
+        body("name").exists().isString().trim().isLength({ min: 2, max: 50 }),
+        body("role").exists().isString().trim().isLength({ min: 2, max: 100 }),
+        body("bio").exists().isString().trim().isLength({ min: 10, max: 500 }),
         body("photoUrl").optional().isURL(),
         body("linkedinUrl").optional().isURL(),
         body("githubUrl").optional().isURL(),
@@ -35,9 +35,17 @@ teamRouter.put(
     "/:id",
     [
         param("id").exists().isMongoId(),
-        body("name").optional().isString(),
-        body("role").optional().isString(),
-        body("bio").optional().isString(),
+        body("name").optional().isString().trim().isLength({ min: 2, max: 50 }),
+        body("role")
+            .optional()
+            .isString()
+            .trim()
+            .isLength({ min: 2, max: 100 }),
+        body("bio")
+            .optional()
+            .isString()
+            .trim()
+            .isLength({ min: 10, max: 500 }),
         body("photoUrl").optional().isURL(),
         body("linkedinUrl").optional().isURL(),
         body("githubUrl").optional().isURL(),
