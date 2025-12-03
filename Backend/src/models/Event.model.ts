@@ -1,11 +1,23 @@
 import { Schema, model } from "mongoose";
-import type { IEvent } from "../types/event.interface";
+import type { IEvent } from "../types/Event.interface";
 
 const EventSchema = new Schema<IEvent>(
     {
-        title: { type: String, required: true },
-        description: { type: String, required: true },
-        speakers: { type: [String], default: [] },
+        title: {
+            type: String,
+            required: true,
+            minlength: 5,
+            maxlength: 100,
+            trim: true,
+        },
+        description: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: 20,
+            maxlength: 2000,
+        },
+        speakers: { type: [String], default: [], trim: true },
 
         type: {
             type: String,
@@ -21,7 +33,7 @@ const EventSchema = new Schema<IEvent>(
             required: true,
         },
 
-        venue: { type: String, required: true },
+        venue: { type: String, required: true, trim: true },
 
         date_from: { type: Date, required: true },
 
@@ -36,9 +48,9 @@ const EventSchema = new Schema<IEvent>(
             },
         },
 
-        cover: { type: String, required: true },
+        cover: { type: String, required: true, trim: true },
         photos: { type: [String], default: [] },
-        gdgUrl: { type: String, required: true, unique: true },
+        gdgUrl: { type: String, required: true, unique: true, trim: true },
         gdgEventId: { type: Number, required: true, unique: true },
         maxParticipants: { type: Number, default: 100 },
     },
