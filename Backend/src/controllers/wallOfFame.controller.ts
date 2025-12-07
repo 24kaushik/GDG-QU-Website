@@ -93,10 +93,7 @@ export const deleteWallOfFameEntry = asyncHandler(
     async (req: Request, res: Response) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            throw new ApiError(
-                400,
-                JSON.stringify(errors.array())
-            );
+            throw new ApiError(400, JSON.stringify(errors.array()));
         }
         const { id } = req.params;
 

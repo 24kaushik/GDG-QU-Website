@@ -30,11 +30,14 @@ import userRouter from "./routes/user.route";
 import eventRouter from "./routes/event.route";
 import teamRouter from "./routes/team.route";
 import wallOfFameRouter from "./routes/wallOfFame.route";
+import projectRouter from "./routes/project.routes";
+
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/event", eventRouter);
 app.use("/api/team", teamRouter);
+app.use("/api/project", projectRouter);
 app.use("/api/wof", wallOfFameRouter);
 
 // Error handling middleware
