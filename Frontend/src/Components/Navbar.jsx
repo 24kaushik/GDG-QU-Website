@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
-    FaHome,
-    FaUsers,
-    FaCalendarAlt,
-    FaTrophy,
-    FaEnvelope,
-    FaUser,
-    FaUserPlus,
     FaBars,
+    FaCalendarAlt,
+    FaEnvelope,
+    FaHome,
+    FaProjectDiagram,
     FaTimes,
-    FaProjectDiagram
+    FaTrophy,
+    FaUser,
+    FaUsers
 } from 'react-icons/fa';
+import { NavLink, useNavigate } from 'react-router-dom';
+import LoginModal from './LoginModal';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeLink, setActiveLink] = useState('Home');
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -35,13 +37,15 @@ const Navbar = () => {
     };
 
     const navLinks = [
-        { name: 'Home', icon: <FaHome />, color: colors.blue },
-        { name: 'Team', icon: <FaUsers />, color: colors.green },
-        { name: 'Events', icon: <FaCalendarAlt />, color: colors.yellow },
-        { name: 'Projects', icon: <FaProjectDiagram />, color: colors.red },
-        { name: 'Wall of Fame', icon: <FaTrophy />, color: colors.blue },
-        { name: 'Contact Us', icon: <FaEnvelope />, color: colors.green }
+        { name: 'Home', icon: <FaHome />, color: colors.blue, link: "/" },
+        { name: 'Team', icon: <FaUsers />, color: colors.green, link: "team" },
+        { name: 'Events', icon: <FaCalendarAlt />, color: colors.yellow, link: "events" },
+        { name: 'Projects', icon: <FaProjectDiagram />, color: colors.red, link: "projects" },
+        { name: 'Wall of Fame', icon: <FaTrophy />, color: colors.blue, link: "wall_of_fame" },
+        { name: 'Contact Us', icon: <FaEnvelope />, color: colors.green, link: "contact_us" }
     ];
+
+    const navigate = useNavigate()
 
     return (
         <nav
@@ -79,9 +83,9 @@ const Navbar = () => {
                     {/* Desktop Navigation Links - ICON COLOR FIXED */}
                     <div className="hidden md:flex items-center space-x-1">
                         {navLinks.map((link) => (
-                            <a
+                            <NavLink
                                 key={link.name}
-                                href={`#${link.name.toLowerCase().replace(' ', '-')}`}
+                                to={link.link}
                                 className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 group ${activeLink === link.name
                                     ? 'text-white'
                                     : 'text-gray-700'
@@ -119,13 +123,14 @@ const Navbar = () => {
                                         style={{ backgroundColor: link.color }}
                                     ></span>
                                 )}
-                            </a>
+                            </NavLink>
                         ))}
                     </div>
 
                     {/* Desktop Auth Buttons - ICON COLOR FIXED */}
                     <div className="hidden md:flex items-center space-x-3">
                         <button
+                            onClick={() => setIsLoginModalOpen(true)}
                             className="relative px-5 py-2 rounded-full font-medium border-2 transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group"
                             style={{
                                 borderColor: colors.blue,
@@ -144,19 +149,6 @@ const Navbar = () => {
                                     style={{ color: 'inherit' }}
                                 />
                                 <span className="group-hover:text-white transition-colors duration-300">Login</span>
-                            </span>
-                        </button>
-
-                        <button
-                            className="relative px-5 py-2 rounded-full font-medium text-white transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group"
-                            style={{ backgroundColor: colors.green }}
-                        >
-                            {/* Shine effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-
-                            <span className="flex items-center space-x-2 relative z-10">
-                                <FaUserPlus className="text-white" />
-                                <span>Register</span>
                             </span>
                         </button>
                     </div>
@@ -181,12 +173,12 @@ const Navbar = () => {
                 >
                     <div className="flex flex-col space-y-2">
                         {navLinks.map((link) => (
-                            <a
+                            <NavLink
                                 key={link.name}
-                                href={`#${link.name.toLowerCase().replace(' ', '-')}`}
+                                to={link.link}
                                 className={`flex items-center space-x-3 p-3 rounded-lg font-medium transition-all duration-300 ${activeLink === link.name
-                                        ? 'text-white scale-105'
-                                        : 'text-gray-700 hover:scale-105'
+                                    ? 'text-white scale-105'
+                                    : 'text-gray-700 hover:scale-105'
                                     }`}
                                 style={{
                                     backgroundColor: activeLink === link.name ? link.color : 'transparent'
@@ -205,12 +197,16 @@ const Navbar = () => {
                                     {link.icon}
                                 </span>
                                 <span>{link.name}</span>
-                            </a>
+                            </NavLink>
                         ))}
 
                         {/* Auth Buttons */}
                         <div className="pt-3 border-t border-gray-200 flex flex-col space-y-3">
                             <button
+                                onClick={() => {
+                                    setIsLoginModalOpen(true);
+                                    setIsOpen(false);
+                                }}
                                 className="w-full flex items-center justify-center space-x-2 p-3 rounded-lg font-medium border-2 transition-all duration-300 hover:bg-blue-500 hover:text-white active:scale-95"
                                 style={{
                                     borderColor: colors.blue,
@@ -220,19 +216,17 @@ const Navbar = () => {
                                 <FaUser />
                                 <span>Login</span>
                             </button>
-
-                            <button
-                                className="w-full flex items-center justify-center space-x-2 p-3 rounded-lg font-medium text-white transition-all duration-300 hover:scale-105 active:scale-95"
-                                style={{ backgroundColor: colors.green }}
-                            >
-                                <FaUserPlus className="text-white" />
-                                <span>Register</span>
-                            </button>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+            {/* Login Modal */}
+            <LoginModal
+                isOpen={isLoginModalOpen}
+                onClose={() => setIsLoginModalOpen(false)}
+            />
         </nav>
     );
 };

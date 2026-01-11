@@ -4,7 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Team from "./Pages/Team";
 import Event from "./Pages/Event";
 import MainLayout from "./MainLayout";
-import AdminLayout from "./Pages/Admin/AdminLayout";
+// import AdminLayout from "./Pages/Admin/AdminLayout";
+import Login from "./Pages/Login";
+import MemberProfile from "./Components/MemberProfile";
+// import Register from "./Pages/Register";
 
 function App() {
     return (
@@ -17,12 +20,15 @@ function App() {
                         <Route path="/roadmap" element={<Roadmap />} />
                         <Route path="/team" element={<Team />} />
                         <Route path="/events" element={<Event />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/member_profile/:id" element={<MemberProfile />} />
+                        {/* <Route path="/register" element={<Register />} /> */}
                     </Route>
 
                     {/* Admin Routes */}
-                    <Route path="/admin/*" element={<AdminLayout />}>
+                    {/* <Route path="/admin/*" element={<AdminLayout />}> */}
                         
-                    </Route>
+                    {/* </Route> */}
                 </Routes>
             </Router>
         </>
