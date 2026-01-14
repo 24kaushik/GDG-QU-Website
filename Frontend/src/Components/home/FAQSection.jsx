@@ -190,28 +190,6 @@ const FAQSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom Navigation */}
-        <div className="text-center mt-12">
-          <div className="inline-flex space-x-2 bg-gray-100 rounded-full p-2">
-            {faqCategories.map((category, index) => (
-              <button
-                key={category.id}
-                onClick={() => {
-                  const element = document.getElementById(`category-${category.id}`);
-                  element?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105"
-                style={{
-                  backgroundColor: activeIndex !== null && Math.floor(activeIndex / 3) === index ? category.color : 'transparent',
-                  color: activeIndex !== null && Math.floor(activeIndex / 3) === index ? 'white' : category.color
-                }}
-              >
-                {category.title}
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Custom Animations */}

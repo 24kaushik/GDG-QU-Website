@@ -17,7 +17,7 @@ const TechStackSection = () => {
     useEffect(() => {
         const observers = [];
         const options = {
-            threshold: 0.1,
+            threshold: 0,
             rootMargin: "0px 0px -100px 0px",
         };
 
