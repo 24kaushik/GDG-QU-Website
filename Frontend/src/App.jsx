@@ -9,26 +9,24 @@ import AdminLayout from "./Pages/Admin/AdminLayout";
 //TODO: scroll top parent
 
 function App() {
-    return (
-        <>
-            <Router>
-                <Routes>
-                    {/* Main Routes */}
-                    <Route element={<MainLayout />}>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/roadmap" element={<Roadmap />} />
-                        <Route path="/team" element={<Team />} />
-                        <Route path="/events" element={<Event />} />
-                    </Route>
+  return (
+    <>
+      <Router>
+        <Routes>
+          {/* Main Routes */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/events" element={<Event />} />
+          </Route>
 
-                    {/* Admin Routes */}
-                    <Route path="/admin/*" element={<AdminLayout />}>
-                        
-                    </Route>
-                </Routes>
-            </Router>
-        </>
-    );
+          {/* Admin Routes */}
+          <Route path="/admin/*" element={<AdminLayout />}></Route>
+        </Routes>
+      </Router>
+    </>
+  );
 }
 
 export default App;

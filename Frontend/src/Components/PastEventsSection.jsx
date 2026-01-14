@@ -1,28 +1,29 @@
-import React from 'react';
-import { 
-  FaCalendarAlt, 
-  FaClock, 
-  FaUser, 
+import React from "react";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUser,
   FaMapMarkerAlt,
   FaUsers,
   FaStar,
   FaPlay,
   FaPhotoVideo,
-  FaRegSmile
-} from 'react-icons/fa';
+  FaRegSmile,
+} from "react-icons/fa";
 
 const PastEvents = () => {
   const colors = {
-    blue: '#4285f4',
-    green: '#34a853',
-    yellow: '#f9ab00',
-    red: '#ea4335'
+    blue: "#4285f4",
+    green: "#34a853",
+    yellow: "#f9ab00",
+    red: "#ea4335",
   };
 
   const pastEvents = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Web Development Bootcamp",
       facilitator: "Ashu Ayush",
       date: "2024-09-15",
@@ -30,11 +31,13 @@ const PastEvents = () => {
       venue: "Computer Lab",
       audience: 85,
       rating: 4.8,
-      feedback: "Amazing session! Learned so much about modern web development."
+      feedback:
+        "Amazing session! Learned so much about modern web development.",
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "AI/ML Introduction Workshop",
       facilitator: "Himanshu Halder",
       date: "2024-08-22",
@@ -42,11 +45,12 @@ const PastEvents = () => {
       venue: "Auditorium",
       audience: 120,
       rating: 4.9,
-      feedback: "Great insights into machine learning fundamentals."
+      feedback: "Great insights into machine learning fundamentals.",
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "24-Hour Hackathon",
       facilitator: "Rahul Kumar",
       date: "2024-07-10",
@@ -54,11 +58,12 @@ const PastEvents = () => {
       venue: "Tech Park",
       audience: 45,
       rating: 4.7,
-      feedback: "Intense but incredibly rewarding experience!"
+      feedback: "Intense but incredibly rewarding experience!",
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Flutter Mobile Workshop",
       facilitator: "Debjit Das",
       date: "2024-06-18",
@@ -66,11 +71,12 @@ const PastEvents = () => {
       venue: "Lab 301",
       audience: 68,
       rating: 4.6,
-      feedback: "Perfect introduction to Flutter development."
+      feedback: "Perfect introduction to Flutter development.",
     },
     {
       id: 5,
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Cloud Computing Session",
       facilitator: "Kaushik Sarkar",
       date: "2024-05-25",
@@ -78,11 +84,12 @@ const PastEvents = () => {
       venue: "Online",
       audience: 92,
       rating: 4.8,
-      feedback: "Excellent coverage of cloud concepts and GCP."
+      feedback: "Excellent coverage of cloud concepts and GCP.",
     },
     {
       id: 6,
-      image: "https://images.unsplash.com/photo-1544396821-4dd40b938ad3?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1544396821-4dd40b938ad3?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Cyber Security Workshop",
       facilitator: "Pravash Kumar Shaw",
       date: "2024-04-12",
@@ -90,22 +97,21 @@ const PastEvents = () => {
       venue: "Security Lab",
       audience: 55,
       rating: 4.9,
-      feedback: "Eye-opening session on security best practices."
-    }
+      feedback: "Eye-opening session on security best practices.",
+    },
   ];
 
   const PastEventCard = ({ event }) => {
     return (
       <div className="group relative bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-        
         {/* Event Image */}
         <div className="relative h-48 overflow-hidden">
-          <img 
-            src={event.image} 
+          <img
+            src={event.image}
             alt={event.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          
+
           {/* Past Event Overlay */}
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <div className="text-white text-center">
@@ -117,7 +123,9 @@ const PastEvents = () => {
           {/* Audience Count */}
           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 flex items-center space-x-2">
             <FaUsers className="text-blue-500" />
-            <span className="font-semibold text-gray-900">{event.audience}+</span>
+            <span className="font-semibold text-gray-900">
+              {event.audience}+
+            </span>
           </div>
 
           {/* Rating */}
@@ -129,19 +137,29 @@ const PastEvents = () => {
 
         {/* Event Content */}
         <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{event.title}</h3>
-          
+          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
+            {event.title}
+          </h3>
+
           {/* Facilitator */}
           <div className="flex items-center space-x-2 mb-3">
             <FaUser className="text-gray-400 text-sm" />
-            <span className="text-sm text-gray-600">By {event.facilitator}</span>
+            <span className="text-sm text-gray-600">
+              By {event.facilitator}
+            </span>
           </div>
 
           {/* Event Details */}
           <div className="space-y-2 mb-4">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <FaCalendarAlt />
-              <span>{new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+              <span>
+                {new Date(event.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <FaClock />
@@ -157,9 +175,13 @@ const PastEvents = () => {
           <div className="mb-4 p-3 bg-gray-50 rounded-lg">
             <div className="flex items-center space-x-2 mb-2">
               <FaRegSmile className="text-green-500" />
-              <span className="text-sm font-medium text-gray-700">Participant Feedback</span>
+              <span className="text-sm font-medium text-gray-700">
+                Participant Feedback
+              </span>
             </div>
-            <p className="text-sm text-gray-600 line-clamp-2 italic">"{event.feedback}"</p>
+            <p className="text-sm text-gray-600 line-clamp-2 italic">
+              "{event.feedback}"
+            </p>
           </div>
 
           {/* Action Buttons */}
@@ -184,23 +206,25 @@ const PastEvents = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto">
-        
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-yellow-50 px-6 py-3 rounded-full border border-yellow-200 mb-6">
             <FaCalendarAlt className="text-yellow-500" />
-            <span className="text-lg font-semibold text-yellow-600">Past Events</span>
+            <span className="text-lg font-semibold text-yellow-600">
+              Past Events
+            </span>
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Successful Events{' '}
+            Successful Events{" "}
             <span className="bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">
               We've Hosted
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Relive the amazing moments from our past events. Watch recordings, browse photos, and see what our community loved.
+            Relive the amazing moments from our past events. Watch recordings,
+            browse photos, and see what our community loved.
           </p>
         </div>
 
@@ -214,13 +238,16 @@ const PastEvents = () => {
         {/* Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
           {[
-            { number: '50+', label: 'Events Hosted', color: colors.blue },
-            { number: '2000+', label: 'Participants', color: colors.green },
-            { number: '4.8★', label: 'Average Rating', color: colors.yellow },
-            { number: '98%', label: 'Satisfaction', color: colors.red }
+            { number: "50+", label: "Events Hosted", color: colors.blue },
+            { number: "2000+", label: "Participants", color: colors.green },
+            { number: "4.8★", label: "Average Rating", color: colors.yellow },
+            { number: "98%", label: "Satisfaction", color: colors.red },
           ].map((stat, index) => (
-            <div key={stat.label} className="text-center p-6 bg-white rounded-2xl shadow-lg">
-              <div 
+            <div
+              key={stat.label}
+              className="text-center p-6 bg-white rounded-2xl shadow-lg"
+            >
+              <div
                 className="text-3xl font-bold mb-2"
                 style={{ color: stat.color }}
               >

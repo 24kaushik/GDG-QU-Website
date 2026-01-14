@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  FaUsers, 
-  FaRocket, 
-  FaHeart, 
-  FaLightbulb, 
-  FaCode, 
+import React, { useState, useEffect, useRef } from "react";
+import {
+  FaUsers,
+  FaRocket,
+  FaHeart,
+  FaLightbulb,
+  FaCode,
   FaPalette,
   FaMobile,
   FaCloud,
@@ -20,8 +20,8 @@ import {
   FaTrophy,
   FaUserPlus,
   FaHandshake,
-  FaCalendarAlt
-} from 'react-icons/fa';
+  FaCalendarAlt,
+} from "react-icons/fa";
 
 const WelcomeTeamSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,10 +29,10 @@ const WelcomeTeamSection = () => {
   const canvasRef = useRef(null);
 
   const colors = {
-    blue: '#4285f4',
-    green: '#34a853',
-    yellow: '#f9ab00',
-    red: '#ea4335'
+    blue: "#4285f4",
+    green: "#34a853",
+    yellow: "#f9ab00",
+    red: "#ea4335",
   };
 
   // Mobile detection
@@ -42,19 +42,19 @@ const WelcomeTeamSection = () => {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Animated background effect - MOBILE OPTIMIZED
   useEffect(() => {
     setIsVisible(true);
-    
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     let animationFrameId;
 
     const setCanvasSize = () => {
@@ -63,7 +63,7 @@ const WelcomeTeamSection = () => {
     };
 
     setCanvasSize();
-    window.addEventListener('resize', setCanvasSize);
+    window.addEventListener("resize", setCanvasSize);
 
     const nodes = [];
     const nodeCount = isMobile ? 6 : 12; // Reduced nodes for mobile
@@ -78,12 +78,12 @@ const WelcomeTeamSection = () => {
         speedY: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.3),
         color: Object.values(colors)[i % 4],
         opacity: Math.random() * 0.5 + 0.3,
-        pulse: Math.random() * Math.PI * 2
+        pulse: Math.random() * Math.PI * 2,
       });
     }
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(3, 7, 18, 0.05)';
+      ctx.fillStyle = "rgba(3, 7, 18, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       nodes.forEach((node, index) => {
@@ -101,14 +101,23 @@ const WelcomeTeamSection = () => {
         // Draw node
         ctx.beginPath();
         ctx.arc(node.x, node.y, pulseSize, 0, Math.PI * 2);
-        
+
         const gradient = ctx.createRadialGradient(
-          node.x, node.y, 0,
-          node.x, node.y, pulseSize * 2
+          node.x,
+          node.y,
+          0,
+          node.x,
+          node.y,
+          pulseSize * 2
         );
-        gradient.addColorStop(0, `${node.color}${Math.round(node.opacity * 255).toString(16).padStart(2, '0')}`);
+        gradient.addColorStop(
+          0,
+          `${node.color}${Math.round(node.opacity * 255)
+            .toString(16)
+            .padStart(2, "0")}`
+        );
         gradient.addColorStop(1, `${node.color}00`);
-        
+
         ctx.fillStyle = gradient;
         ctx.fill();
 
@@ -116,13 +125,13 @@ const WelcomeTeamSection = () => {
         nodes.forEach((otherNode, otherIndex) => {
           if (index !== otherIndex) {
             const distance = Math.sqrt(
-              Math.pow(node.x - otherNode.x, 2) + 
-              Math.pow(node.y - otherNode.y, 2)
+              Math.pow(node.x - otherNode.x, 2) +
+                Math.pow(node.y - otherNode.y, 2)
             );
 
             if (distance < (isMobile ? 100 : 150)) {
               ctx.beginPath();
-              ctx.strokeStyle = `${node.color}${Math.round((1 - distance/(isMobile ? 100 : 150)) * 20).toString(16)}`;
+              ctx.strokeStyle = `${node.color}${Math.round((1 - distance / (isMobile ? 100 : 150)) * 20).toString(16)}`;
               ctx.lineWidth = 0.8;
               ctx.moveTo(node.x, node.y);
               ctx.lineTo(otherNode.x, otherNode.y);
@@ -138,25 +147,40 @@ const WelcomeTeamSection = () => {
     animate();
 
     return () => {
-      window.removeEventListener('resize', setCanvasSize);
+      window.removeEventListener("resize", setCanvasSize);
       cancelAnimationFrame(animationFrameId);
     };
   }, [isMobile]);
 
   const teamRoles = [
-    { icon: <FaCode />, name: 'Web Dev', color: colors.blue, count: 8 },
-    { icon: <FaMobile />, name: 'Mobile Dev', color: colors.green, count: 6 },
-    { icon: <FaBrain />, name: 'AI/ML', color: colors.yellow, count: 5 },
-    { icon: <FaCloud />, name: 'Cloud', color: colors.red, count: 4 },
-    { icon: <FaPalette />, name: 'Design', color: colors.blue, count: 3 },
-    { icon: <FaShieldAlt />, name: 'Security', color: colors.green, count: 3 }
+    { icon: <FaCode />, name: "Web Dev", color: colors.blue, count: 8 },
+    { icon: <FaMobile />, name: "Mobile Dev", color: colors.green, count: 6 },
+    { icon: <FaBrain />, name: "AI/ML", color: colors.yellow, count: 5 },
+    { icon: <FaCloud />, name: "Cloud", color: colors.red, count: 4 },
+    { icon: <FaPalette />, name: "Design", color: colors.blue, count: 3 },
+    { icon: <FaShieldAlt />, name: "Security", color: colors.green, count: 3 },
   ];
 
   const stats = [
-    { number: '25+', label: 'Team Members', icon: <FaUsers />, color: colors.blue },
-    { number: '50+', label: 'Projects', icon: <FaRocket />, color: colors.green },
-    { number: '1000+', label: 'Community', icon: <FaHeart />, color: colors.yellow },
-    { number: '2+', label: 'Years', icon: <FaMedal />, color: colors.red }
+    {
+      number: "25+",
+      label: "Team Members",
+      icon: <FaUsers />,
+      color: colors.blue,
+    },
+    {
+      number: "50+",
+      label: "Projects",
+      icon: <FaRocket />,
+      color: colors.green,
+    },
+    {
+      number: "1000+",
+      label: "Community",
+      icon: <FaHeart />,
+      color: colors.yellow,
+    },
+    { number: "2+", label: "Years", icon: <FaMedal />, color: colors.red },
   ];
 
   // Mobile-optimized illustration
@@ -169,7 +193,7 @@ const WelcomeTeamSection = () => {
 
       {/* Floating Elements - Simplified for mobile */}
       {[0, 1, 2, 3].map((i) => {
-        const angle = (i * 90) * Math.PI / 180;
+        const angle = (i * 90 * Math.PI) / 180;
         const radius = 80;
         const x = radius * Math.cos(angle);
         const y = radius * Math.sin(angle);
@@ -182,10 +206,10 @@ const WelcomeTeamSection = () => {
               left: `calc(50% + ${x}px)`,
               top: `calc(50% + ${y}px)`,
               borderColor: Object.values(colors)[i % 4],
-              animation: `float 4s ease-in-out infinite ${i * 0.5}s`
+              animation: `float 4s ease-in-out infinite ${i * 0.5}s`,
             }}
           >
-            <div 
+            <div
               className="w-4 h-4 rounded-full flex items-center justify-center text-white text-xs"
               style={{ backgroundColor: Object.values(colors)[i % 4] }}
             >
@@ -205,28 +229,37 @@ const WelcomeTeamSection = () => {
         <div className="relative">
           <div className="relative w-48 h-48 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center shadow-2xl">
             <FaUsers className="text-white text-4xl" />
-            
+
             {/* Floating Elements */}
             <div className="absolute -top-4 -left-4 w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float">
               <FaRocket className="text-xl" />
             </div>
-            
-            <div className="absolute -top-4 -right-4 w-14 h-14 bg-red-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float" style={{animationDelay: '1s'}}>
+
+            <div
+              className="absolute -top-4 -right-4 w-14 h-14 bg-red-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float"
+              style={{ animationDelay: "1s" }}
+            >
               <FaLightbulb className="text-lg" />
             </div>
-            
-            <div className="absolute -bottom-4 -left-4 w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float" style={{animationDelay: '2s'}}>
+
+            <div
+              className="absolute -bottom-4 -left-4 w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float"
+              style={{ animationDelay: "2s" }}
+            >
               <FaCode className="text-lg" />
             </div>
-            
-            <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float" style={{animationDelay: '3s'}}>
+
+            <div
+              className="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white shadow-lg animate-float"
+              style={{ animationDelay: "3s" }}
+            >
               <FaHeart className="text-xl" />
             </div>
           </div>
 
           {/* Orbiting Team Members */}
           {[0, 1, 2, 3, 4, 5].map((i) => {
-            const angle = (i * 60) * Math.PI / 180;
+            const angle = (i * 60 * Math.PI) / 180;
             const radius = 160;
             const x = radius * Math.cos(angle);
             const y = radius * Math.sin(angle);
@@ -240,10 +273,10 @@ const WelcomeTeamSection = () => {
                   top: `calc(50% + ${y}px)`,
                   borderColor: Object.values(colors)[i % 4],
                   animationDelay: `${i * 0.5}s`,
-                  animationDuration: '8s'
+                  animationDuration: "8s",
                 }}
               >
-                <div 
+                <div
                   className="w-6 h-6 rounded-full flex items-center justify-center text-white text-sm"
                   style={{ backgroundColor: Object.values(colors)[i % 4] }}
                 >
@@ -259,9 +292,8 @@ const WelcomeTeamSection = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 pt-16 lg:pt-20">
-      
       {/* Animated Background */}
-      <canvas 
+      <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-64 lg:h-96 opacity-40"
       />
@@ -269,55 +301,70 @@ const WelcomeTeamSection = () => {
       {/* Welcome Team Section */}
       <section className="relative py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          
           {/* Main Grid - MOBILE FIXED */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            
             {/* Left Side - Animated Illustration */}
-            <div className={`transform transition-all duration-1000 order-2 lg:order-1 ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}>
+            <div
+              className={`transform transition-all duration-1000 order-2 lg:order-1 ${
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+            >
               {isMobile ? <MobileIllustration /> : <DesktopIllustration />}
             </div>
 
             {/* Right Side - Content - MOBILE FIXED */}
-            <div className={`space-y-6 lg:space-y-8 transform transition-all duration-1000 delay-300 order-1 lg:order-2 ${
-              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}>
-              
+            <div
+              className={`space-y-6 lg:space-y-8 transform transition-all duration-1000 delay-300 order-1 lg:order-2 ${
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+            >
               {/* Header */}
               <div className="space-y-4">
                 <div className="inline-flex items-center space-x-2 bg-blue-50 px-4 py-2 rounded-full border border-blue-200 mb-12">
                   <FaUsers className="text-blue-500 text-sm lg:text-base" />
-                  <span className="text-sm font-semibold text-blue-600">Meet Our Team</span>
+                  <span className="text-sm font-semibold text-blue-600">
+                    Meet Our Team
+                  </span>
                 </div>
-                
+
                 <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
-                  Welcome to Our{' '} <br />
+                  Welcome to Our <br />
                   <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                     Dream Team
                   </span>
                 </h1>
 
                 <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
-                  A passionate group of developers, designers, and innovators working together 
-                  to create amazing experiences with Google technologies.
+                  A passionate group of developers, designers, and innovators
+                  working together to create amazing experiences with Google
+                  technologies.
                 </p>
               </div>
 
               {/* Team Stats - MOBILE FIXED */}
               <div className="grid grid-cols-2 gap-3 lg:gap-4">
                 {stats.map((stat, index) => (
-                  <div key={stat.label} className="flex items-center space-x-2 lg:space-x-3 p-3 lg:p-4 bg-white rounded-xl shadow-lg">
-                    <div 
+                  <div
+                    key={stat.label}
+                    className="flex items-center space-x-2 lg:space-x-3 p-3 lg:p-4 bg-white rounded-xl shadow-lg"
+                  >
+                    <div
                       className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl flex items-center justify-center text-white text-sm lg:text-base"
                       style={{ backgroundColor: stat.color }}
                     >
                       {stat.icon}
                     </div>
                     <div>
-                      <div className="text-lg lg:text-xl font-bold text-gray-900">{stat.number}</div>
-                      <div className="text-xs lg:text-sm text-gray-600">{stat.label}</div>
+                      <div className="text-lg lg:text-xl font-bold text-gray-900">
+                        {stat.number}
+                      </div>
+                      <div className="text-xs lg:text-sm text-gray-600">
+                        {stat.label}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -331,16 +378,23 @@ const WelcomeTeamSection = () => {
                 </h3>
                 <div className="grid grid-cols-2 gap-2 lg:gap-3">
                   {teamRoles.map((role, index) => (
-                    <div key={role.name} className="flex items-center space-x-2 p-2 lg:p-3 bg-white/50 rounded-lg border border-gray-200">
-                      <div 
+                    <div
+                      key={role.name}
+                      className="flex items-center space-x-2 p-2 lg:p-3 bg-white/50 rounded-lg border border-gray-200"
+                    >
+                      <div
                         className="w-6 h-6 lg:w-8 lg:h-8 rounded lg:rounded-lg flex items-center justify-center text-white text-xs lg:text-sm"
                         style={{ backgroundColor: role.color }}
                       >
                         {role.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs lg:text-sm font-medium text-gray-900 truncate">{role.name}</div>
-                        <div className="text-xs text-gray-600">{role.count} members</div>
+                        <div className="text-xs lg:text-sm font-medium text-gray-900 truncate">
+                          {role.name}
+                        </div>
+                        <div className="text-xs text-gray-600">
+                          {role.count} members
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -392,27 +446,31 @@ const WelcomeTeamSection = () => {
               {
                 text: "Alone we can do so little; together we can do so much.",
                 author: "Helen Keller",
-                color: colors.blue
+                color: colors.blue,
               },
               {
                 text: "Talent wins games, but teamwork wins championships.",
-                author: "Michael Jordan", 
-                color: colors.green
+                author: "Michael Jordan",
+                color: colors.green,
               },
               {
                 text: "Great things are never done by one person. They're done by a team.",
                 author: "Steve Jobs",
-                color: colors.yellow
-              }
+                color: colors.yellow,
+              },
             ].map((quote, index) => (
-              <div 
+              <div
                 key={index}
                 className="relative p-4 lg:p-6 bg-white rounded-xl lg:rounded-2xl shadow-lg border-l-4 transform hover:scale-105 transition-all duration-300"
                 style={{ borderLeftColor: quote.color }}
               >
-                <div className="text-sm lg:text-base text-gray-700 italic mb-2 lg:mb-3">"{quote.text}"</div>
-                <div className="text-xs lg:text-sm font-semibold text-gray-900">- {quote.author}</div>
-                <div 
+                <div className="text-sm lg:text-base text-gray-700 italic mb-2 lg:mb-3">
+                  "{quote.text}"
+                </div>
+                <div className="text-xs lg:text-sm font-semibold text-gray-900">
+                  - {quote.author}
+                </div>
+                <div
                   className="absolute top-3 lg:top-4 right-3 lg:right-4 text-xl lg:text-2xl opacity-10"
                   style={{ color: quote.color }}
                 >
@@ -427,23 +485,40 @@ const WelcomeTeamSection = () => {
       {/* Custom Animations */}
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-8px) rotate(120deg); }
-          66% { transform: translateY(5px) rotate(240deg); }
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          33% {
+            transform: translateY(-8px) rotate(120deg);
+          }
+          66% {
+            transform: translateY(5px) rotate(240deg);
+          }
         }
-        
+
         @keyframes orbite {
-          0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-          25% { transform: translate(5px, -5px) rotate(90deg) scale(1.05); }
-          50% { transform: translate(0, -10px) rotate(180deg) scale(1); }
-          75% { transform: translate(-5px, -5px) rotate(270deg) scale(1.05); }
-          100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+          0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+          }
+          25% {
+            transform: translate(5px, -5px) rotate(90deg) scale(1.05);
+          }
+          50% {
+            transform: translate(0, -10px) rotate(180deg) scale(1);
+          }
+          75% {
+            transform: translate(-5px, -5px) rotate(270deg) scale(1.05);
+          }
+          100% {
+            transform: translate(0, 0) rotate(360deg) scale(1);
+          }
         }
-        
+
         .animate-float {
           animation: float 4s ease-in-out infinite;
         }
-        
+
         .animate-orbite {
           animation: orbite 8s linear infinite;
         }
@@ -451,9 +526,16 @@ const WelcomeTeamSection = () => {
         /* Mobile-specific animations */
         @media (max-width: 768px) {
           @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-5px) rotate(120deg); }
-            66% { transform: translateY(3px) rotate(240deg); }
+            0%,
+            100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+              transform: translateY(-5px) rotate(120deg);
+            }
+            66% {
+              transform: translateY(3px) rotate(240deg);
+            }
           }
         }
       `}</style>

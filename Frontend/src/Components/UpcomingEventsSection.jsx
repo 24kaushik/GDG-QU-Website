@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
-import { 
-  FaCalendarAlt, 
-  FaClock, 
-  FaUser, 
+import React, { useState } from "react";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUser,
   FaMapMarkerAlt,
   FaArrowRight,
   FaRegBookmark,
   FaShare,
-  FaUsers
-} from 'react-icons/fa';
+  FaUsers,
+} from "react-icons/fa";
 
 const UpcomingEvents = () => {
   const [hoveredEvent, setHoveredEvent] = useState(null);
 
   const colors = {
-    blue: '#4285f4',
-    green: '#34a853',
-    yellow: '#f9ab00',
-    red: '#ea4335'
+    blue: "#4285f4",
+    green: "#34a853",
+    yellow: "#f9ab00",
+    red: "#ea4335",
   };
 
   const upcomingEvents = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "React Workshop: Advanced Hooks",
       facilitator: "Ashu Ayush",
       date: "2024-10-24",
@@ -31,11 +32,12 @@ const UpcomingEvents = () => {
       venue: "Google Meet",
       type: "workshop",
       seats: 50,
-      registered: 35
+      registered: 35,
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "AI/ML Tech Talk: Future of AI",
       facilitator: "Himanshu Halder",
       date: "2024-10-28",
@@ -43,11 +45,12 @@ const UpcomingEvents = () => {
       venue: "College Auditorium",
       type: "tech-talk",
       seats: 100,
-      registered: 78
+      registered: 78,
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "24-Hour Hackathon: Build for Good",
       facilitator: "Rahul Kumar",
       date: "2024-11-05",
@@ -55,11 +58,12 @@ const UpcomingEvents = () => {
       venue: "Tech Park Campus",
       type: "hackathon",
       seats: 30,
-      registered: 22
+      registered: 22,
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Flutter Mobile Development",
       facilitator: "Debjit Das",
       date: "2024-11-12",
@@ -67,11 +71,12 @@ const UpcomingEvents = () => {
       venue: "Lab Building Room 201",
       type: "workshop",
       seats: 40,
-      registered: 28
+      registered: 28,
     },
     {
       id: 5,
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Cloud Computing with GCP",
       facilitator: "Kaushik Sarkar",
       date: "2024-11-18",
@@ -79,11 +84,12 @@ const UpcomingEvents = () => {
       venue: "Online Session",
       type: "workshop",
       seats: 60,
-      registered: 45
+      registered: 45,
     },
     {
       id: 6,
-      image: "https://images.unsplash.com/photo-1544396821-4dd40b938ad3?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image:
+        "https://images.unsplash.com/photo-1544396821-4dd40b938ad3?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Cyber Security Workshop",
       facilitator: "Pravash Kumar Shaw",
       date: "2024-11-25",
@@ -91,25 +97,33 @@ const UpcomingEvents = () => {
       venue: "Security Lab",
       type: "workshop",
       seats: 35,
-      registered: 20
-    }
+      registered: 20,
+    },
   ];
 
   const getEventTypeColor = (type) => {
-    switch(type) {
-      case 'workshop': return colors.blue;
-      case 'tech-talk': return colors.green;
-      case 'hackathon': return colors.yellow;
-      default: return colors.red;
+    switch (type) {
+      case "workshop":
+        return colors.blue;
+      case "tech-talk":
+        return colors.green;
+      case "hackathon":
+        return colors.yellow;
+      default:
+        return colors.red;
     }
   };
 
   const getEventTypeIcon = (type) => {
-    switch(type) {
-      case 'workshop': return '🔧';
-      case 'tech-talk': return '🎤';
-      case 'hackathon': return '⚡';
-      default: return '🎯';
+    switch (type) {
+      case "workshop":
+        return "🔧";
+      case "tech-talk":
+        return "🎤";
+      case "hackathon":
+        return "⚡";
+      default:
+        return "🎯";
     }
   };
 
@@ -117,34 +131,41 @@ const UpcomingEvents = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-      <div 
+      <div
         className="group relative bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:scale-105 hover:shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Event Image */}
         <div className="relative h-48 overflow-hidden">
-          <img 
-            src={event.image} 
+          <img
+            src={event.image}
             alt={event.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          
+
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          
+
           {/* Event Type Badge */}
-          <div 
+          <div
             className="absolute top-4 left-4 px-3 py-1 rounded-full text-white text-sm font-semibold backdrop-blur-sm"
             style={{ backgroundColor: getEventTypeColor(event.type) }}
           >
-            {getEventTypeIcon(event.type)} {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+            {getEventTypeIcon(event.type)}{" "}
+            {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
           </div>
 
           {/* Date Badge */}
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center shadow-lg">
-            <div className="text-sm font-bold text-gray-900">{new Date(event.date).getDate()}</div>
-            <div className="text-xs text-gray-600">{new Date(event.date).toLocaleString('default', { month: 'short' })}</div>
+            <div className="text-sm font-bold text-gray-900">
+              {new Date(event.date).getDate()}
+            </div>
+            <div className="text-xs text-gray-600">
+              {new Date(event.date).toLocaleString("default", {
+                month: "short",
+              })}
+            </div>
           </div>
 
           {/* Hover Actions */}
@@ -160,19 +181,29 @@ const UpcomingEvents = () => {
 
         {/* Event Content */}
         <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{event.title}</h3>
-          
+          <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
+            {event.title}
+          </h3>
+
           {/* Facilitator */}
           <div className="flex items-center space-x-2 mb-3">
             <FaUser className="text-gray-400 text-sm" />
-            <span className="text-sm text-gray-600">By {event.facilitator}</span>
+            <span className="text-sm text-gray-600">
+              By {event.facilitator}
+            </span>
           </div>
 
           {/* Event Details */}
           <div className="space-y-2 mb-4">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <FaCalendarAlt />
-              <span>{new Date(event.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
+              <span>
+                {new Date(event.date).toLocaleDateString("en-US", {
+                  weekday: "short",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <FaClock />
@@ -188,25 +219,27 @@ const UpcomingEvents = () => {
           <div className="mb-4">
             <div className="flex justify-between text-xs text-gray-600 mb-1">
               <span>Seats filled</span>
-              <span>{event.registered}/{event.seats}</span>
+              <span>
+                {event.registered}/{event.seats}
+              </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className="h-2 rounded-full transition-all duration-500"
-                style={{ 
+                style={{
                   width: `${(event.registered / event.seats) * 100}%`,
-                  backgroundColor: getEventTypeColor(event.type)
+                  backgroundColor: getEventTypeColor(event.type),
                 }}
               ></div>
             </div>
           </div>
 
           {/* CTA Button */}
-          <button 
+          <button
             className="w-full py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
-            style={{ 
+            style={{
               backgroundColor: getEventTypeColor(event.type),
-              color: 'white'
+              color: "white",
             }}
           >
             <span>Register Now</span>
@@ -215,7 +248,7 @@ const UpcomingEvents = () => {
         </div>
 
         {/* Hover Border Effect */}
-        <div 
+        <div
           className="absolute inset-0 border-2 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{ borderColor: getEventTypeColor(event.type) }}
         ></div>
@@ -226,23 +259,25 @@ const UpcomingEvents = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
-        
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 bg-green-50 px-6 py-3 rounded-full border border-green-200 mb-6">
             <FaCalendarAlt className="text-green-500" />
-            <span className="text-lg font-semibold text-green-600">Upcoming Events</span>
+            <span className="text-lg font-semibold text-green-600">
+              Upcoming Events
+            </span>
           </div>
-          
+
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Don't Miss These{' '}
+            Don't Miss These{" "}
             <span className="bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent">
               Amazing Events
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join our upcoming workshops, tech talks, and hackathons. Learn new skills and network with industry experts.
+            Join our upcoming workshops, tech talks, and hackathons. Learn new
+            skills and network with industry experts.
           </p>
         </div>
 
