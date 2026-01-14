@@ -161,7 +161,7 @@ const TechStackSection = () => {
     };
 
     return (
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100 lg:bg-gradient-to-br lg:from-gray-50 lg:to-white">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center space-x-2 bg-blue-50 px-6 py-3 rounded-full border border-blue-200 mb-4">
@@ -191,7 +191,7 @@ const TechStackSection = () => {
                             <div
                                 key={tech.id}
                                 id={`tech-${tech.id}`}
-                                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center transition-all duration-1000 ${
+                                className={`shadow-lg p-5 rounded-2xl bg-white lg:shadow-none lg:bg-transparent lg:p-0 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center transition-all duration-1000 ${
                                     isVisible
                                         ? "translate-y-0 opacity-100"
                                         : "translate-y-20 opacity-0"
