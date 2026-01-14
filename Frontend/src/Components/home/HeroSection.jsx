@@ -463,7 +463,9 @@ const HeroSection = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <button
+                        <a
+                            href="https://gdg.community.dev/gdg-on-campus-quantum-university-roorkee-india/"
+                            target="_blank"
                             className="group relative px-8 py-4 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
                             style={{ backgroundColor: colors.green }}
                         >
@@ -474,7 +476,7 @@ const HeroSection = () => {
                             </span>
 
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                        </button>
+                        </a>
                     </div>
 
                     <div className="pt-8">

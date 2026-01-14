@@ -300,9 +300,13 @@ const TechStackSection = () => {
                             Join our community and get access to all tech
                             domains with expert guidance
                         </p>
-                        <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:scale-105 transition-transform duration-300">
+                        <a
+                            href="https://gdg.community.dev/gdg-on-campus-quantum-university-roorkee-india/"
+                            target="_blank"
+                            className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:scale-105 transition-transform duration-300"
+                        >
                             Join Community Now
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

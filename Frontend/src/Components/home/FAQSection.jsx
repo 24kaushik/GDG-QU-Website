@@ -13,99 +13,11 @@ import {
   FaStar,
   FaHeart
 } from 'react-icons/fa';
+import { faqCategories, colors, homeStats as stats } from '../../data/homeData';
+import { Link } from 'react-router-dom';
 
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-
-  const colors = {
-    blue: '#4285f4',
-    green: '#34a853',
-    yellow: '#f9ab00',
-    red: '#ea4335'
-  };
-
-  const faqCategories = [
-    {
-      id: 'general',
-      title: 'General Questions',
-      icon: <FaQuestionCircle />,
-      color: colors.blue,
-      questions: [
-        {
-          question: "What is Google Developer Groups (GDG)?",
-          answer: "GDG is a global community of developers passionate about Google's technologies. We organize workshops, study jams, and networking events to help developers learn and grow together."
-        },
-        {
-          question: "Who can join GDG?",
-          answer: "Anyone interested in technology! Whether you're a beginner, student, professional, or expert - all are welcome. No prior experience required."
-        },
-        {
-          question: "Is there any membership fee?",
-          answer: "No! GDG is completely free to join. All our events and resources are available at no cost to the community."
-        }
-      ]
-    },
-    {
-      id: 'events',
-      title: 'Events & Activities',
-      icon: <FaCalendarAlt />,
-      color: colors.green,
-      questions: [
-        {
-          question: "What kind of events does GDG organize?",
-          answer: "We host workshops, tech talks, hackathons, study jams, coding competitions, and networking events covering various Google technologies and developer tools."
-        },
-        {
-          question: "How often are events conducted?",
-          answer: "We typically host 2-3 events per month, including weekly study sessions, monthly workshops, and quarterly major events like hackathons."
-        },
-        {
-          question: "Can I suggest or host an event?",
-          answer: "Absolutely! We encourage community members to propose and host events. Reach out to our team with your idea."
-        }
-      ]
-    },
-    {
-      id: 'learning',
-      title: 'Learning & Resources',
-      icon: <FaGraduationCap />,
-      color: colors.yellow,
-      questions: [
-        {
-          question: "What technologies will I learn?",
-          answer: "Android, Flutter, Web Technologies, Google Cloud, Firebase, Machine Learning, TensorFlow, and many more Google developer technologies."
-        },
-        {
-          question: "Do I need prior experience to participate?",
-          answer: "Not at all! We have tracks for complete beginners to advanced developers. Our community helps everyone learn at their own pace."
-        },
-        {
-          question: "Are there any learning resources provided?",
-          answer: "Yes! We provide curated learning paths, documentation, video tutorials, and access to Google's developer resources."
-        }
-      ]
-    },
-    {
-      id: 'community',
-      title: 'Community & Networking',
-      icon: <FaUsers />,
-      color: colors.red,
-      questions: [
-        {
-          question: "How can I connect with other members?",
-          answer: "Join our Discord server, attend events, participate in study groups, and connect through our social media channels."
-        },
-        {
-          question: "Are there opportunities for collaboration?",
-          answer: "Yes! You can collaborate on projects, participate in team hackathons, and join special interest groups based on your interests."
-        },
-        {
-          question: "Can I become a speaker or facilitator?",
-          answer: "Definitely! We're always looking for community members to share their knowledge. Contact us to become a speaker."
-        }
-      ]
-    }
-  ];
 
   const toggleQuestion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -159,20 +71,6 @@ const FAQSection = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Everything you need to know about GDG community. Can't find an answer? Reach out to our team.
           </p>
-        </div>
-
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search questions..."
-              className="w-full px-6 py-4 bg-white rounded-2xl border border-gray-200 shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all duration-300 pl-14"
-            />
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-              <FaQuestionCircle className="text-xl" />
-            </div>
-          </div>
         </div>
 
         {/* FAQ Categories */}
@@ -241,13 +139,8 @@ const FAQSection = () => {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
-          {[
-            { number: '500+', label: 'Community Members', icon: <FaUsers />, color: colors.blue },
-            { number: '50+', label: 'Events Hosted', icon: <FaCalendarAlt />, color: colors.green },
-            { number: '100+', label: 'Projects Built', icon: <FaCode />, color: colors.yellow },
-            { number: '24/7', label: 'Support Available', icon: <FaHandshake />, color: colors.red }
-          ].map((stat, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-16">
+          {stats.map((stat, index) => (
             <div 
               key={index}
               className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center transform hover:scale-105 transition-all duration-300"
@@ -284,15 +177,15 @@ const FAQSection = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center justify-center space-x-2">
+                <a href="https://chat.whatsapp.com/ITrLWCTUV9lEshoRxOwixf" target='_blank' className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center justify-center space-x-2">
                   <FaUsers />
                   <span>Join Community Chat</span>
-                </button>
+                </a>
                 
-                <button className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-2">
+                <Link to="/contact" className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center justify-center space-x-2">
                   <FaHandshake />
                   <span>Contact Organizers</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -322,7 +215,7 @@ const FAQSection = () => {
       </div>
 
       {/* Custom Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
           33% { transform: translateY(-10px) rotate(120deg); }

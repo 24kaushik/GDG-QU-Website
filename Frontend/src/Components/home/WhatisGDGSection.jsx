@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import { colors, homeStats as stats } from "../../data/homeData";
 import gdg_icon from "../../Assets/logos/gdg_icon.jpg";
+import { Link } from "react-router-dom";
 
 const cards = [
     {
@@ -265,15 +266,15 @@ const WhatIsGDGSection = () => {
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <button className="flex items-center justify-center space-x-2 px-6 py-3 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                            <a href="https://gdg.community.dev/gdg-on-campus-quantum-university-roorkee-india/" target="_blank" className="flex items-center justify-center space-x-2 px-6 py-3 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
                                 <FaUsers />
                                 <span>Join Community</span>
-                            </button>
+                            </a>
 
-                            <button className="flex items-center justify-center space-x-2 px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-full font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300">
+                            <Link to="/events" className="flex items-center justify-center space-x-2 px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-full font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300">
                                 <FaCalendarAlt />
                                 <span>View Events</span>
-                            </button>
+                            </Link>
                         </div>
 
                         <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">

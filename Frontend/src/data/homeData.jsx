@@ -15,6 +15,9 @@ import {
     FaMicrochip,
     FaPalette,
     FaMap,
+    FaQuestionCircle,
+    FaCalendarAlt,
+    FaGraduationCap,
 } from "react-icons/fa";
 
 export const colors = {
@@ -343,6 +346,89 @@ export const techStacks = [
                 name: "Dribbble",
                 icon: <FaExternalLinkAlt />,
                 link: "https://dribbble.com/",
+            },
+        ],
+    },
+];
+
+export const faqCategories = [
+    {
+        id: "general",
+        title: "General Questions",
+        icon: <FaQuestionCircle />,
+        color: colors.blue,
+        questions: [
+            {
+                question: "What is Google Developer Groups (GDG)?",
+                answer: "GDG is a global community of developers passionate about Google's technologies. We organize workshops, study jams, and networking events to help developers learn and grow together.",
+            },
+            {
+                question: "Who can join GDG?",
+                answer: "Anyone interested in technology! Whether you're a beginner, student, professional, or expert - all are welcome. No prior experience required.",
+            },
+            {
+                question: "Is there any membership fee?",
+                answer: "No! GDG is completely free to join. All our events and resources are available at no cost to the community.",
+            },
+        ],
+    },
+    {
+        id: "events",
+        title: "Events & Activities",
+        icon: <FaCalendarAlt />,
+        color: colors.green,
+        questions: [
+            {
+                question: "What kind of events does GDG organize?",
+                answer: "We host workshops, tech talks, hackathons, study jams, coding competitions, and networking events covering various Google technologies and developer tools.",
+            },
+            {
+                question: "How often are events conducted?",
+                answer: "We typically host 2-3 events per month, including weekly study sessions, monthly workshops, and quarterly major events like hackathons.",
+            },
+            {
+                question: "Can I suggest or host an event?",
+                answer: "Absolutely! We encourage community members to propose and host events. Reach out to our team with your idea.",
+            },
+        ],
+    },
+    {
+        id: "learning",
+        title: "Learning & Resources",
+        icon: <FaGraduationCap />,
+        color: colors.yellow,
+        questions: [
+            {
+                question: "What technologies will I learn?",
+                answer: "Android, Flutter, Web Technologies, Google Cloud, Firebase, Machine Learning, TensorFlow, and many more Google developer technologies.",
+            },
+            {
+                question: "Do I need prior experience to participate?",
+                answer: "Not at all! We have tracks for complete beginners to advanced developers. Our community helps everyone learn at their own pace.",
+            },
+            {
+                question: "Are there any learning resources provided?",
+                answer: "Yes! We provide curated learning paths, documentation, video tutorials, and access to Google's developer resources.",
+            },
+        ],
+    },
+    {
+        id: "community",
+        title: "Community & Networking",
+        icon: <FaUsers />,
+        color: colors.red,
+        questions: [
+            {
+                question: "How can I connect with other members?",
+                answer: "Join our Discord server, attend events, participate in study groups, and connect through our social media channels.",
+            },
+            {
+                question: "Are there opportunities for collaboration?",
+                answer: "Yes! You can collaborate on projects, participate in team hackathons, and join special interest groups based on your interests.",
+            },
+            {
+                question: "Can I become a speaker or facilitator?",
+                answer: "Definitely! We're always looking for community members to share their knowledge. Contact us to become a speaker.",
             },
         ],
     },
