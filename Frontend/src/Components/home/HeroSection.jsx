@@ -16,17 +16,11 @@ import {
     FaStar,
 } from "react-icons/fa";
 import gdg_icon from "../../Assets/logos/gdg_icon.jpg";
+import { homeStats as stats, colors } from "../../data/homeData";
 
 const AnimatedIllustration = () => {
     const [isVisible, setIsVisible] = useState(false);
     const canvasRef = useRef(null);
-
-    const colors = {
-        blue: "#4285f4",
-        green: "#34a853",
-        yellow: "#f9ab00",
-        red: "#ea4335",
-    };
 
     useEffect(() => {
         setIsVisible(true);
@@ -387,13 +381,6 @@ const HeroSection = () => {
         return () => clearInterval(interval);
     }, []);
 
-    const colors = {
-        blue: "#4285f4",
-        green: "#34a853",
-        yellow: "#f9ab00",
-        red: "#ea4335",
-    };
-
     const socialLinks = [
         { icon: <FaGithub />, color: colors.blue, href: "#", label: "GitHub" },
         {
@@ -521,26 +508,7 @@ const HeroSection = () => {
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-200">
-                        {[
-                            {
-                                number: "500+",
-                                label: "Members",
-                                icon: <FaUsers />,
-                                color: colors.blue,
-                            },
-                            {
-                                number: "50+",
-                                label: "Events",
-                                icon: <FaCode />,
-                                color: colors.green,
-                            },
-                            {
-                                number: "100+",
-                                label: "Projects",
-                                icon: <FaRocket />,
-                                color: colors.yellow,
-                            },
-                        ].map((stat) => (
+                        {stats.map((stat) => (
                             <div key={stat.label} className="text-center group">
                                 <div
                                     className="w-12 h-12 rounded-xl mx-auto mb-2 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
