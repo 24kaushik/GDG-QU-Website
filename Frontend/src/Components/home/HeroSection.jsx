@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     FaRocket,
     FaGithub,
@@ -6,7 +6,6 @@ import {
     FaTwitter,
     FaYoutube,
     FaArrowRight,
-    FaPlay,
     FaCode,
     FaUsers,
     FaBrain,
@@ -16,7 +15,7 @@ import {
     FaRobot,
     FaStar,
 } from "react-icons/fa";
-import gdg_icon from '../../Assets/logos/gdg_icon.jpg';
+import gdg_icon from "../../Assets/logos/gdg_icon.jpg";
 
 const AnimatedIllustration = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -32,12 +31,10 @@ const AnimatedIllustration = () => {
     useEffect(() => {
         setIsVisible(true);
 
-        // Particle animation - FIXED VERSION
         const canvas = canvasRef.current;
         if (canvas) {
             const ctx = canvas.getContext("2d");
 
-            // Set canvas size properly
             const setCanvasSize = () => {
                 const parent = canvas.parentElement;
                 canvas.width = parent.offsetWidth;
@@ -48,23 +45,21 @@ const AnimatedIllustration = () => {
             window.addEventListener("resize", setCanvasSize);
 
             const particles = [];
-            const particleCount = 80; // Reduced for better performance
+            const particleCount = 80;
 
-            // Create particles
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 4 + 2, // Larger particles
+                    size: Math.random() * 4 + 2,
                     speedX: (Math.random() - 0.5) * 1,
                     speedY: (Math.random() - 0.5) * 1,
                     color: Object.values(colors)[Math.floor(Math.random() * 4)],
-                    opacity: Math.random() * 0.6 + 0.4, // Higher opacity
+                    opacity: Math.random() * 0.6 + 0.4,
                 });
             }
 
             const animate = () => {
-                // Clear with slight fade effect for trails
                 ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -72,13 +67,11 @@ const AnimatedIllustration = () => {
                     particle.x += particle.speedX;
                     particle.y += particle.speedY;
 
-                    // Bounce off walls
                     if (particle.x < 0 || particle.x > canvas.width)
                         particle.speedX *= -1;
                     if (particle.y < 0 || particle.y > canvas.height)
                         particle.speedY *= -1;
 
-                    // Draw particle with glow effect
                     ctx.beginPath();
                     ctx.arc(
                         particle.x,
@@ -88,7 +81,6 @@ const AnimatedIllustration = () => {
                         Math.PI * 2
                     );
 
-                    // Gradient fill for better visibility
                     const gradient = ctx.createRadialGradient(
                         particle.x,
                         particle.y,
@@ -108,7 +100,6 @@ const AnimatedIllustration = () => {
                     ctx.fillStyle = gradient;
                     ctx.fill();
 
-                    // Add glow
                     ctx.shadowColor = particle.color;
                     ctx.shadowBlur = 10;
                     ctx.fill();
@@ -128,27 +119,23 @@ const AnimatedIllustration = () => {
 
     return (
         <div
-            className={`relative w-full h-full transform transition-all duration-1000 delay-300 ${
+            className={`relative hidden md:flex w-full h-full transform transition-all duration-1000 delay-300 ${
                 isVisible
                     ? "translate-x-0 opacity-100"
                     : "translate-x-10 opacity-0"
             }`}
         >
-            {/* Background Canvas for Particles - FIXED STYLING */}
             <canvas
                 ref={canvasRef}
-                className="absolute inset-0 w-full h-full opacity-100" // Changed opacity to 100
+                className="absolute inset-0 w-full h-full opacity-100"
                 style={{
                     background: "transparent",
                     zIndex: 1,
                 }}
             />
 
-            {/* Main Illustration Container */}
             <div className="relative w-full h-full min-h-[500px] flex items-center justify-center z-10 -mt-50">
-                {/* Central Community Circle */}
                 <div className="relative w-64 h-64 md:w-80 md:h-80 z-20">
-                    {/* Outer Ring - Animated */}
                     <div
                         className="absolute inset-0 rounded-full border-4 animate-spin-slow"
                         style={{
@@ -156,8 +143,6 @@ const AnimatedIllustration = () => {
                             animationDuration: "20s",
                         }}
                     />
-
-                    {/* Middle Ring - Counter Rotate */}
                     <div
                         className="absolute inset-4 rounded-full border-4 animate-spin-medium"
                         style={{
@@ -166,26 +151,28 @@ const AnimatedIllustration = () => {
                             animationDirection: "reverse",
                         }}
                     />
-
-                    {/* Inner Ring */}
                     <div
                         className="absolute inset-8 rounded-full border-4 animate-pulse"
-                        style={{ borderColor: colors.blue }}
+                        style={{ borderColor: colors.blue, opacity: 0.5 }}
                     />
-
-                    {/* Central GDG Logo */}
-                    <div className="absolute inset-12 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform duration-500 z-30">
-                        <img src={gdg_icon} alt="GDG Logo" className="w-16 h-16 md:w-20 md:h-20" />
-                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-500 rounded-full animate-bounce"></div>
+                    <div
+                        className="absolute inset-12 rounded-full flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform duration-500 z-30 border border-white/30"
+                        style={{
+                            background:
+                                "linear-gradient(135deg, rgba(66,133,244,0.12), rgba(52,168,83,0.12), rgba(234,67,53,0.12))",
+                        }}
+                    >
+                        <img
+                            src={gdg_icon}
+                            alt="GDG Logo"
+                            className="w-16 h-16 md:w-32 md:h-32 drop-shadow-md"
+                        />
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue-500/70 rounded-full animate-bounce"></div>
                         <div
-                            className="absolute -bottom-2 -left-2 w-6 h-6 bg-red-500 rounded-full animate-bounce"
+                            className="absolute -bottom-2 -left-2 w-6 h-6 bg-red-500/70 rounded-full animate-bounce"
                             style={{ animationDelay: "0.5s" }}
                         ></div>
                     </div>
-
-                    {/* Floating Tech Elements */}
-
-                    {/* AI/ML Element */}
                     <div
                         className="absolute -top-4 left-1/2 transform -translate-x-1/2 animate-float-slow group cursor-pointer z-30"
                         style={{ animationDuration: "6s" }}
@@ -200,8 +187,6 @@ const AnimatedIllustration = () => {
                             AI/ML
                         </div>
                     </div>
-
-                    {/* Web Development */}
                     <div
                         className="absolute top-1/2 -right-4 transform -translate-y-1/2 animate-float-medium group cursor-pointer z-30"
                         style={{
@@ -219,8 +204,6 @@ const AnimatedIllustration = () => {
                             Web Dev
                         </div>
                     </div>
-
-                    {/* Cloud Computing */}
                     <div
                         className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 animate-float-slow group cursor-pointer z-30"
                         style={{
@@ -238,8 +221,6 @@ const AnimatedIllustration = () => {
                             Cloud
                         </div>
                     </div>
-
-                    {/* Mobile Development */}
                     <div
                         className="absolute top-1/2 -left-4 transform -translate-y-1/2 animate-float-medium group cursor-pointer z-30"
                         style={{
@@ -257,10 +238,6 @@ const AnimatedIllustration = () => {
                             Mobile
                         </div>
                     </div>
-
-                    {/* Additional Floating Elements */}
-
-                    {/* Server/Backend */}
                     <div
                         className="absolute top-8 left-8 animate-bounce-slow group cursor-pointer z-30"
                         style={{ animationDuration: "4s" }}
@@ -272,8 +249,6 @@ const AnimatedIllustration = () => {
                             <FaServer className="text-sm" />
                         </div>
                     </div>
-
-                    {/* Robotics/AI */}
                     <div
                         className="absolute top-8 right-8 animate-bounce-medium group cursor-pointer z-30"
                         style={{
@@ -288,8 +263,6 @@ const AnimatedIllustration = () => {
                             <FaRobot className="text-sm" />
                         </div>
                     </div>
-
-                    {/* Rocket/Innovation */}
                     <div
                         className="absolute bottom-8 left-8 animate-bounce-medium group cursor-pointer z-30"
                         style={{
@@ -304,8 +277,6 @@ const AnimatedIllustration = () => {
                             <FaRocket className="text-sm" />
                         </div>
                     </div>
-
-                    {/* Star/Achievement */}
                     <div
                         className="absolute bottom-8 right-8 animate-bounce-slow group cursor-pointer z-30"
                         style={{
@@ -323,7 +294,6 @@ const AnimatedIllustration = () => {
                 </div>
             </div>
 
-            {/* Custom Animations */}
             <style jsx>{`
                 @keyframes float-slow {
                     0%,
@@ -443,11 +413,9 @@ const HeroSection = () => {
 
     return (
         <section className="min-h-screen flex items-center justify-center pt-20 pb-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white to-gray-50 overflow-hidden relative">
-            {/* Background Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-green-50/10 to-yellow-50/20 z-0"></div>
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-                {/* Left Side - Content */}
                 <div
                     className={`space-y-8 transform transition-all duration-1000 ${
                         isVisible
@@ -455,7 +423,6 @@ const HeroSection = () => {
                             : "-translate-x-10 opacity-0"
                     }`}
                 >
-                    {/* Badge */}
                     <div className="inline-flex items-center space-x-2 bg-blue-50 px-4 py-2 rounded-full border border-blue-200">
                         <span
                             className="w-2 h-2 rounded-full animate-pulse"
@@ -469,7 +436,6 @@ const HeroSection = () => {
                         </span>
                     </div>
 
-                    {/* Main Heading */}
                     <div className="space-y-4">
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
                             <span className="block">Empowering</span>
@@ -477,15 +443,10 @@ const HeroSection = () => {
                                 <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                                     {rotatingWords[currentWord]}
                                 </span>
-                                <span
-                                    className="absolute -right-4 top-0 w-1 h-full animate-pulse"
-                                    style={{ backgroundColor: colors.red }}
-                                ></span>
                             </span>
                             <span className="block">of Tomorrow</span>
                         </h1>
 
-                        {/* Rotating Words Indicator */}
                         <div className="flex space-x-2 mt-4">
                             {rotatingWords.map((_, index) => (
                                 <button
@@ -507,7 +468,6 @@ const HeroSection = () => {
                         </div>
                     </div>
 
-                    {/* Description */}
                     <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
                         Join our vibrant community of student developers,
                         innovators, and creators. Learn, collaborate, and build
@@ -515,7 +475,6 @@ const HeroSection = () => {
                         the future together!
                     </p>
 
-                    {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
                         <button
                             className="group relative px-8 py-4 rounded-full font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
@@ -527,22 +486,20 @@ const HeroSection = () => {
                                 <FaArrowRight className="transform group-hover:translate-x-1 transition-transform duration-300" />
                             </span>
 
-                            {/* Shine effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                         </button>
                     </div>
 
-                    {/* Social Links */}
                     <div className="pt-8">
                         <p className="text-gray-500 mb-4">
                             Follow us on social media
                         </p>
                         <div className="flex space-x-4">
-                            {socialLinks.map((social, index) => (
+                            {socialLinks.map((social) => (
                                 <a
                                     key={social.label}
                                     href={social.href}
-                                    className={`group relative w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 transform`}
+                                    className="group relative w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 transform"
                                     style={{
                                         backgroundColor: `${social.color}15`,
                                         border: `2px solid ${social.color}30`,
@@ -555,8 +512,6 @@ const HeroSection = () => {
                                     >
                                         {social.icon}
                                     </span>
-
-                                    {/* Tooltip */}
                                     <span className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                                         {social.label}
                                     </span>
@@ -565,7 +520,6 @@ const HeroSection = () => {
                         </div>
                     </div>
 
-                    {/* Stats */}
                     <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-200">
                         {[
                             {
@@ -586,7 +540,7 @@ const HeroSection = () => {
                                 icon: <FaRocket />,
                                 color: colors.yellow,
                             },
-                        ].map((stat, index) => (
+                        ].map((stat) => (
                             <div key={stat.label} className="text-center group">
                                 <div
                                     className="w-12 h-12 rounded-xl mx-auto mb-2 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
@@ -608,7 +562,6 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Right Side - Animated Illustration */}
                 <AnimatedIllustration />
             </div>
         </section>
