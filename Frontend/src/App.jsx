@@ -6,6 +6,8 @@ import Event from "./Pages/Event";
 import MainLayout from "./MainLayout";
 import AdminLayout from "./Pages/Admin/AdminLayout";
 
+//TODO: scroll top parent
+
 function App() {
     return (
         <>

@@ -113,7 +113,7 @@ const AnimatedIllustration = () => {
 
     return (
         <div
-            className={`relative hidden md:flex w-full h-full transform transition-all duration-1000 delay-300 ${
+            className={`relative hidden lg:flex w-full h-full transform transition-all duration-1000 delay-300 ${
                 isVisible
                     ? "translate-x-0 opacity-100"
                     : "translate-x-10 opacity-0"
@@ -288,7 +288,7 @@ const AnimatedIllustration = () => {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style jsx="true">{`
                 @keyframes float-slow {
                     0%,
                     100% {
