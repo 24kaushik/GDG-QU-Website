@@ -39,7 +39,7 @@ const AnimatedIllustration = () => {
       window.addEventListener("resize", setCanvasSize);
 
       const particles = [];
-      const particleCount = 80;
+      const particleCount = 35;
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
