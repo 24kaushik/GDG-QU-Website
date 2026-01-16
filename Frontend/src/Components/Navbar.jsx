@@ -72,7 +72,7 @@ const Navbar = () => {
           : "bg-white/90 backdrop-blur-sm py-4"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 lg:px-6">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link

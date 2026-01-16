@@ -6,7 +6,7 @@ import Event from "./Pages/Event";
 import MainLayout from "./MainLayout";
 import AdminLayout from "./Pages/Admin/AdminLayout";
 
-//TODO: scroll top parent
+//TODO: Modularize the whole thing later
 
 function App() {
   return (
