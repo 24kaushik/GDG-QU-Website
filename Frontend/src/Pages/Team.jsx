@@ -1,5 +1,5 @@
 import React from "react";
-import WelcomeTeamSection from "../Components/WelcoleTeamSection";
+import WelcomeTeamSection from "../Components/WelcomeTeamSection";
 import TeamMembersSection from "../Components/TeamMembersSection";
 
 const Team = () => {
