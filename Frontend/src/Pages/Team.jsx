@@ -1,6 +1,6 @@
 import React from "react";
-import WelcomeTeamSection from "../Components/WelcomeTeamSection";
-import TeamMembersSection from "../Components/TeamMembersSection";
+import WelcomeTeamSection from "../Components/team/WelcomeTeamSection";
+import TeamMembersSection from "../Components/team/TeamMembersSection";
 
 const Team = () => {
   return (
