@@ -35,7 +35,7 @@ const JoinCommunity = () => {
           
           {/* WhatsApp Button */}
           <a
-            href="https://chat.whatsapp.com/YOUR_LINK" 
+            href="https://chat.whatsapp.com/ITrLWCTUV9lEshoRxOwixf" 
             target="_blank"
             rel="noreferrer"
             className="group relative w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-full font-bold text-lg shadow-lg shadow-green-500/20 hover:shadow-green-500/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
@@ -47,7 +47,7 @@ const JoinCommunity = () => {
 
           {/* GDG Button */}
           <a
-            href="https://gdg.community.dev/YOUR_URL" 
+            href="https://gdg.community.dev/gdg-on-campus-quantum-university-roorkee-india/" 
             target="_blank"
             rel="noreferrer"
             className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-full font-bold text-lg border border-gray-200 shadow-lg hover:shadow-xl hover:border-blue-500 hover:text-blue-600 hover:-translate-y-1 transition-all duration-300"

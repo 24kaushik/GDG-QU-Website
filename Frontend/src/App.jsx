@@ -1,5 +1,4 @@
 import Home from "./Pages/Home";
-import Roadmap from "./Pages/Roadmap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Team from "./Pages/Team";
 import Event from "./Pages/Event";
@@ -16,7 +15,6 @@ function App() {
           {/* Main Routes */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/team" element={<Team />} />
             <Route path="/events" element={<Event />} />
           </Route>

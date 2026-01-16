@@ -94,7 +94,9 @@ const Navbar = () => {
                 key={link.name}
                 to={link.href}
                 className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 group ${
-                  isActive(link.href) ? "text-white" : "text-gray-700 hover:text-gray-900"
+                  isActive(link.href)
+                    ? "text-white"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
               >
                 {/* Active/Hover Background */}
@@ -106,11 +108,13 @@ const Navbar = () => {
                   }`}
                   style={{ backgroundColor: link.color }}
                 />
-                
+
                 <span className="flex items-center space-x-2 relative z-10">
                   <span
                     className={`transition-all duration-300 ${
-                      isActive(link.href) ? "scale-110" : "group-hover:scale-110"
+                      isActive(link.href)
+                        ? "scale-110"
+                        : "group-hover:scale-110"
                     }`}
                     style={{
                       color: isActive(link.href) ? "white" : link.color,
@@ -126,35 +130,21 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <button
-              className="relative px-5 py-2 rounded-full font-bold border-2 transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden group"
-              style={{
-                borderColor: colors.blue,
-                color: colors.blue,
-              }}
+            <Link
+              to="/login"
+              className="group relative p-[2px] rounded-full overflow-hidden active:scale-95 transition-transform duration-200 cursor-pointer"
             >
-              <div
-                className="absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                style={{ backgroundColor: colors.blue }}
-              />
-              <span className="flex items-center space-x-2 relative z-10">
-                <FaUser className="group-hover:text-white transition-colors" />
-                <span className="group-hover:text-white transition-colors">
+              {/* Gradient Background (Acts as border) */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500 opacity-70 group-hover:opacity-100 animate-gradient-xy transition-opacity duration-300" />
+
+              {/* Inner Content */}
+              <div className="relative flex items-center gap-2 px-6 py-2 bg-white rounded-full transition-colors duration-300 group-hover:bg-opacity-95">
+                <FaUser className="text-gray-600 group-hover:text-blue-600 transition-colors" />
+                <span className="font-bold text-gray-700 group-hover:text-gray-900">
                   Login
                 </span>
-              </span>
-            </button>
-
-            <button
-              className="relative px-5 py-2 rounded-full font-bold text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg overflow-hidden group"
-              style={{ backgroundColor: colors.green }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              <span className="flex items-center space-x-2 relative z-10">
-                <FaUserPlus />
-                <span>Register</span>
-              </span>
-            </button>
+              </div>
+            </Link>
           </div>
 
           {/* Mobile / Tablet Hamburger */}
@@ -188,8 +178,9 @@ const Navbar = () => {
                     : "text-gray-700 hover:bg-gray-50 active:scale-95"
                 }`}
                 style={{
-                  backgroundColor:
-                    isActive(link.href) ? link.color : "transparent",
+                  backgroundColor: isActive(link.href)
+                    ? link.color
+                    : "transparent",
                 }}
                 onClick={() => setIsOpen(false)}
               >
@@ -206,24 +197,21 @@ const Navbar = () => {
             ))}
 
             <div className="pt-4 mt-2 border-t border-gray-100 flex flex-col space-y-3">
-              <button
-                className="w-full flex items-center justify-center space-x-2 p-4 rounded-xl font-bold border-2 transition-all duration-300 active:scale-95"
-                style={{
-                  borderColor: colors.blue,
-                  color: colors.blue,
-                }}
+              <Link
+                to="/login"
+                className="group relative p-[2px] rounded-full overflow-hidden active:scale-95 transition-transform duration-200 cursor-pointer"
               >
-                <FaUser />
-                <span>Login</span>
-              </button>
+                {/* Gradient Background (Acts as border) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500 opacity-70 group-hover:opacity-100 animate-gradient-xy transition-opacity duration-300" />
 
-              <button
-                className="w-full flex items-center justify-center space-x-2 p-4 rounded-xl font-bold text-white transition-all duration-300 active:scale-95 shadow-md"
-                style={{ backgroundColor: colors.green }}
-              >
-                <FaUserPlus />
-                <span>Register</span>
-              </button>
+                {/* Inner Content */}
+                <div className="relative flex items-center gap-2 px-6 py-2 bg-white rounded-full transition-colors duration-300 group-hover:bg-opacity-95">
+                  <FaUser className="text-gray-600 group-hover:text-blue-600 transition-colors" />
+                  <span className="font-bold text-gray-700 group-hover:text-gray-900">
+                    Login
+                  </span>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
