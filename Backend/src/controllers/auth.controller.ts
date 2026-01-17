@@ -61,8 +61,7 @@ const googleOAuth = asyncHandler(async (req: Request, res: Response) => {
 
         //  Redirect to frontend and set cookie.
         res.cookie("authToken", token, cookieOptions).redirect(
-            "https://google.com" // TODO: Change this to actual frontend URL
-            // `${process.env.FRONTEND_URL}/oauth-success`
+            `${process.env.MAIN_FRONTEND_URL}/`
         );
     } catch (error) {
         console.error(error);
@@ -178,8 +177,7 @@ const githubOAuth = asyncHandler(async (req: Request, res: Response) => {
 
     //  Redirect to frontend and set cookie.
     res.cookie("authToken", token, cookieOptions).redirect(
-        "https://google.com" // TODO: Change this to actual frontend URL
-        // `${process.env.FRONTEND_URL}/oauth-success`
+        `${process.env.MAIN_FRONTEND_URL}/`
     );
 });
 
