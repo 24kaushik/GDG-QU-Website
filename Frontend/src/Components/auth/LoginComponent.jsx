@@ -7,7 +7,7 @@ import {
   LuSparkles as Sparkles,
 } from "react-icons/lu";
 
-const LoginComponent = () => {
+const LoginComponent = ({ handleGoogleLogin, handleGithubLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeProvider, setActiveProvider] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -23,19 +23,6 @@ const LoginComponent = () => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
-
-  const handleLogin = (provider) => {
-    setIsLoading(true);
-    setActiveProvider(provider);
-    // Simulate login delay
-    setTimeout(() => {
-      setIsLoading(false);
-      setActiveProvider(null);
-      alert(
-        `Successfully connected with ${provider}! Redirecting to GDG Portal...`
-      );
-    }, 2000);
-  };
 
   // Custom Google Icon Component since we can't use react-icons
   const GoogleIcon = ({ className }) => (
@@ -140,7 +127,7 @@ const LoginComponent = () => {
           <div className="space-y-4">
             {/* Google Button */}
             <button
-              onClick={() => handleLogin("Google")}
+              onClick={handleGoogleLogin}
               disabled={isLoading}
               className="group relative w-full flex items-center justify-between px-4 py-4 bg-white hover:bg-gray-50 border border-gray-200 hover:border-blue-200 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden"
             >
@@ -160,7 +147,7 @@ const LoginComponent = () => {
 
             {/* GitHub Button */}
             <button
-              onClick={() => handleLogin("GitHub")}
+              onClick={handleGithubLogin}
               disabled={isLoading}
               className="group relative w-full flex items-center justify-between px-4 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl shadow-gray-900/10 disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden"
             >
