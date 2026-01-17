@@ -31,10 +31,10 @@ const navLinks = [
     href: "/events",
   },
   {
-    name: "Projects",
+    name: "Contributions",
     icon: <FaProjectDiagram />,
     color: colors.red,
-    href: "/projects",
+    href: "/contributions",
   },
   {
     name: "Wall of Fame",

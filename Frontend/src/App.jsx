@@ -5,6 +5,7 @@ import Event from "./Pages/Event";
 import MainLayout from "./MainLayout";
 import AdminLayout from "./Pages/Admin/AdminLayout";
 import Login from "./Pages/Login";
+import Contributions from "./Pages/Contributions";
 
 //TODO: Modularize the whole thing later
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/team" element={<Team />} />
             <Route path="/events" element={<Event />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/contributions" element={<Contributions />} />
           </Route>
 
           {/* Admin Routes */}
