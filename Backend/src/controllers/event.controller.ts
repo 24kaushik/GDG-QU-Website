@@ -10,20 +10,54 @@ import { Types } from "mongoose";
 // TODO: pagenation
 export const getAllEvents = asyncHandler(
     async (req: Request, res: Response) => {
-        const events = await Event.aggregate([
-            { $sort: { date_from: -1 } },
-            {
-                $lookup: {
-                    from: "eventparticipants",
-                    localField: "_id",
-                    foreignField: "eventId",
-                    as: "participants",
+        if (!req.user) {
+            const events = await Event.find().sort({ date_from: -1 });
+            res.sendResponse(200, "Events fetched successfully", events);
+        } else {
+            const userId = req.user._id;
+            const events = await Event.aggregate([
+                {
+                    $sort: { date_from: -1 },
                 },
-            },
-            { $addFields: { participantCount: { $size: "$participants" } } },
-            { $project: { participants: 0 } },
-        ]);
-        res.sendResponse(200, "Events fetched successfully", events);
+                {
+                    $lookup: {
+                        from: "eventparticipants",
+                        let: { eventId: "$_id" },
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: {
+                                        $and: [
+                                            { $eq: ["$eventId", "$$eventId"] },
+                                            {
+                                                $eq: [
+                                                    "$userId",
+                                                    new Types.ObjectId(userId),
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                },
+                            },
+                        ],
+                        as: "enrollments",
+                    },
+                },
+                {
+                    $addFields: {
+                        isEnrolled: {
+                            $gt: [{ $size: "$enrollments" }, 0],
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        enrollments: 0,
+                    },
+                },
+            ]);
+            res.sendResponse(200, "Events fetched successfully", events);
+        }
     }
 );
 
@@ -34,24 +68,65 @@ export const getEventById = asyncHandler(
             throw new ApiError(400, JSON.stringify(errors.array()));
         }
 
-        const eventId = req.params.id;
-        const event = await Event.aggregate([
-            { $match: { _id: new Types.ObjectId(eventId) } },
-            {
-                $lookup: {
-                    from: "eventparticipants",
-                    localField: "_id",
-                    foreignField: "eventId",
-                    as: "participants",
+        if (!req.user) {
+            const eventId = req.params.id;
+            const event = await Event.findById(eventId);
+            if (!event) {
+                throw new ApiError(404, "Event not found");
+            }
+            res.sendResponse(200, "Event fetched successfully", event);
+        } else {
+            const eventId = req.params.id;
+            const userId = req.user._id;
+
+            const events = await Event.aggregate([
+                {
+                    $match: { _id: new Types.ObjectId(eventId) },
                 },
-            },
-            { $addFields: { participantCount: { $size: "$participants" } } },
-            { $project: { participants: 0 } },
-        ]).then((results) => results[0]);
-        if (!event) {
-            throw new ApiError(404, "Event not found");
+                {
+                    $lookup: {
+                        from: "eventparticipants",
+                        let: { eventId: "$_id" },
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: {
+                                        $and: [
+                                            { $eq: ["$eventId", "$$eventId"] },
+                                            {
+                                                $eq: [
+                                                    "$userId",
+                                                    new Types.ObjectId(userId),
+                                                ],
+                                            },
+                                        ],
+                                    },
+                                },
+                            },
+                        ],
+                        as: "enrollments",
+                    },
+                },
+                {
+                    $addFields: {
+                        isEnrolled: {
+                            $gt: [{ $size: "$enrollments" }, 0],
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        enrollments: 0,
+                    },
+                },
+            ]);
+
+            if (events.length === 0) {
+                throw new ApiError(404, "Event not found");
+            }
+
+            res.sendResponse(200, "Event fetched successfully", events[0]);
         }
-        res.sendResponse(200, "Event fetched successfully", event);
     }
 );
 
@@ -73,8 +148,9 @@ export const createEvent = asyncHandler(async (req: Request, res: Response) => {
     } = req.body;
 
     // Fetching CoverImage, gdgEventId and photos from GDG URL
-    const { coverImageUrl, gdgEventId, eventPhotos } =
-        await fetchGdgMedia(gdgUrl);
+    const { coverImageUrl, gdgEventId, eventPhotos } = await fetchGdgMedia(
+        gdgUrl
+    );
 
     // Check if an event with the same gdgEventId already exists
     const existingEvent = await Event.findOne({ gdgEventId: gdgEventId });
@@ -158,14 +234,8 @@ export const enrollForEvent = asyncHandler(
             );
         }
 
-        const currentEnrollmentCount = await EventParticipant.countDocuments({
-            eventId: event._id,
-        });
-        if (currentEnrollmentCount >= event.maxParticipants) {
-            throw new ApiError(
-                400,
-                "Event has reached maximum participant limit"
-            );
+        if (event.participantCount >= event.maxParticipants) {
+            throw new ApiError(400, "Event has reached maximum participants");
         }
 
         // Check if the user is already enrolled
@@ -185,6 +255,9 @@ export const enrollForEvent = asyncHandler(
         if (!enrollment) {
             throw new ApiError(500, "Failed to enroll for event");
         }
+
+        event.participantCount += 1;
+        await event.save();
 
         res.sendResponse(201, "Enrolled for event successfully", enrollment);
     }

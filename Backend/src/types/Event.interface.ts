@@ -21,6 +21,7 @@ export interface IEvent extends Document {
     photos: string[];
     gdgUrl: string;
     gdgEventId: number;
+    participantCount: number;
     maxParticipants: number;
     createdAt?: Date;
     updatedAt?: Date;
