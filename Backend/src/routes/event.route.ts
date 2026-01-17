@@ -12,13 +12,15 @@ import {
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
 import { body, param } from "express-validator";
 import userAuthMiddleware from "../middlewares/userAuth.middleware";
+import optionalUserAuth from "../middlewares/optionalUserAuth.middleware";
 
 const eventRouter = Router();
 
-eventRouter.get("/", getAllEvents);
+eventRouter.get("/", optionalUserAuth, getAllEvents);
 eventRouter.get(
     "/:id",
     param("id").isMongoId().withMessage("Invalid event ID"),
+    optionalUserAuth,
     getEventById
 );
 eventRouter.post(

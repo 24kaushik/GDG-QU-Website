@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
     getAllUsers,
+    getSelf,
     getUserById,
     updateUser,
 } from "../controllers/user.controller";
@@ -10,8 +11,16 @@ import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
 
 const userRouter = Router();
 
+userRouter.get("/me", userAuthMiddleware, getSelf);
+
 userRouter.get("/all", adminAuthMiddleware, getAllUsers);
-userRouter.get("/:userId", param("userId").isMongoId(), getUserById);
+userRouter.get(
+    "/:userId",
+    param("userId").isMongoId(),
+    adminAuthMiddleware,
+    getUserById
+);
+
 userRouter.put(
     "/update",
     userAuthMiddleware,
@@ -41,5 +50,4 @@ userRouter.put(
     ],
     updateUser
 );
-
 export default userRouter;

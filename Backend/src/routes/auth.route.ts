@@ -6,7 +6,7 @@ const authRouter = Router();
 
 authRouter.post(
     "/google",
-    body("credential").notEmpty().withMessage("Credential is required"),
+    body("code").notEmpty().withMessage("code is required"),
     googleOAuth
 );
 authRouter.get(
