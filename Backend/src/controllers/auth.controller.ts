@@ -5,33 +5,48 @@ import { ApiError } from "../utils/ApiError";
 import { validationResult } from "express-validator";
 import User from "../models/User.model";
 import { cookieOptions } from "../constants";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Google OAuth2 Client
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+    throw new Error("Google OAuth environment variables are not configured");
+}
+
+const client = new OAuth2Client(
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    "postmessage" // Required for useGoogleLogin hook
+);
 
 // === Google Auth ===
 const googleOAuth = asyncHandler(async (req: Request, res: Response) => {
-    // Validate request
+    // 1. Validate request
     const result = validationResult(req);
     if (!result.isEmpty()) {
         throw new ApiError(400, JSON.stringify(result.mapped()));
     }
 
-    const { credential } = req.body;
-    const audience = process.env.GOOGLE_CLIENT_ID;
+    const { code } = req.body;
 
-    if (!audience) {
-        throw new ApiError(500, "Google client ID is not configured");
+    if (!code) {
+        throw new ApiError(400, "Authorization code is missing");
     }
 
-    // Verify the token
     try {
+        // 2. Exchange code for tokens
+        const { tokens } = await client.getToken(code);
+
+        // 3. Verify the ID Token from the tokens object
         const ticket = await client.verifyIdToken({
-            idToken: credential,
-            audience: audience,
+            idToken: tokens.id_token!,
+            audience: GOOGLE_CLIENT_ID,
         });
 
-        // Get the payload, extract user info
         const payload = ticket.getPayload();
         if (!payload) {
             throw new ApiError(400, "Invalid Google token payload");
@@ -39,11 +54,11 @@ const googleOAuth = asyncHandler(async (req: Request, res: Response) => {
 
         const { sub, email, name, picture, email_verified } = payload;
 
-        // Check if user exists in the database, create if not
+        // 4. Database logic (Find or Create)
         let user = await User.findOne({ email });
         if (user) {
             user.googleId = sub;
-            user.photo = picture || "";
+            user.photo = picture || user.photo || "";
             user.name = name || user.name || "";
             user.verifiedEmail = email_verified || false;
             await user.save();
@@ -59,13 +74,21 @@ const googleOAuth = asyncHandler(async (req: Request, res: Response) => {
 
         const token = (user as any).generateJWT();
 
-        //  Redirect to frontend and set cookie.
-        res.cookie("authToken", token, cookieOptions).redirect(
-            `${process.env.MAIN_FRONTEND_URL}/`
-        );
+        // 5. Response - Send JSON to allow React to handle the redirect
+        res.cookie("authToken", token, cookieOptions)
+            .status(200)
+            .json({
+                success: true,
+                message: "Authentication successful",
+                user: {
+                    name: user.name,
+                    email: user.email,
+                    photo: user.photo,
+                },
+            });
     } catch (error) {
-        console.error(error);
-        throw new ApiError(400, "Invalid Google token");
+        console.error("Google Auth Error:", error);
+        throw new ApiError(400, "Google authentication failed");
     }
 });
 
@@ -177,6 +200,7 @@ const githubOAuth = asyncHandler(async (req: Request, res: Response) => {
 
     //  Redirect to frontend and set cookie.
     res.cookie("authToken", token, cookieOptions).redirect(
+        // "https://google.com" // TODO: Change this to actual frontend URL
         `${process.env.MAIN_FRONTEND_URL}/`
     );
 });

@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/errorHandler.middleware";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // CORS configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS
