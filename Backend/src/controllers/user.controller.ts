@@ -66,3 +66,19 @@ export const updateUser = asyncHandler(async (req: any, res: Response) => {
 
     res.sendResponse(200, "User updated successfully", updatedUser);
 });
+
+export const getSelf = asyncHandler(async (req: any, res: Response) => {
+    const user = {
+        _id: req.user._id,
+        email: req.user.email,
+        name: req.user.name,
+        photo: req.user.photo,
+        realName: req.user.realName,
+        qid: req.user.qid,
+        course: req.user.course,
+        branch: req.user.branch,
+        isProfileComplete: req.user.isProfileComplete,
+        role: req.user.role,
+    }
+    return res.sendResponse(200, "User fetched successfully", user);
+});
