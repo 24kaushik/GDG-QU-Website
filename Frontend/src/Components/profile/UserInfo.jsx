@@ -14,46 +14,14 @@ import {
   FaCube,
   FaShapes,
 } from "react-icons/fa";
-
-// --- MOCK DATA ---
-const MOCK_INCOMPLETE_USER = {
-  statusCode: 200,
-  message: "User fetched successfully",
-  data: {
-    _id: "69245b2295a6439a480eb460",
-    email: "kaushik.s.contact@gmail.com",
-    name: "Kaushik Sarkar",
-    photo: "https://avatars.githubusercontent.com/u/87313991?v=4",
-    isProfileComplete: false,
-  },
-  success: true,
-};
-
-const MOCK_COMPLETE_USER = {
-  statusCode: 200,
-  message: "User fetched successfully",
-  data: {
-    _id: "6923160995f1763a2c97eeaf",
-    email: "akaushikarkar@gmail.com",
-    name: "Kaushik",
-    photo: "https://avatars.githubusercontent.com/u/87313991?v=4",
-    realName: "Kaushik Sarkar",
-    qid: 24030389,
-    course: "Btech",
-    branch: "CSE",
-    isProfileComplete: true,
-  },
-  success: true,
-};
-
-// Toggle to test states
-const TEST_MODE = "INCOMPLETE";
+import { useAuth } from "../../context/AuthContext";
 
 const ProfileSection = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const authContext = useAuth();
 
   // Form State
   const [formData, setFormData] = useState({
@@ -65,9 +33,16 @@ const ProfileSection = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    setTimeout(() => {
-      const response =
-        TEST_MODE === "COMPLETE" ? MOCK_COMPLETE_USER : MOCK_INCOMPLETE_USER;
+    const fetchUserData = async () => {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/me`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      ).then((res) => res.json());
+
       setUser(response.data);
       setFormData({
         realName: response.data.realName || "",
@@ -76,7 +51,8 @@ const ProfileSection = () => {
         branch: response.data.branch || "",
       });
       setLoading(false);
-    }, 800);
+    };
+    fetchUserData();
   }, []);
 
   const validate = () => {
@@ -109,8 +85,18 @@ const ProfileSection = () => {
     if (!validate()) return;
     setIsSaving(true);
     try {
-      console.log("PUT /update:", formData);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/update`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(formData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update profile");
+      }
       setUser((prev) => ({ ...prev, ...formData, isProfileComplete: true }));
       setIsEditing(false);
     } catch (err) {
@@ -121,7 +107,7 @@ const ProfileSection = () => {
   };
 
   const handleLogout = () => {
-    alert("Logging out...");
+    authContext.logout();
   };
 
   if (loading) {
@@ -136,7 +122,7 @@ const ProfileSection = () => {
   }
 
   return (
-    <section className="relative py-12 md:py-24 min-h-screen flex items-center justify-center overflow-hidden bg-slate-50">
+    <section className="relative py-12 flex items-center justify-center overflow-hidden bg-slate-50">
       {/* --- BACKGROUND EFFECTS --- */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -178,7 +164,7 @@ const ProfileSection = () => {
                     </h3>
                     <p className="text-red-600/80 text-sm mt-1 leading-relaxed">
                       Your profile is missing key details. Complete it now to
-                      get your ID verified.
+                      get your ID completed.
                     </p>
                   </div>
                 </div>
@@ -199,7 +185,7 @@ const ProfileSection = () => {
 
               <div className="absolute top-6 right-6 md:right-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-[10px] md:text-xs font-bold text-white border border-white/20 shadow-sm">
-                  <FaCheckCircle className="text-green-300" /> VERIFIED MEMBER
+                  <FaCheckCircle className="text-green-300" /> These details will be shown on your certificates
                 </span>
               </div>
             </div>
@@ -220,7 +206,7 @@ const ProfileSection = () => {
 
             {/* --- PROFILE PIC & NAME ROW --- */}
             {/* Mobile: Flex Column + Centered. Desktop: Flex Row + Aligned Bottom */}
-            <div className="flex flex-col items-center text-center md:flex-row md:items-end md:text-left gap-4 md:gap-6 -mt-16 mb-8 md:mb-10 relative z-10">
+            <div className="flex flex-col items-center text-center md:flex-row md:items-end md:text-left gap-4 md:gap-6 -mt-16 mb-8 md:mb-10 relative z-10 pt-3">
               {/* Avatar */}
               <div className="relative shrink-0">
                 <div

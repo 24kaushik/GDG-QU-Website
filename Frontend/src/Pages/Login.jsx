@@ -1,8 +1,10 @@
-import React from "react";
+import React, { use, useEffect } from "react";
 import LoginComponent from "../Components/auth/LoginComponent";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const authContext = useAuth();
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
       const response = await fetch(
@@ -15,7 +17,7 @@ const Login = () => {
         }
       );
       const data = await response.json();
-      console.log("Server Response:", data);
+      authContext.login(data.user);
     },
     flow: "auth-code",
   });
