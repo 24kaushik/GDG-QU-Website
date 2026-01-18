@@ -167,7 +167,7 @@ const GDGEventsSection = () => {
                   <FaTerminal />
                 </div>
                 <div className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-200">
-                  OPEN
+                  ENROLL NOW!
                 </div>
               </div>
 
@@ -175,14 +175,14 @@ const GDGEventsSection = () => {
               {/* Put latest event here */}
               <div className="space-y-2">
                 <div className="h-2 w-12 bg-gray-400/20 rounded-full"></div>
-                <h3 className="text-2xl font-bold text-gray-800">DevFest 2026</h3>
-                <p className="text-sm text-gray-500">The biggest developer festival in the region is back.</p>
+                <h3 className="text-2xl font-bold text-gray-800">Explore new events</h3>
+                <p className="text-sm text-gray-500">Explore a variety of events like workshops, seminars, hackathons, and bootcamps.</p>
               </div>
 
               {/* Card Footer */}
               <div className="pt-4 border-t border-gray-200/20 flex items-center gap-2 text-sm text-gray-600">
                  <FaMapMarkerAlt className="text-red-500" />
-                 <span>Innovation Hub, City Center</span>
+                 <span>Quantum University, Roorkee</span>
               </div>
             </div>
 
