@@ -205,4 +205,11 @@ const githubOAuth = asyncHandler(async (req: Request, res: Response) => {
     );
 });
 
-export { googleOAuth, githubOAuth };
+const logout = asyncHandler(async (req: Request, res: Response) => {
+    res.clearCookie("authToken", cookieOptions).status(200).json({
+        success: true,
+        message: "Logged out successfully",
+    });
+});
+
+export { googleOAuth, githubOAuth, logout };
