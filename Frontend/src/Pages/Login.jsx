@@ -22,7 +22,17 @@ const Login = () => {
     flow: "auth-code",
   });
 
-  const handleGithubLogin = () => {};
+  const handleGithubLogin = () => {
+    const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+
+    const redirectUri = `${import.meta.env.VITE_BACKEND_URL}/api/auth/github`;
+
+    const scope = "user:email read:user";
+
+    const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+
+    window.location.href = githubUrl;
+  };
 
   return (
     <div>
