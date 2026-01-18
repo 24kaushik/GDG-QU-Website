@@ -9,6 +9,7 @@ import Contributions from "./Pages/Contributions";
 import Profile from "./Pages/Profile";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./context/AuthContext";
+import Protected from "./utils/Protected";
 
 //TODO: Modularize the whole thing later
 
@@ -26,7 +27,7 @@ function App() {
                 <Route path="/events" element={<Event />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/contributions" element={<Contributions />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<Protected><Profile /></Protected>} />
               </Route>
 
               {/* Admin Routes */}

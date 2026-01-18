@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         console.error("Auth check failed:", error);
         setUser(null);
       } finally {
+        setLoading(false);
       }
     };
 
@@ -39,12 +41,17 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    // TODO: Call backend logout route here to clear the cookie
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    }).catch((error) => {
+      console.error("Logout failed:", error);
+    });
     window.location.href = `/`;
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
