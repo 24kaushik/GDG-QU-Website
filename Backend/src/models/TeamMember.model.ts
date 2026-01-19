@@ -10,19 +10,26 @@ const TeamMemberSchema = new Schema(
             minlength: 2,
             maxlength: 50,
         },
-        role: {
+        position: {
             type: String,
             required: true,
             trim: true,
             minlength: 2,
-            maxlength: 100,
+            maxlength: 20,
         },
-        photoUrl: {
+        image: {
             type: String,
             required: true,
             trim: true,
         },
         bio: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: 10,
+            maxlength: 500,
+        },
+        fullBio: {
             type: String,
             required: true,
             trim: true,
@@ -48,6 +55,9 @@ const TeamMemberSchema = new Schema(
         badge: {
             type: String,
             trim: true,
+        },
+        skills: {
+            type: [String],
         },
     },
     { timestamps: true }
