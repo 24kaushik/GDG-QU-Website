@@ -7,26 +7,30 @@ export const createTeamMember = asyncHandler(
     async (req: Request, res: Response) => {
         const {
             name,
-            role,
+            position,
             bio,
-            photoUrl,
+            fullBio,
+            image,
             linkedinUrl,
             githubUrl,
             twitterUrl,
             instagramUrl,
             badge,
+            skills,
         } = req.body;
 
         const newMember = await TeamMember.create({
             name,
-            role,
+            position,
             bio,
-            photoUrl,
+            fullBio,
+            image,
             linkedinUrl,
             githubUrl,
             twitterUrl,
             instagramUrl,
             badge,
+            skills,
         });
 
         if (!newMember) {
