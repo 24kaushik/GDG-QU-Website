@@ -20,14 +20,24 @@ teamRouter.post(
     "/create",
     [
         body("name").exists().isString().trim().isLength({ min: 2, max: 50 }),
-        body("role").exists().isString().trim().isLength({ min: 2, max: 100 }),
+        body("position")
+            .exists()
+            .isString()
+            .trim()
+            .isLength({ min: 2, max: 20 }),
         body("bio").exists().isString().trim().isLength({ min: 10, max: 500 }),
-        body("photoUrl").optional().isURL(),
+        body("fullBio")
+            .exists()
+            .isString()
+            .trim()
+            .isLength({ min: 10, max: 500 }),
+        body("image").optional().isURL(),
         body("linkedinUrl").optional().isURL(),
         body("githubUrl").optional().isURL(),
         body("twitterUrl").optional().isURL(),
         body("instagramUrl").optional().isURL(),
         body("badge").optional().isString(),
+        body("skills").optional().isArray(),
     ],
     createTeamMember
 );
@@ -36,22 +46,28 @@ teamRouter.put(
     [
         param("id").exists().isMongoId(),
         body("name").optional().isString().trim().isLength({ min: 2, max: 50 }),
-        body("role")
+        body("position")
             .optional()
             .isString()
             .trim()
-            .isLength({ min: 2, max: 100 }),
+            .isLength({ min: 2, max: 20 }),
         body("bio")
             .optional()
             .isString()
             .trim()
             .isLength({ min: 10, max: 500 }),
-        body("photoUrl").optional().isURL(),
+        body("fullBio")
+            .optional()
+            .isString()
+            .trim()
+            .isLength({ min: 10, max: 500 }),
+        body("image").optional().isURL(),
         body("linkedinUrl").optional().isURL(),
         body("githubUrl").optional().isURL(),
         body("twitterUrl").optional().isURL(),
         body("instagramUrl").optional().isURL(),
         body("badge").optional().isString(),
+        body("skills").optional().isArray(),
     ],
     updateTeamMember
 );
