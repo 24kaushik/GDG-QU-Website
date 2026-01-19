@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import gdg_long_white from "../Assets/logos/gdg_long_white.png";
 import { homeStats } from "../data/homeData";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [currentYear] = useState(new Date().getFullYear());
@@ -196,10 +197,10 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.link} className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2 text-sm group">
+                  <Link to={link.link} className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2 text-sm group">
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-blue-400 transition-colors"></span>
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
