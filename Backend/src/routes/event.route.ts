@@ -4,10 +4,12 @@ import {
     deleteEvent,
     enrollForEvent,
     getAllEvents,
+    getEnrolledEvents,
     getEventById,
     getEventParticipants,
     refreshEvent,
     updateEvent,
+    unenrollFromEvent,
 } from "../controllers/event.controller";
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
 import { body, param } from "express-validator";
@@ -17,6 +19,7 @@ import optionalUserAuth from "../middlewares/optionalUserAuth.middleware";
 const eventRouter = Router();
 
 eventRouter.get("/", optionalUserAuth, getAllEvents);
+eventRouter.get("/enrolled", userAuthMiddleware, getEnrolledEvents);
 eventRouter.get(
     "/:id",
     param("id").isMongoId().withMessage("Invalid event ID"),
@@ -29,6 +32,7 @@ eventRouter.post(
     userAuthMiddleware,
     enrollForEvent
 );
+eventRouter.post("/unenroll/:id", param("id").isMongoId(), userAuthMiddleware, unenrollFromEvent);
 
 eventRouter.use(adminAuthMiddleware);
 eventRouter.post(
@@ -146,5 +150,6 @@ eventRouter.get(
     param("id").isMongoId(),
     getEventParticipants
 );
+
 
 export default eventRouter;

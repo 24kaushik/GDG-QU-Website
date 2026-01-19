@@ -5,7 +5,7 @@ import type { Request, Response } from "express";
 import { ApiError } from "../utils/ApiError";
 import { fetchGdgMedia } from "../utils/eventFetcher";
 import EventParticipant from "../models/EventParticipant.model";
-import { Types } from "mongoose";
+import mongoose, { isValidObjectId, Types } from "mongoose";
 
 // TODO: pagenation
 export const getAllEvents = asyncHandler(
@@ -148,9 +148,8 @@ export const createEvent = asyncHandler(async (req: Request, res: Response) => {
     } = req.body;
 
     // Fetching CoverImage, gdgEventId and photos from GDG URL
-    const { coverImageUrl, gdgEventId, eventPhotos } = await fetchGdgMedia(
-        gdgUrl
-    );
+    const { coverImageUrl, gdgEventId, eventPhotos } =
+        await fetchGdgMedia(gdgUrl);
 
     // Check if an event with the same gdgEventId already exists
     const existingEvent = await Event.findOne({ gdgEventId: gdgEventId });
@@ -336,5 +335,55 @@ export const getEventParticipants = asyncHandler(
             "Event participants fetched successfully",
             participants
         );
+    }
+);
+
+export const getEnrolledEvents = asyncHandler(
+    async (req: Request, res: Response) => {
+        const user = req.user;
+        if (!user) {
+            throw new ApiError(401, "Unauthorized");
+        }
+
+        const enrollments = await EventParticipant.find({ userId: user._id })
+            .populate("eventId")
+            .exec();
+
+        const enrolledEvents = enrollments.map(
+            (enrollment) => enrollment.eventId
+        );
+
+        res.sendResponse(
+            200,
+            "Enrolled events fetched successfully",
+            enrolledEvents
+        );
+    }
+);
+
+export const unenrollFromEvent = asyncHandler(
+    async (req: Request, res: Response) => {
+        const eventId = req.params.id;
+
+        if (!isValidObjectId(eventId)) {
+            throw new ApiError(400, "Invalid event ID");
+        }
+
+        const enrollment = await EventParticipant.findOneAndDelete({
+            eventId,
+            userId: req.user!._id,
+        });
+
+        if (!enrollment) {
+            throw new ApiError(404, "Enrollment not found");
+        }
+
+        await Event.findByIdAndUpdate(
+            eventId,
+            { $inc: { participantCount: -1 } },
+            { new: true }
+        );
+
+        res.sendResponse(200, "Unenrolled from event successfully", null);
     }
 );
