@@ -1,381 +1,337 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  FaGoogle, 
-  FaGithub, 
-  FaLinkedin, 
-  FaTwitter, 
-  FaYoutube,
-  FaDiscord,
+import React, { useEffect, useRef, useState } from "react";
+import {
+  FaGoogle,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
   FaInstagram,
   FaHeart,
   FaRocket,
   FaCode,
   FaUsers,
   FaMapMarkerAlt,
-  FaPhone,
   FaEnvelope,
-  FaPaperPlane,
   FaArrowUp,
-  FaRegCopyright
-} from 'react-icons/fa';
+  FaRegCopyright,
+} from "react-icons/fa";
+import gdg_long_white from "../Assets/logos/gdg_long_white.png";
+import { homeStats } from "../data/homeData";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [isVisible, setIsVisible] = useState(false);
-  const [email, setEmail] = useState('');
+  const [currentYear] = useState(new Date().getFullYear());
   const canvasRef = useRef(null);
 
   const colors = {
-    blue: '#4285f4',
-    green: '#34a853',
-    yellow: '#f9ab00',
-    red: '#ea4335'
+    blue: "#4285f4",
+    green: "#34a853",
+    yellow: "#f9ab00",
+    red: "#ea4335",
   };
 
-  // Particle animation for background
+  // Improved Particle Animation
   useEffect(() => {
-    setIsVisible(true);
-    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    const particles = [];
-    const particleCount = 50;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let particles = [];
+    const particleCount = 60;
+    const connectionDistance = 120;
 
-    // Set canvas size
-    const setCanvasSize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+    // Handle Resize
+    const resizeCanvas = () => {
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
     };
 
-    setCanvasSize();
-    window.addEventListener('resize', setCanvasSize);
+    // Initial size
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        color: Object.values(colors)[Math.floor(Math.random() * 4)],
-        opacity: Math.random() * 0.3 + 0.1
-      });
-    }
+    // Initialize Particles
+    const initParticles = () => {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2 + 1,
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5,
+          color: Object.values(colors)[Math.floor(Math.random() * 4)],
+        });
+      }
+    };
 
+    initParticles();
+
+    // Animation Loop
     const animate = () => {
-      ctx.fillStyle = 'rgba(3, 7, 18, 0.1)'; // Dark background with transparency
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach(particle => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
+      particles.forEach((p, i) => {
+        p.x += p.dx;
+        p.y += p.dy;
 
-        // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
+        // Bounce off walls
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
 
-        // Draw particle with glow
+        // Draw Particle
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        
-        const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.size * 2
-        );
-        gradient.addColorStop(0, `${particle.color}${Math.round(particle.opacity * 255).toString(16).padStart(2, '0')}`);
-        gradient.addColorStop(1, `${particle.color}00`);
-        
-        ctx.fillStyle = gradient;
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = 0.6;
         ctx.fill();
 
-        // Connect particles with lines
-        particles.forEach(otherParticle => {
-          const distance = Math.sqrt(
-            Math.pow(particle.x - otherParticle.x, 2) + 
-            Math.pow(particle.y - otherParticle.y, 2)
-          );
+        // Connect Particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
+          if (dist < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `${particle.color}${Math.round((1 - distance/100) * 10).toString(16)}`;
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = 1 - dist / connectionDistance;
             ctx.lineWidth = 0.5;
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
           }
-        });
+        }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
-    return () => window.removeEventListener('resize', setCanvasSize);
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const socialLinks = [
-    { icon: <FaGithub />, name: 'GitHub', color: colors.blue, link: '#' },
-    { icon: <FaLinkedin />, name: 'LinkedIn', color: colors.green, link: '#' },
-    { icon: <FaTwitter />, name: 'Twitter', color: colors.yellow, link: '#' },
-    { icon: <FaYoutube />, name: 'YouTube', color: colors.red, link: '#' },
-    { icon: <FaDiscord />, name: 'Discord', color: colors.blue, link: '#' },
-    { icon: <FaInstagram />, name: 'Instagram', color: colors.green, link: '#' }
+    { icon: <FaGithub />, name: "GitHub", color: "#fff", bg: "#333" },
+    { icon: <FaLinkedin />, name: "LinkedIn", color: "#fff", bg: "#0077b5" },
+    { icon: <FaTwitter />, name: "Twitter", color: "#fff", bg: "#1da1f2" },
+    { icon: <FaInstagram />, name: "Instagram", color: "#fff", bg: "#e1306c" },
   ];
 
   const quickLinks = [
-    { name: 'Home', link: '#home' },
-    { name: 'About GDG', link: '#about' },
-    { name: 'Tech Stack', link: '#tech' },
-    { name: 'Roadmaps', link: '#roadmaps' },
-    { name: 'Events', link: '#events' },
-    { name: 'Team', link: '#team' },
-    { name: 'Projects', link: '#projects' },
-    { name: 'Contact', link: '#contact' }
+    { name: "Home", link: "/" },
+    { name: "Team", link: "/team" },
+    { name: "Events", link: "/events" },
+    { name: "Roadmaps", link: "/roadmaps" },
+    { name: "Contributions", link: "/contributions" },
   ];
 
   const techDomains = [
-    'Web Development',
-    'Mobile Development', 
-    'AI/ML',
-    'Cloud Computing',
-    'Cyber Security',
-    'Blockchain',
-    'IoT',
-    'Graphic Design'
+    { name: "Web Dev", color: "text-blue-400" },
+    { name: "Android", color: "text-green-400" },
+    { name: "Cloud", color: "text-red-400" },
+    { name: "AI / ML", color: "text-yellow-400" },
+    { name: "Design", color: "text-purple-400" },
+    { name: "Blockchain", color: "text-cyan-400" },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-slate-900 to-gray-950 text-white overflow-hidden">
-      
-      {/* Animated Background Canvas */}
-      <canvas 
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-40"
-      />
+    <footer className="relative bg-[#0a0f1c] text-white overflow-hidden border-t border-white/5">
+      {/* --- Background Layers --- */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#0d1221] to-black z-0"></div>
 
-      {/* Animated Gradient Orbs */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
-      </div>
+      {/* Canvas Layer */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-30" />
 
-      {/* Main Footer Content */}
+      {/* Radial Glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
-        {/* Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
-          
-          {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">G</span>
-                </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full animate-ping"></div>
-                <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-red-500 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  GDG Community
-                </h3>
-                <p className="text-gray-400 text-sm">Google Developer Groups</p>
-              </div>
-            </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Empowering developers through community, innovation, and Google's technologies. 
-              Join us in shaping the future of technology.
+        {/* --- Main Grid Layout --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+          {/* Column 1: Brand & Socials */}
+          <div className="space-y-6">
+            <img
+              src={gdg_long_white}
+              alt="GDG Logo"
+              className="h-14 -ml-2 w-auto opacity-90"
+            />
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+              A community-driven group for developers to learn, share, and
+              connect. Powered by Google Developers technology to shape the
+              future.
             </p>
-            
-            {/* Social Links */}
-            <div className="flex space-x-3">
-              {socialLinks.map((social, index) => (
+
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
                 <a
                   key={social.name}
-                  href={social.link}
-                  className="group relative w-10 h-10 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  href="#"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor = social.bg)
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      "rgba(255,255,255,0.05)")
+                  }
                 >
-                  <span 
-                    className="text-lg transition-all duration-300 group-hover:scale-125"
-                    style={{ color: social.color }}
-                  >
+                  <span className="text-lg text-white/80 hover:text-white">
                     {social.icon}
                   </span>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-                    {social.name}
-                  </div>
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-1">
-            <h4 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-              <FaRocket className="text-blue-400" />
-              <span>Quick Links</span>
-            </h4>
-            <div className="grid grid-cols-2 gap-3">
-              {quickLinks.map((link, index) => (
+          {/* Column 2: Quick Links */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+              <FaRocket className="text-blue-500" /> Explore
+            </h3>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.link}
+                    className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2 text-sm group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-blue-400 transition-colors"></span>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Tech Domains */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+              <FaCode className="text-green-500" /> Domains
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {techDomains.map((tech) => (
+                <span
+                  key={tech.name}
+                  className="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-xs text-gray-300 hover:border-white/30 hover:bg-white/10 transition-all cursor-default"
+                >
+                  <span className={`mr-1.5 ${tech.color}`}>●</span>
+                  {tech.name}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 4: Contact Us */}
+          <div>
+            <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+              <FaEnvelope className="text-yellow-500" /> Contact Us
+            </h3>
+
+            <div className="space-y-4 mb-8">
+              <div className="flex items-start gap-3 text-sm text-gray-400">
+                <FaMapMarkerAlt className="mt-1 text-gray-500 shrink-0" />
+                <span>
+                  Quantum University,
+                  <br />
+                  Roorkee, India
+                </span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <FaEnvelope className="text-gray-500 shrink-0" />
                 <a
-                  key={link.name}
-                  href={link.link}
-                  className="group flex items-center space-x-2 text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2"
+                  href="mailto:dscquantumuniversity@gmail.com"
+                  className="hover:text-blue-400 transition-colors"
                 >
-                  <div className="w-1 h-1 bg-blue-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-                  <span className="text-sm">{link.name}</span>
+                  dscquantumuniversity@gmail.com
                 </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech Domains */}
-          <div className="lg:col-span-1">
-            <h4 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-              <FaCode className="text-green-400" />
-              <span>Tech Domains</span>
-            </h4>
-            <div className="grid grid-cols-2 gap-3">
-              {techDomains.map((domain, index) => (
-                <div
-                  key={domain}
-                  className="group flex items-center space-x-2 text-gray-300 hover:text-white transition-all duration-300"
-                >
-                  <div 
-                    className="w-2 h-2 rounded-full transition-all duration-300 group-hover:scale-150"
-                    style={{ backgroundColor: Object.values(colors)[index % 4] }}
-                  ></div>
-                  <span className="text-sm">{domain}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Newsletter */}
-          <div className="lg:col-span-1">
-            <h4 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-              <FaPaperPlane className="text-yellow-400" />
-              <span>Stay Updated</span>
-            </h4>
-            <p className="text-gray-300 text-sm mb-4">
-              Get the latest updates on events, workshops, and tech insights.
-            </p>
-            
-            <div className="space-y-3">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                />
-                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded flex items-center justify-center hover:scale-110 transition-transform duration-300">
-                  <FaPaperPlane className="text-white text-sm" />
-                </button>
               </div>
-              
-              <div className="flex items-center space-x-2 text-xs text-gray-400">
-                <FaHeart className="text-red-400" />
-                <span>Join 500+ developers in our community</span>
-              </div>
+            </div>
+
+            {/* Community Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full">
+              <FaUsers className="text-blue-400" />
+              <span className="text-xs font-medium text-blue-200">
+                {homeStats[0].number} Community Members
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10 my-8"></div>
+        {/* --- Footer Bottom --- */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-xs text-gray-500">
+            <div className="flex items-center gap-1">
+              <FaRegCopyright /> {currentYear} GDG QU.
+            </div>
+            <div className="hidden md:block w-1 h-1 bg-gray-700 rounded-full"></div>
+            <div className="flex gap-4">
+              <a href="#" className="hover:text-gray-300 transition-colors">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-gray-300 transition-colors">
+                Terms
+              </a>
+              <a href="#" className="hover:text-gray-300 transition-colors">
+                Code of Conduct
+              </a>
+            </div>
+          </div>
 
-        {/* Bottom Section */}
-        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
-          
-          {/* Copyright */}
-          <div className="flex items-center space-x-2 text-gray-400">
-            <FaRegCopyright className="text-sm" />
-            <span className="text-sm">
-              {currentYear} GDG Community. Made with <FaHeart className="inline text-red-400 mx-1" /> for developers
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-gray-500 flex items-center gap-1">
+              Made with <FaHeart className="text-red-500 animate-pulse" /> by
+              GDG Team and Contributors
             </span>
+            <button
+              onClick={scrollToTop}
+              className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all"
+              title="Back to Top"
+            >
+              <FaArrowUp className="text-xs" />
+            </button>
           </div>
-
-          {/* Additional Links */}
-          <div className="flex items-center space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors duration-300">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors duration-300">Code of Conduct</a>
-          </div>
-
-          {/* Scroll to Top */}
-          <button
-            onClick={scrollToTop}
-            className="group flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
-          >
-            <span className="text-sm">Back to Top</span>
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <FaArrowUp className="text-white text-sm" />
-            </div>
-          </button>
         </div>
 
-        {/* Google Developer Badge */}
-        <div className="text-center mt-8 pt-8 border-t border-white/10">
-          <div className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
-            <FaGoogle className="text-blue-400" />
-            <span className="text-sm text-gray-300">Google Developer Groups</span>
-            <div className="flex space-x-1">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-              <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+        {/* Google Developer Badge with Animated Dots */}
+        <div className="mt-12 flex justify-center">
+          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-black/40 border border-white/10 backdrop-blur-md">
+            <FaGoogle className="text-sm text-gray-400" />
+            <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest border-r border-white/10 pr-3 mr-1">
+              Google Developer Groups
+            </span>
+
+            {/* The 4 Dots Animation */}
+            <div className="flex space-x-1.5">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
+              <div
+                className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"
+                style={{ animationDelay: "0.2s" }}
+              ></div>
+              <div
+                className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"
+                style={{ animationDelay: "0.4s" }}
+              ></div>
+              <div
+                className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"
+                style={{ animationDelay: "0.6s" }}
+              ></div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Floating Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Floating Icons */}
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute text-white/5 text-2xl animate-float"
-            style={{
-              left: `${10 + i * 12}%`,
-              top: `${20 + Math.sin(i) * 60}%`,
-              animationDelay: `${i * 2}s`,
-              animationDuration: `${15 + i * 2}s`
-            }}
-          >
-            <FaCode />
-          </div>
-        ))}
-      </div>
-
-      {/* Custom Animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-20px) rotate(120deg); }
-          66% { transform: translateY(10px) rotate(240deg); }
-        }
-        
-        .animate-float {
-          animation: float 20s ease-in-out infinite;
-        }
-      `}</style>
     </footer>
   );
 };
