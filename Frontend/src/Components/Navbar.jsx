@@ -133,7 +133,9 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            {authContext.user ? <ProfileIcon profilePic={authContext.user.photo} /> : (
+            {authContext.user ? (
+              <ProfileIcon profilePic={authContext.user.photo} />
+            ) : (
               <Link
                 to="/login"
                 className="group relative p-[2px] rounded-full overflow-hidden active:scale-95 transition-transform duration-200 cursor-pointer"
@@ -202,21 +204,25 @@ const Navbar = () => {
             ))}
 
             <div className="pt-4 mt-2 border-t border-gray-100 flex flex-col space-y-3">
-              {authContext.user ? (<ProfileIcon profilePic={authContext.user.photo} />) : <Link
-                to="/login"
-                className="group relative p-[2px] rounded-full overflow-hidden active:scale-95 transition-transform duration-200 cursor-pointer"
-              >
-                {/* Gradient Background (Acts as border) */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500 opacity-70 group-hover:opacity-100 animate-gradient-xy transition-opacity duration-300" />
+              {authContext.user ? (
+                <ProfileIcon profilePic={authContext.user.photo} />
+              ) : (
+                <Link
+                  to="/login"
+                  className="group relative p-[2px] rounded-full overflow-hidden active:scale-95 transition-transform duration-200 cursor-pointer"
+                >
+                  {/* Gradient Background (Acts as border) */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500 opacity-70 group-hover:opacity-100 animate-gradient-xy transition-opacity duration-300" />
 
-                {/* Inner Content */}
-                <div className="relative flex items-center gap-2 px-6 py-2 bg-white rounded-full transition-colors duration-300 group-hover:bg-opacity-95">
-                  <FaUser className="text-gray-600 group-hover:text-blue-600 transition-colors" />
-                  <span className="font-bold text-gray-700 group-hover:text-gray-900">
-                    Login
-                  </span>
-                </div>
-              </Link>}
+                  {/* Inner Content */}
+                  <div className="relative flex items-center gap-2 px-6 py-2 bg-white rounded-full transition-colors duration-300 group-hover:bg-opacity-95">
+                    <FaUser className="text-gray-600 group-hover:text-blue-600 transition-colors" />
+                    <span className="font-bold text-gray-700 group-hover:text-gray-900">
+                      Login
+                    </span>
+                  </div>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -233,14 +239,17 @@ const ProfileIcon = ({ profilePic }) => {
     >
       {/* Gradient Border Ring */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 via-red-500 to-yellow-500 p-[2px] opacity-80 group-hover:opacity-100 group-hover:rotate-180 transition-all duration-700 ease-out">
-        <div className="bg-white w-full h-full rounded-full"></div> 
+        <div className="bg-white w-full h-full rounded-full"></div>
         {/* The bg-white div creates the gap between image and border */}
       </div>
 
       {/* Image Container */}
       <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white">
         <img
-          src={profilePic || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
+          src={
+            profilePic ||
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          }
           alt="Profile"
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />

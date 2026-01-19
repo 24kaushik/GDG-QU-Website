@@ -27,7 +27,14 @@ function App() {
                 <Route path="/events" element={<Event />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/contributions" element={<Contributions />} />
-                <Route path="/profile" element={<Protected><Profile /></Protected>} />
+                <Route
+                  path="/profile"
+                  element={
+                    <Protected>
+                      <Profile />
+                    </Protected>
+                  }
+                />
               </Route>
 
               {/* Admin Routes */}

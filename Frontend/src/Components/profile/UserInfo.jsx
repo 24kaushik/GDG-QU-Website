@@ -185,7 +185,8 @@ const ProfileSection = () => {
 
               <div className="absolute top-6 right-6 md:right-8">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-[10px] md:text-xs font-bold text-white border border-white/20 shadow-sm">
-                  <FaCheckCircle className="text-green-300" /> These details will be shown on your certificates
+                  <FaCheckCircle className="text-green-300" /> These details
+                  will be shown on your certificates
                 </span>
               </div>
             </div>

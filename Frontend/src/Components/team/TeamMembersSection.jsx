@@ -32,40 +32,40 @@ const colors = {
 };
 
 const categoryStyles = {
-  mentors: { 
-    color: colors.yellow, 
-    bgColor: "#ffe7a5", 
-    icon: <FaCrown />, 
-    label: "Mentor", 
-    frame: yellow_frame 
+  mentors: {
+    color: colors.yellow,
+    bgColor: "#ffe7a5",
+    icon: <FaCrown />,
+    label: "Mentor",
+    frame: yellow_frame,
   },
-  teamLead: { 
-    color: colors.red, 
-    bgColor: "#f8d8d8", 
-    icon: <FaUserTie />, 
-    label: "Lead", 
-    frame: red_frame 
+  teamLead: {
+    color: colors.red,
+    bgColor: "#f8d8d8",
+    icon: <FaUserTie />,
+    label: "Lead",
+    frame: red_frame,
   },
-  teamHeads: { 
-    color: colors.blue, 
-    bgColor: "#c3ecf6", 
-    icon: <FaUserGraduate />, 
-    label: "Head", 
-    frame: blue_frame 
+  teamHeads: {
+    color: colors.blue,
+    bgColor: "#c3ecf6",
+    icon: <FaUserGraduate />,
+    label: "Head",
+    frame: blue_frame,
   },
-  coreTeam: { 
-    color: colors.green, 
-    bgColor: "#ccf6c5", 
-    icon: <FaUsers />, 
-    label: "Core", 
-    frame: green_frame 
+  coreTeam: {
+    color: colors.green,
+    bgColor: "#ccf6c5",
+    icon: <FaUsers />,
+    label: "Core",
+    frame: green_frame,
   },
-  default: { 
-    color: colors.blue, 
-    bgColor: "#c3ecf6", 
-    icon: <FaUsers />, 
-    label: "Member", 
-    frame: blue_frame 
+  default: {
+    color: colors.blue,
+    bgColor: "#c3ecf6",
+    icon: <FaUsers />,
+    label: "Member",
+    frame: blue_frame,
   },
 };
 
@@ -105,7 +105,6 @@ const ProfileModal = ({ member, category, onClose }) => {
 
       {/* Main Modal Container - Added flex-col to handle fixed header + scrollable body */}
       <div className="relative bg-white/95 backdrop-blur-2xl w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden transform transition-all animate-modalIn max-h-[90vh] flex flex-col">
-        
         {/* Fixed Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 flex z-50">
           <div className="flex-1 bg-blue-500"></div>
@@ -124,101 +123,100 @@ const ProfileModal = ({ member, category, onClose }) => {
 
         {/* Scrollable Content Wrapper - Handles scrolling for BOTH columns */}
         <div className="flex-1 overflow-y-auto custom-scrollbar">
-            <div className="flex flex-col md:flex-row min-h-full">
-                
-                {/* Left Side: Identity Card */}
-                <div className="md:w-[40%] bg-gray-50/50 p-10 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-gray-100 shrink-0">
-                    <div className="relative mb-6">
-                        <div
-                        className="absolute -inset-2 rounded-full blur-lg opacity-30 animate-pulse"
-                        style={{ backgroundColor: color }}
-                        ></div>
-                        <img
-                        src={member.image}
-                        alt={member.name}
-                        className="relative w-44 h-44 object-cover rounded-3xl shadow-2xl border-4 border-white"
-                        />
-                    </div>
+          <div className="flex flex-col md:flex-row min-h-full">
+            {/* Left Side: Identity Card */}
+            <div className="md:w-[40%] bg-gray-50/50 p-10 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-gray-100 shrink-0">
+              <div className="relative mb-6">
+                <div
+                  className="absolute -inset-2 rounded-full blur-lg opacity-30 animate-pulse"
+                  style={{ backgroundColor: color }}
+                ></div>
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="relative w-44 h-44 object-cover rounded-3xl shadow-2xl border-4 border-white"
+                />
+              </div>
 
-                    <h2 className="text-3xl font-black text-gray-900 leading-tight">
-                        {member.name}
-                    </h2>
-                    <div className="mt-3 flex items-center justify-center space-x-2">
-                        <span className="text-lg" style={{ color }}>
-                        {icon}
-                        </span>
-                        <p
-                        className="font-bold text-sm tracking-widest uppercase opacity-70"
-                        style={{ color }}
-                        >
-                        {member.position}
-                        </p>
-                    </div>
+              <h2 className="text-3xl font-black text-gray-900 leading-tight">
+                {member.name}
+              </h2>
+              <div className="mt-3 flex items-center justify-center space-x-2">
+                <span className="text-lg" style={{ color }}>
+                  {icon}
+                </span>
+                <p
+                  className="font-bold text-sm tracking-widest uppercase opacity-70"
+                  style={{ color }}
+                >
+                  {member.position}
+                </p>
+              </div>
 
-                    <div className="flex space-x-4 mt-8">
-                        {Object.entries(member.social).map(
-                        ([platform, link]) =>
-                            link && (
-                            <a
-                                key={platform}
-                                href={link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-3 bg-white rounded-2xl shadow-sm text-gray-400 hover:text-gray-900 hover:shadow-md transition-all transform hover:-translate-y-1"
-                                title={platform}
-                            >
-                                {socialIcons[platform]}
-                            </a>
-                            )
-                        )}
-                    </div>
-                </div>
-
-                {/* Right Side: Information Content */}
-                <div className="md:w-[60%] p-10">
-                    <div className="space-y-8">
-                        <section>
-                        <div className="flex items-center space-x-2 mb-4">
-                            <FaStar style={{ color }} />
-                            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
-                            About Me
-                            </h4>
-                        </div>
-                        <p className="text-gray-600 text-lg leading-relaxed font-medium">
-                            {member.fullBio || member.bio}
-                        </p>
-                        </section>
-
-                        <section>
-                        <div className="flex items-center space-x-2 mb-4">
-                            <FaCode style={{ color }} />
-                            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
-                            Technical Expertise
-                            </h4>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                            {(member.skills || []).map((skill, i) => (
-                            <span
-                                key={i}
-                                className="px-4 py-2 bg-gray-100 rounded-xl text-sm font-bold text-gray-700 border border-gray-200"
-                            >
-                                {skill}
-                            </span>
-                            ))}
-                        </div>
-                        </section>
-
-                        <div className="pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
-                        <div
-                            className="px-5 py-2 rounded-full text-white text-xs font-black uppercase tracking-wider shadow-lg"
-                            style={{ backgroundColor: color }}
-                        >
-                            {member.badge}
-                        </div>
-                        </div>
-                    </div>
-                </div>
+              <div className="flex space-x-4 mt-8">
+                {Object.entries(member.social).map(
+                  ([platform, link]) =>
+                    link && (
+                      <a
+                        key={platform}
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-white rounded-2xl shadow-sm text-gray-400 hover:text-gray-900 hover:shadow-md transition-all transform hover:-translate-y-1"
+                        title={platform}
+                      >
+                        {socialIcons[platform]}
+                      </a>
+                    )
+                )}
+              </div>
             </div>
+
+            {/* Right Side: Information Content */}
+            <div className="md:w-[60%] p-10">
+              <div className="space-y-8">
+                <section>
+                  <div className="flex items-center space-x-2 mb-4">
+                    <FaStar style={{ color }} />
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
+                      About Me
+                    </h4>
+                  </div>
+                  <p className="text-gray-600 text-lg leading-relaxed font-medium">
+                    {member.fullBio || member.bio}
+                  </p>
+                </section>
+
+                <section>
+                  <div className="flex items-center space-x-2 mb-4">
+                    <FaCode style={{ color }} />
+                    <h4 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
+                      Technical Expertise
+                    </h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {(member.skills || []).map((skill, i) => (
+                      <span
+                        key={i}
+                        className="px-4 py-2 bg-gray-100 rounded-xl text-sm font-bold text-gray-700 border border-gray-200"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+
+                <div className="pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4">
+                  <div
+                    className="px-5 py-2 rounded-full text-white text-xs font-black uppercase tracking-wider shadow-lg"
+                    style={{ backgroundColor: color }}
+                  >
+                    {member.badge}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -254,9 +252,9 @@ const TeamMemberCard = ({
             ? "scale-105 shadow-2xl border-opacity-100"
             : "scale-100 border-opacity-0"
         }`}
-        style={{ 
-          backgroundColor: bgColor, 
-          borderColor: color 
+        style={{
+          backgroundColor: bgColor,
+          borderColor: color,
         }}
       >
         <div
@@ -268,12 +266,12 @@ const TeamMemberCard = ({
         </div>
 
         <div className="relative aspect-square overflow-hidden">
-          <img 
-            src={frame} 
+          <img
+            src={frame}
             alt="frame"
-            className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none" 
+            className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none"
           />
-          
+
           <img
             src={member.image}
             alt={member.name}
@@ -281,7 +279,7 @@ const TeamMemberCard = ({
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-          
+
           <div className="absolute bottom-4 left-4 flex space-x-2 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300 z-20">
             {Object.entries(member.social).map(
               ([platform, link]) =>

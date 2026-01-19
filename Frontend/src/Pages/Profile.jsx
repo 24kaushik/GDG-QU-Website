@@ -1,6 +1,6 @@
-import React from 'react'
-import UserInfo from '../Components/profile/UserInfo'
-import EnrolledEvents from '../Components/profile/EnrolledEvents'
+import React from "react";
+import UserInfo from "../Components/profile/UserInfo";
+import EnrolledEvents from "../Components/profile/EnrolledEvents";
 
 const Profile = () => {
   return (
@@ -8,7 +8,7 @@ const Profile = () => {
       <UserInfo />
       <EnrolledEvents />
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

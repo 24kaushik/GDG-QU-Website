@@ -45,7 +45,7 @@ const Footer = () => {
       canvas.width = canvas.parentElement.offsetWidth;
       canvas.height = canvas.parentElement.offsetHeight;
     };
-    
+
     // Initial size
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -95,8 +95,8 @@ const Footer = () => {
 
           if (dist < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = p.color; 
-            ctx.globalAlpha = 1 - dist / connectionDistance; 
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = 1 - dist / connectionDistance;
             ctx.lineWidth = 0.5;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
@@ -146,10 +146,9 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-[#0a0f1c] text-white overflow-hidden border-t border-white/5">
-      
       {/* --- Background Layers --- */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-[#0d1221] to-black z-0"></div>
-      
+
       {/* Canvas Layer */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-30" />
 
@@ -158,18 +157,21 @@ const Footer = () => {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
         {/* --- Main Grid Layout --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
-          
           {/* Column 1: Brand & Socials */}
           <div className="space-y-6">
-            <img src={gdg_long_white} alt="GDG Logo" className="h-14 -ml-2 w-auto opacity-90" />
+            <img
+              src={gdg_long_white}
+              alt="GDG Logo"
+              className="h-14 -ml-2 w-auto opacity-90"
+            />
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              A community-driven group for developers to learn, share, and connect. 
-              Powered by Google Developers technology to shape the future.
+              A community-driven group for developers to learn, share, and
+              connect. Powered by Google Developers technology to shape the
+              future.
             </p>
-            
+
             {/* Social Icons */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -177,9 +179,14 @@ const Footer = () => {
                   key={social.name}
                   href="#"
                   className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = social.bg}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)'}
+                  style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor = social.bg)
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      "rgba(255,255,255,0.05)")
+                  }
                 >
                   <span className="text-lg text-white/80 hover:text-white">
                     {social.icon}
@@ -197,7 +204,10 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.link} className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2 text-sm group">
+                  <Link
+                    to={link.link}
+                    className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 flex items-center gap-2 text-sm group"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-blue-400 transition-colors"></span>
                     {link.name}
                   </Link>
@@ -213,8 +223,8 @@ const Footer = () => {
             </h3>
             <div className="flex flex-wrap gap-2">
               {techDomains.map((tech) => (
-                <span 
-                  key={tech.name} 
+                <span
+                  key={tech.name}
                   className="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-xs text-gray-300 hover:border-white/30 hover:bg-white/10 transition-all cursor-default"
                 >
                   <span className={`mr-1.5 ${tech.color}`}>●</span>
@@ -226,78 +236,101 @@ const Footer = () => {
 
           {/* Column 4: Contact Us */}
           <div>
-             <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+            <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
               <FaEnvelope className="text-yellow-500" /> Contact Us
             </h3>
-            
+
             <div className="space-y-4 mb-8">
-               <div className="flex items-start gap-3 text-sm text-gray-400">
-                  <FaMapMarkerAlt className="mt-1 text-gray-500 shrink-0" />
-                  <span>Quantum University,<br/>Roorkee, India</span>
-               </div>
-               <div className="flex items-center gap-3 text-sm text-gray-400">
-                  <FaEnvelope className="text-gray-500 shrink-0" />
-                  <a href="mailto:dscquantumuniversity@gmail.com" className="hover:text-blue-400 transition-colors">dscquantumuniversity@gmail.com</a>
-               </div>
+              <div className="flex items-start gap-3 text-sm text-gray-400">
+                <FaMapMarkerAlt className="mt-1 text-gray-500 shrink-0" />
+                <span>
+                  Quantum University,
+                  <br />
+                  Roorkee, India
+                </span>
+              </div>
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <FaEnvelope className="text-gray-500 shrink-0" />
+                <a
+                  href="mailto:dscquantumuniversity@gmail.com"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  dscquantumuniversity@gmail.com
+                </a>
+              </div>
             </div>
 
             {/* Community Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full">
-               <FaUsers className="text-blue-400" />
-               <span className="text-xs font-medium text-blue-200">{homeStats[0].number} Community Members</span>
+              <FaUsers className="text-blue-400" />
+              <span className="text-xs font-medium text-blue-200">
+                {homeStats[0].number} Community Members
+              </span>
             </div>
           </div>
-
         </div>
 
         {/* --- Footer Bottom --- */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-xs text-gray-500">
-             <div className="flex items-center gap-1">
-                <FaRegCopyright /> {currentYear} GDG QU.
-             </div>
-             <div className="hidden md:block w-1 h-1 bg-gray-700 rounded-full"></div>
-             <div className="flex gap-4">
-                <a href="#" className="hover:text-gray-300 transition-colors">Privacy</a>
-                <a href="#" className="hover:text-gray-300 transition-colors">Terms</a>
-                <a href="#" className="hover:text-gray-300 transition-colors">Code of Conduct</a>
-             </div>
+            <div className="flex items-center gap-1">
+              <FaRegCopyright /> {currentYear} GDG QU.
+            </div>
+            <div className="hidden md:block w-1 h-1 bg-gray-700 rounded-full"></div>
+            <div className="flex gap-4">
+              <a href="#" className="hover:text-gray-300 transition-colors">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-gray-300 transition-colors">
+                Terms
+              </a>
+              <a href="#" className="hover:text-gray-300 transition-colors">
+                Code of Conduct
+              </a>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
-             <span className="text-xs text-gray-500 flex items-center gap-1">
-                Made with <FaHeart className="text-red-500 animate-pulse" /> by GDG Team and Contributors
-             </span>
-             <button
-                onClick={scrollToTop}
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all"
-                title="Back to Top"
-              >
-                <FaArrowUp className="text-xs" />
-              </button>
+            <span className="text-xs text-gray-500 flex items-center gap-1">
+              Made with <FaHeart className="text-red-500 animate-pulse" /> by
+              GDG Team and Contributors
+            </span>
+            <button
+              onClick={scrollToTop}
+              className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all"
+              title="Back to Top"
+            >
+              <FaArrowUp className="text-xs" />
+            </button>
           </div>
-
         </div>
 
         {/* Google Developer Badge with Animated Dots */}
         <div className="mt-12 flex justify-center">
-           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-black/40 border border-white/10 backdrop-blur-md">
-              <FaGoogle className="text-sm text-gray-400" />
-              <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest border-r border-white/10 pr-3 mr-1">
-                 Google Developer Groups
-              </span>
-              
-              {/* The 4 Dots Animation */}
-              <div className="flex space-x-1.5">
-                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
-                <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: "0.2s" }}></div>
-                <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: "0.4s" }}></div>
-                <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" style={{ animationDelay: "0.6s" }}></div>
-              </div>
-           </div>
-        </div>
+          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-black/40 border border-white/10 backdrop-blur-md">
+            <FaGoogle className="text-sm text-gray-400" />
+            <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest border-r border-white/10 pr-3 mr-1">
+              Google Developer Groups
+            </span>
 
+            {/* The 4 Dots Animation */}
+            <div className="flex space-x-1.5">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
+              <div
+                className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"
+                style={{ animationDelay: "0.2s" }}
+              ></div>
+              <div
+                className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"
+                style={{ animationDelay: "0.4s" }}
+              ></div>
+              <div
+                className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"
+                style={{ animationDelay: "0.6s" }}
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );

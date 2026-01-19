@@ -4,7 +4,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./Components/FooterSection";
 
 const MainLayout = () => {
-
   // scroll to top on route change
   const { pathname } = useLocation();
   useEffect(() => {

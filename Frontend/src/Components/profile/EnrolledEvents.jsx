@@ -54,7 +54,7 @@ const EnrolledEventsSection = () => {
         }
 
         const result = await response.json();
-        
+
         if (result.success) {
           setEvents(result.data);
         } else {
@@ -76,7 +76,7 @@ const EnrolledEventsSection = () => {
       return;
 
     setUnenrollLoading(eventId);
-    
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/api/event/unenroll/${eventId}`,
@@ -117,9 +117,9 @@ const EnrolledEventsSection = () => {
       weekday: "short",
       month: "short",
       day: "numeric",
-      year: "numeric"
+      year: "numeric",
     });
-    
+
   const formatTime = (date) =>
     new Date(date).toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -204,7 +204,10 @@ const EnrolledEventsSection = () => {
                   {/* Card Image */}
                   <div className="relative h-40 overflow-hidden bg-gray-100">
                     <img
-                      src={event.cover || "https://via.placeholder.com/400x200?text=Event"}
+                      src={
+                        event.cover ||
+                        "https://via.placeholder.com/400x200?text=Event"
+                      }
                       alt={event.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -262,13 +265,13 @@ const EnrolledEventsSection = () => {
                             <FaCheckCircle /> Attended
                           </div>
                           {event.gdgUrl && (
-                            <a 
-                                href={event.gdgUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-sm text-gray-400 hover:text-blue-600 flex items-center gap-1 font-medium transition-colors"
+                            <a
+                              href={event.gdgUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm text-gray-400 hover:text-blue-600 flex items-center gap-1 font-medium transition-colors"
                             >
-                                Details <FaExternalLinkAlt className="text-xs" />
+                              Details <FaExternalLinkAlt className="text-xs" />
                             </a>
                           )}
                         </div>
