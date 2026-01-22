@@ -1,16 +1,16 @@
 import React from "react";
-import WelcomeEvents from "../Components/WelcomeEventSection";
-import UpcomingEvents from "../Components/UpcomingEventsSection";
-import PastEvents from "../Components/PastEventsSection";
+import WelcomeEvents from "../Components/event/WelcomeEventSection";
+import UpcomingEvents from "../Components/event/UpcomingEventsSection";
+import JoinCommunity from "../Components/event/JoinCommunity";
 
 const Event = () => {
-    return (
-        <>
-            <WelcomeEvents />
-            <UpcomingEvents />
-            <PastEvents />
-        </>
-    );
+  return (
+    <>
+      <WelcomeEvents />
+      <UpcomingEvents />
+      <JoinCommunity />
+    </>
+  );
 };
 
 export default Event;
