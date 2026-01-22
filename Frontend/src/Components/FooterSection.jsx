@@ -108,7 +108,7 @@ const Footer = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+        animate();
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);

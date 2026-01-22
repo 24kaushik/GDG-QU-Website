@@ -94,10 +94,10 @@ const AnimatedIllustration = () => {
           ctx.shadowBlur = 0;
         });
 
-        requestAnimationFrame(animate);
-      };
+                requestAnimationFrame(animate);
+            };
 
-      animate();
+            animate();
 
       return () => {
         window.removeEventListener("resize", setCanvasSize);

@@ -13,7 +13,12 @@ import Protected from "./utils/Protected";
 import ContactPage from "./Pages/Contact";
 
 //TODO: Modularize the whole thing later
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AdminEvent from "./Pages/Admin/AdminEvent";
+import AdminTeamPage from "./Pages/Admin/AdminTeam";
+import AdminContactPage from "./Pages/Admin/AdminContactPage";
 
+//TODO: Modularize the whole thing later
 function App() {
   return (
     <>
@@ -40,7 +45,14 @@ function App() {
               </Route>
 
               {/* Admin Routes */}
-              <Route path="/admin/*" element={<AdminLayout />}></Route>
+                  
+
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="event" element={<AdminEvent />} />
+                <Route path="team" element={<AdminTeamPage />} />
+                <Route path="contact" element={<AdminContactPage />} />
+              </Route>
             </Routes>
           </Router>
         </AuthProvider>
