@@ -16,7 +16,7 @@ const LatestContactCard = () => {
 
     return (
         <div className="w-full lg:w-1/3 mt-6 lg:mt-0 lg:p-4">
-            <div className="backdrop-blur-lg bg-white/30 p-8 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full min-h-[220px] flex flex-col justify-between">
+            <div className="backdrop-blur-lg bg-white/30 p-8 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[102%] w-full min-h-[220px] flex flex-col justify-between">
                 <div>
                     <div className="mb-3">
                         <h4 className="text-sm font-semibold text-gray-500">

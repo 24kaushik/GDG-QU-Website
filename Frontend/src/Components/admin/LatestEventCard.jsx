@@ -15,7 +15,7 @@ const LatestEventCard = () => {
     return (
         // make this card take most of the horizontal space on large screens and full width on small screens
         <div className="w-full lg:w-2/3 lg:p-4">
-            <div className="backdrop-blur-lg bg-white/30 p-6 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full h-full flex flex-col ">
+            <div className="backdrop-blur-lg bg-white/30 p-6 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[102%] w-full h-full flex flex-col ">
                 <div className="flex flex-col md:flex-row justify-center h-full items-center md:items-start gap-4">
                     {/* Info column */}
                     <div className="flex-1 h-full flex flex-col justify-evenly">

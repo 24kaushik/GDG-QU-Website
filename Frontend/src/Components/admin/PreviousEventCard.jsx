@@ -16,7 +16,7 @@ const PreviousEventCard = () => {
 
     return (
         <div className="w-full lg:w-1/3 mt-6 lg:mt-0 lg:p-4">
-            <div className="backdrop-blur-lg bg-white/30 p-6 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
+            <div className="backdrop-blur-lg bg-white/30 p-6 rounded-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[102%] w-full">
                 <div className="flex items-start justify-between mb-4">
                     <div>
                         <h3 className="text-2xl font-bold text-gray-900">
