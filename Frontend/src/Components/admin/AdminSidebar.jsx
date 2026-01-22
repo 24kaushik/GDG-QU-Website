@@ -34,12 +34,12 @@ const AdminSidebar = () => {
             colorClass: "text-google-yellow",
             hoverBg: "hover:bg-google-yellow/10",
         },
-        {
-            Icon: FaRoad,
-            label: "Roadmap",
-            colorClass: "text-google-blue",
-            hoverBg: "hover:bg-google-blue/10",
-        },
+        // {
+        //     Icon: FaRoad,
+        //     label: "Roadmap",
+        //     colorClass: "text-google-blue",
+        //     hoverBg: "hover:bg-google-blue/10",
+        // },
         {
             Icon: FaMessage,
             label: "Contacts",
