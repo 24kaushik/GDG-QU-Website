@@ -16,7 +16,9 @@ import ContactPage from "./Pages/Contact";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import AdminEvent from "./Pages/Admin/AdminEvent";
 import AdminTeamPage from "./Pages/Admin/AdminTeam";
+import AdminContactPage from "./Pages/Admin/AdminContactPage";
 
+//TODO: Modularize the whole thing later
 function App() {
   return (
     <>
@@ -49,6 +51,7 @@ function App() {
                 <Route index element={<AdminDashboard />} />
                 <Route path="event" element={<AdminEvent />} />
                 <Route path="team" element={<AdminTeamPage />} />
+                <Route path="contact" element={<AdminContactPage />} />
               </Route>
             </Routes>
           </Router>
