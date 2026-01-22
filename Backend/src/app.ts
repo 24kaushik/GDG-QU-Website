@@ -34,6 +34,7 @@ import eventRouter from "./routes/event.route";
 import teamRouter from "./routes/team.route";
 import wallOfFameRouter from "./routes/wallOfFame.route";
 import projectRouter from "./routes/project.routes";
+import contactRouter from "./routes/contact.route";
 
 
 app.use("/api/auth", authRouter);
@@ -42,6 +43,7 @@ app.use("/api/event", eventRouter);
 app.use("/api/team", teamRouter);
 app.use("/api/project", projectRouter);
 app.use("/api/wof", wallOfFameRouter);
+app.use("/api/contact", contactRouter);
 
 // Error handling middleware
 app.use(errorHandler);
