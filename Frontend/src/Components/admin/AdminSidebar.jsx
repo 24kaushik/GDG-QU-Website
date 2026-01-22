@@ -56,8 +56,7 @@ const AdminSidebar = () => {
 
     return (
         <>
-            {/* --- Mobile Trigger Button (Hamburger) --- */}
-            {/* Hidden when sidebar is open to prevent overlapping */}
+            {/* --- Mobile Trigger Button --- */}
             <button
                 type="button"
                 onClick={() => setIsOpen(true)}
@@ -71,7 +70,7 @@ const AdminSidebar = () => {
                 <MdMenu size={24} />
             </button>
 
-            {/* --- Mobile Overlay (Backdrop) --- */}
+            {/* --- Mobile Overlay --- */}
             {isOpen && (
                 <div 
                     className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
@@ -88,13 +87,10 @@ const AdminSidebar = () => {
                     md:translate-x-0
                 `}
             >
-                {/* --- INTERNAL CUT (CLOSE) BUTTON --- */}
-                {/* Absolute position top-right of sidebar, only visible on mobile */}
                 <button
                     type="button"
                     onClick={() => setIsOpen(false)}
                     className="md:hidden absolute top-2 right-2 p-1.5 rounded-full text-slate-400 hover:text-red-500 hover:bg-red-50 transition"
-                    aria-label="Close Menu"
                 >
                     <MdClose size={20} />
                 </button>
@@ -107,21 +103,28 @@ const AdminSidebar = () => {
                     />
                 </div>
 
-                <nav className="mt-6 flex-1 flex flex-col items-center gap-2 overflow-y-auto no-scrollbar">
+                {/* FIX APPLIED HERE:
+                   - overflow-y-auto: Allows scrolling on mobile if menu is tall.
+                   - md:overflow-visible: Disables scrolling on desktop so tooltips can float outside the box without being clipped or causing scrollbars.
+                */}
+                <nav className="mt-6 flex-1 flex flex-col items-center gap-2 overflow-y-auto md:overflow-visible no-scrollbar">
                     {navItems.map(({ Icon, label, colorClass, hoverBg }) => (
                         <button
                             key={label}
                             type="button"
-                            onClick={() => setIsOpen(false)} // Close on navigate
-                            aria-label={label}
-                            title={label}
+                            onClick={() => setIsOpen(false)}
                             className={`group relative w-full h-12 grid place-items-center rounded-xl text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 transition ${hoverBg}`}
                         >
                             <Icon size={22} className={colorClass} />
                             
-                            {/* Tooltip (Desktop Only) */}
-                            <span className="pointer-events-none absolute left-[calc(100%+8px)] z-50 rounded-md bg-white px-2 py-1 text-xs text-slate-700 shadow-md ring-1 ring-slate-200 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition hidden md:block">
+                            {/* Tooltip: 
+                                - whitespace-nowrap: Prevents text wrapping 
+                                - hidden md:block: Strictly removes it from DOM on mobile
+                            */}
+                            <span className="pointer-events-none absolute left-[calc(100%+10px)] top-1/2 -translate-y-1/2 z-50 rounded-md bg-slate-800 px-3 py-1.5 text-xs font-medium text-white shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 whitespace-nowrap hidden md:block">
                                 {label}
+                                {/* Little triangle pointer for the tooltip */}
+                                <span className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-2 h-2 bg-slate-800 rotate-45"></span>
                             </span>
                         </button>
                     ))}
@@ -130,8 +133,7 @@ const AdminSidebar = () => {
                 <div className="mt-auto flex items-center justify-center pt-4">
                     <button
                         type="button"
-                        aria-label="Profile"
-                        className="grid place-items-center rounded-full p-1.5 text-google-blue bg-google-blue/10 hover:bg-google-blue/20 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-google-blue/40"
+                        className="grid place-items-center rounded-full p-1.5 text-google-blue bg-google-blue/10 hover:bg-google-blue/20 transition"
                     >
                         <MdPerson size={32} />
                     </button>
