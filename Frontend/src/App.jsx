@@ -13,6 +13,7 @@ import Protected from "./utils/Protected";
 
 //TODO: Modularize the whole thing later
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AdminEvent from "./Pages/Admin/AdminEvent";
 
 function App() {
   return (
@@ -38,16 +39,19 @@ function App() {
                 />
               </Route>
 
-                    {/* Admin Routes */}
-                    <Route path="/admin/*" element={<AdminLayout />}>
-                        <Route index element={<AdminDashboard />} />
-                    </Route>
-                </Routes>
-            </Router>
+              {/* Admin Routes */}
+                  
+
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="event" element={<AdminEvent />} />
+              </Route>
+            </Routes>
+          </Router>
         </AuthProvider>
       </GoogleOAuthProvider>
-        </>
-    );
+    </>
+  );
 }
 
 export default App;

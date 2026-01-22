@@ -1,6 +1,6 @@
 import React from "react";
 import AdminSidebar from "../../Components/admin/AdminSidebar";
-import AdminDashboard from "./AdminDashboard";
+import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
     return (
@@ -12,7 +12,7 @@ const AdminLayout = () => {
             <div className="relative z-10 flex">
                 <AdminSidebar />
                 <main className="w-full">
-                    <AdminDashboard />
+                    <Outlet />
                 </main>
             </div>
         </div>
