@@ -79,6 +79,6 @@ export const getSelf = asyncHandler(async (req: any, res: Response) => {
         branch: req.user.branch,
         isProfileComplete: req.user.isProfileComplete,
         role: req.user.role,
-    }
+    };
     return res.sendResponse(200, "User fetched successfully", user);
 });
