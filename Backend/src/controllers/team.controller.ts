@@ -45,10 +45,8 @@ export const getTeamMembers = asyncHandler(
     async (req: Request, res: Response) => {
         const members = await TeamMember.find().sort({ createdAt: -1 });
 
-        if (!members || members.length === 0) {
-            throw new ApiError(404, "No team members found");
-        }
-        res.sendResponse(200, "Team members retrieved successfully", members);
+        // Return empty array if no members, not 404
+        res.sendResponse(200, "Team members retrieved successfully", members || []);
     }
 );
 
