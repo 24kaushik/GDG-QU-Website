@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./Frontend
+    container_name: gdg_frontend
+    restart: unless-stopped
+    env_file:
+      - ./Frontend/.env
+    networks:
+      - gdg_net
+
+  backend:
+    build:
+      context: ./Backend
+    container_name: gdg_backend
+    restart: unless-stopped
+    env_file:
+      - ./Backend/.env
+    expose:
+      - "8000"
+    networks:
+      - gdg_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: gdg_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+    networks:
+      - gdg_net
+
+networks:
+  gdg_net:
+    driver: bridge

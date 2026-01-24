@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import GDG_Logo from "../../assets/images/gdg_logo.webp";
-
+import GDG_Logo from "../../Assets/images/gdg_logo.webp";
 import { MdPerson, MdMenu, MdClose } from "react-icons/md";
 import { FaHome, FaGraduationCap, FaCalendarAlt } from "react-icons/fa";
 import { FaRoad, FaMessage } from "react-icons/fa6";
@@ -9,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const navItems = [
     {

@@ -4,7 +4,7 @@ import connectDB from "./config/db";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 // Connect to the database and then start the server
 connectDB()
