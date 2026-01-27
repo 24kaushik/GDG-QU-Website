@@ -2,32 +2,26 @@ version: "3.9"
 
 services:
   frontend:
-    build:
-      context: ./Frontend
     image: ${DOCKER_USERNAME}/gdg-frontend:latest
     container_name: gdg_frontend
     restart: unless-stopped
     env_file:
-      - ./Frontend/.env
+      - .env
     networks:
       - gdg_net
 
   backend:
-    build:
-      context: ./Backend
     image: ${DOCKER_USERNAME}/gdg-backend:latest
     container_name: gdg_backend
     restart: unless-stopped
     env_file:
-      - ./Backend/.env
+      - .env
     expose:
       - "8000"
     networks:
       - gdg_net
 
   nginx:
-    build:
-      context: ./nginx
     image: ${DOCKER_USERNAME}/gdg-nginx:latest
     container_name: gdg_nginx
     ports:
