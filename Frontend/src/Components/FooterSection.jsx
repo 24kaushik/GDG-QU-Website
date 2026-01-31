@@ -252,10 +252,10 @@ const Footer = () => {
               <div className="flex items-center gap-3 text-sm text-gray-400">
                 <FaEnvelope className="text-gray-500 shrink-0" />
                 <a
-                  href="mailto:dscquantumuniversity@gmail.com"
+                  href="mailto:dsc@quantumuniversity.edu.in"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  dscquantumuniversity@gmail.com
+                  dsc@quantumuniversity.edu.in
                 </a>
               </div>
             </div>
