@@ -18,6 +18,7 @@ import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import AdminEvent from "./Pages/Admin/AdminEvent";
 import AdminTeamPage from "./Pages/Admin/AdminTeam";
 import AdminContactPage from "./Pages/Admin/AdminContactPage";
+import AdminProtected from "./utils/AdminProtected";
 
 //TODO: Modularize the whole thing later
 function App() {
@@ -49,7 +50,7 @@ function App() {
               {/* Admin Routes */}
 
 
-              <Route path="/admin" element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminProtected><AdminLayout /></AdminProtected>}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="event" element={<AdminEvent />} />
                 <Route path="team" element={<AdminTeamPage />} />

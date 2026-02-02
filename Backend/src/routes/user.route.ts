@@ -8,12 +8,22 @@ import {
 import { body, param } from "express-validator";
 import userAuthMiddleware from "../middlewares/userAuth.middleware";
 import adminAuthMiddleware from "../middlewares/adminAuth.middleware";
+import { asyncHandler } from "../utils/asyncHandler";
+import type { Request, Response } from "express";
 
 const userRouter = Router();
 
 userRouter.get("/me", userAuthMiddleware, getSelf);
-
 userRouter.get("/all", adminAuthMiddleware, getAllUsers);
+
+userRouter.get(
+    "/isAdmin",
+    adminAuthMiddleware,
+    asyncHandler(async (_: Request, res: Response) => {
+        res.sendResponse(200, "User is an admin", { isAdmin: true });
+    })
+);
+
 userRouter.get(
     "/:userId",
     param("userId").isMongoId(),
