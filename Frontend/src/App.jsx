@@ -11,6 +11,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthProvider } from "./context/AuthContext";
 import Protected from "./utils/Protected";
 import ContactPage from "./Pages/Contact";
+import WallOfFame from "./Pages/WallOfFame";
 
 //TODO: Modularize the whole thing later
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/contributions" element={<Contributions />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/wall-of-fame" element={<WallOfFame />} />
                 <Route
                   path="/profile"
                   element={
@@ -46,7 +48,7 @@ function App() {
               </Route>
 
               {/* Admin Routes */}
-                  
+
 
               <Route path="/admin" element={<AdminProtected><AdminLayout /></AdminProtected>}>
                 <Route index element={<AdminDashboard />} />

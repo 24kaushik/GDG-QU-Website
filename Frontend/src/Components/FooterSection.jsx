@@ -13,10 +13,11 @@ import {
   FaEnvelope,
   FaArrowUp,
   FaRegCopyright,
+  FaYoutube,
 } from "react-icons/fa";
 import gdg_long_white from "../Assets/logos/gdg_long_white.png";
 import { homeStats } from "../data/homeData";
-import { Link } from "react-router-dom";
+import { href, Link } from "react-router-dom";
 
 const Footer = () => {
   const [currentYear] = useState(new Date().getFullYear());
@@ -121,10 +122,11 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <FaGithub />, name: "GitHub", color: "#fff", bg: "#333" },
-    { icon: <FaLinkedin />, name: "LinkedIn", color: "#fff", bg: "#0077b5" },
-    { icon: <FaTwitter />, name: "Twitter", color: "#fff", bg: "#1da1f2" },
-    { icon: <FaInstagram />, name: "Instagram", color: "#fff", bg: "#e1306c" },
+    { icon: <FaGithub />, name: "GitHub", color: "#fff", bg: "#333", href: "https://github.com/GDSCQU"},
+    { icon: <FaLinkedin />, name: "LinkedIn", color: "#fff", bg: "#0077b5" ,href: "https://www.linkedin.com/company/dsc-quantum-university/posts/?feedView=all"},
+    { icon: <FaTwitter />, name: "Twitter", color: "#fff", bg: "#1da1f2",href: "https://x.com/GDG_QuantumUni" },
+    { icon: <FaInstagram />, name: "Instagram", color: "#fff", bg: "#e1306c" ,href: "https://www.instagram.com/gdgquantumuniversity?igsh=dnBvOHp3ZTV2aWZx"},
+    { icon: <FaYoutube />, name: "YouTube", color: "#fff", bg: "#ff0000", href: "https://www.youtube.com/@gdscquantumuniversity6559/featured"},
   ];
 
   const quickLinks = [
@@ -252,10 +254,10 @@ const Footer = () => {
               <div className="flex items-center gap-3 text-sm text-gray-400">
                 <FaEnvelope className="text-gray-500 shrink-0" />
                 <a
-                  href="mailto:dscquantumuniversity@gmail.com"
+                  href="mailto:dsc@quantumuniversity.edu.in"
                   className="hover:text-blue-400 transition-colors"
                 >
-                  dscquantumuniversity@gmail.com
+                  dsc@quantumuniversity.edu.in
                 </a>
               </div>
             </div>

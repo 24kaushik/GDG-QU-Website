@@ -21,10 +21,14 @@ export const AuthProvider = ({ children }) => {
           const data = await response.json();
           setUser(data.data);
         } else {
+          // 401 is expected when not logged in - don't treat as error
           setUser(null);
         }
       } catch (error) {
-        console.error("Auth check failed:", error);
+        // Only log actual network/fetch errors, not auth failures
+        if (error.name !== "AbortError") {
+          console.error("Auth check failed:", error);
+        }
         setUser(null);
       } finally {
         setLoading(false);

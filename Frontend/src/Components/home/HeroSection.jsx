@@ -14,6 +14,7 @@ import {
   FaServer,
   FaRobot,
   FaStar,
+  FaInstagram,
 } from "react-icons/fa";
 import gdg_icon from "../../Assets/logos/gdg_icon.jpg";
 import { homeStats as stats, colors } from "../../data/homeData";
@@ -374,20 +375,29 @@ const HeroSection = () => {
   }, []);
 
   const socialLinks = [
-    { icon: <FaGithub />, color: colors.blue, href: "#", label: "GitHub" },
+    { icon: <FaGithub />, color: colors.blue, href: "https://github.com/GDSCQU", label: "GitHub" },
     {
       icon: <FaLinkedin />,
       color: colors.green,
-      href: "#",
+      href: "https://www.linkedin.com/company/dsc-quantum-university/posts/?feedView=all",
       label: "LinkedIn",
     },
     {
       icon: <FaTwitter />,
       color: colors.yellow,
-      href: "#",
+      href: "https://x.com/GDG_QuantumUni",
       label: "Twitter",
     },
-    { icon: <FaYoutube />, color: colors.red, href: "#", label: "YouTube" },
+    { icon: <FaYoutube />,
+      color: colors.red,
+      href: "https://www.youtube.com/@gdscquantumuniversity6559/featured",
+      label: "YouTube" },
+      {
+      icon: <FaInstagram />,
+      color: colors.yellow,
+      href: "https://www.instagram.com/gdgquantumuniversity?igsh=dnBvOHp3ZTV2aWZx",
+      label: "Instagram",
+    },
   ];
 
   return (
